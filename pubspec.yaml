@@ -1,10 +1,11 @@
 name: app
-description: Google Developer Student Clubs Solution Challenge 23 Projects.
+description: Google Solution Challenge 23 Project.
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0+1
 
 environment:
   sdk: '>=2.19.0 <3.0.0'
+  flutter: ^3.0.0
 
 dependencies:
   flutter:
