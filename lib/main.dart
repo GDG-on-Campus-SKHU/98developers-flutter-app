@@ -1,3 +1,4 @@
+import 'package:app/screens/signup.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,16 +11,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-        fontFamily: 'NotoSans',
-      ),
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          brightness: Brightness.light,
+          fontFamily: 'NotoSans',
         ),
-      ),
-    );
+        home: SignupScreen());
   }
 }
