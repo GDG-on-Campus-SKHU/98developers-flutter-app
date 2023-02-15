@@ -68,6 +68,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       height: 40,
                     ),
                     GestureDetector(
+                      //signup button
                       child: Container(
                         alignment: Alignment.center,
                         width: _width * 0.8,
