@@ -1,4 +1,5 @@
 import 'package:app/utilities/palette.dart';
+import 'package:app/utilities/text_generator.dart';
 import 'package:flutter/material.dart';
 
 class LaunchScreen extends StatefulWidget {
@@ -9,86 +10,50 @@ class LaunchScreen extends StatefulWidget {
 }
 
 class _LaunchScreenState extends State<LaunchScreen> {
+  final _crossAxisStart = CrossAxisAlignment.start;
   @override
   Widget build(BuildContext context) {
-    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Palette.white,
         body: PageView(
           children: <Widget>[
-            SizedBox.expand(
-              child: Container(
-                width: _width * 0.8,
-                height: double.infinity,
-                color: Palette.white,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Reuse",
-                        style: TextStyle(
-                            color: Palette.sapphire,
-                            fontSize: 35,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const Text(
-                        "Find reusable items and make them.",
-                        style: TextStyle(
-                          color: Palette.jetblack,
-                          fontSize: 19,
-                        ),
-                      )
-                    ]),
-              ),
+            Container(
+              padding: const EdgeInsets.all(9.0),
+              height: double.infinity,
+              color: Palette.white,
+              child: Column(crossAxisAlignment: _crossAxisStart, children: [
+                title("Reuse"),
+                subtitle("Find reusable items and make them."),
+                SizedBox(height: 10.0),
+                Placeholder()
+              ]),
             ),
-            SizedBox.expand(
-              child: Container(
-                color: Palette.white,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Recovery",
-                        style: TextStyle(
-                            color: Palette.sapphire,
-                            fontSize: 35,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const Text(
-                        "Find and use the climate community.",
-                        style: TextStyle(
-                          color: Palette.jetblack,
-                          fontSize: 19,
-                        ),
-                      )
-                    ]),
-              ),
+            Container(
+              padding: const EdgeInsets.all(9.0),
+              color: Palette.white,
+              child: Column(crossAxisAlignment: _crossAxisStart, children: [
+                title("Recovery"),
+                subtitle("Find and use the climate community."),
+                SizedBox(height: 10.0),
+                Placeholder()
+              ]),
             ),
-            SizedBox.expand(
-              child: Container(
-                color: Palette.white,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Recycle",
-                        style: TextStyle(
-                            color: Palette.sapphire,
-                            fontSize: 35,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const Text(
-                        "Find out what you can recycle.",
-                        style: TextStyle(
-                          color: Palette.jetblack,
-                          fontSize: 19,
-                        ),
-                      )
-                    ]),
-              ),
+            Container(
+              padding: const EdgeInsets.all(9.0),
+              color: Palette.white,
+              child: Column(crossAxisAlignment: _crossAxisStart, children: [
+                title("Recycle"),
+                subtitle("Find out what you can recycle."),
+                SizedBox(height: 10.0),
+                Placeholder(),
+                ElevatedButton(onPressed: () {}, child: Text("Okay!"))
+              ]),
             ),
           ],
         ),
-        appBar: AppBar());
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Palette.white,
+        ));
   }
 }
