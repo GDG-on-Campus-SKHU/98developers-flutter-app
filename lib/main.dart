@@ -1,4 +1,5 @@
 import 'package:app/screens/home.dart';
+import 'package:app/utilities/palette.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +23,77 @@ class MainApp extends StatelessWidget {
       //     child: Text('Hello World!'),
       //   ),
       // ),
-      home: HomeScreen(),
+      home: BottonNavigation(),
+    );
+  }
+}
+
+class BottonNavigation extends StatefulWidget {
+  const BottonNavigation({super.key});
+
+  @override
+  State<BottonNavigation> createState() => _BottonNavigationState();
+}
+
+class _BottonNavigationState extends State<BottonNavigation> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _widgetOptions = <Widget>[
+    HomeScreen(),
+    HomeScreen(),
+    HomeScreen(),
+    HomeScreen(),
+  ];
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  void initState() {
+    //해당 클래스가 호출되었을떄
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Palette.white,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.fireplace_sharp),
+              label: 'fire',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.navigation_outlined),
+              label: 'exp',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'exp',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Palette.sapphire,
+          unselectedItemColor: Palette.grey,
+          onTap: _onItemTapped),
     );
   }
 }
