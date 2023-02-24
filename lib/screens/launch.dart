@@ -1,8 +1,7 @@
-import 'package:app/widgets/miri_next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:app/utilities/palette.dart';
 import 'package:app/utilities/text_generator.dart';
-import 'package:app/widgets/page_linear_indicator.dart';
+import 'package:app/widgets/next_button.dart';
 import 'package:app/utilities/constants.dart';
 
 class LaunchScreen extends StatefulWidget {
