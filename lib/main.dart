@@ -74,19 +74,31 @@ class _BottonNavigationState extends State<BottonNavigation> {
           showUnselectedLabels: false,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(
+                Icons.home,
+                size: 35,
+              ),
               label: 'home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.fireplace_sharp),
+              icon: Icon(
+                Icons.fireplace_sharp,
+                size: 35,
+              ),
               label: 'fire',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.navigation_outlined),
+              icon: Icon(
+                Icons.navigation_outlined,
+                size: 35,
+              ),
               label: 'exp',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(
+                Icons.person,
+                size: 35,
+              ),
               label: 'exp',
             ),
           ],
