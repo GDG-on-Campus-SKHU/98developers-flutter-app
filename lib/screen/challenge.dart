@@ -135,7 +135,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                 style: TextStyle(
                     fontSize: 25,
                     color: Palette.jetblack,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.w900),
               ),
             ),
           ),
