@@ -56,11 +56,12 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                     width: _width * 0.9,
                     height: 80,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           children: [
                             Container(
-                              width: _width * 0.8,
+                              width: _width * 0.78,
                               alignment: Alignment.topLeft,
                               child: Container(
                                 alignment: Alignment.center,
@@ -78,7 +79,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                               ),
                             ),
                             Container(
-                              width: _width * 0.8,
+                              width: _width * 0.78,
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 nowTitle[index],
@@ -89,7 +90,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                               ),
                             ),
                             Container(
-                              width: _width * 0.8,
+                              width: _width * 0.78,
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 children: [
@@ -111,12 +112,14 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                           ],
                         ),
                         Container(
-                          child: Icon(
-                            Icons.arrow_forward_rounded,
-                            color: Palette.darkgrey,
+                            child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_forward,
                             size: 16,
+                            color: Palette.darkgrey,
                           ),
-                        )
+                          onPressed: () {},
+                        ))
                       ],
                     ),
                   );
@@ -151,7 +154,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                         Column(
                           children: [
                             Container(
-                              width: _width * 0.8,
+                              width: _width * 0.78,
                               alignment: Alignment.topLeft,
                               child: Container(
                                 alignment: Alignment.center,
@@ -169,7 +172,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                               ),
                             ),
                             Container(
-                              width: _width * 0.8,
+                              width: _width * 0.78,
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 exportTitle[index],
@@ -180,7 +183,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                               ),
                             ),
                             Container(
-                              width: _width * 0.8,
+                              width: _width * 0.78,
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 children: [
@@ -202,12 +205,14 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                           ],
                         ),
                         Container(
-                          child: Icon(
-                            Icons.arrow_forward_rounded,
-                            color: Palette.darkgrey,
+                            child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_forward,
                             size: 16,
+                            color: Palette.darkgrey,
                           ),
-                        )
+                          onPressed: () {},
+                        ))
                       ],
                     ),
                   );
