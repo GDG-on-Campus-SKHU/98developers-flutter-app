@@ -1,9 +1,9 @@
-import 'package:app/widgets/light_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:app/utilities/palette.dart';
-import 'package:app/utilities/text_generator.dart';
-import 'package:app/widgets/next_button.dart';
+import 'package:app/utilities/typografie.dart';
 import 'package:app/utilities/constants.dart';
+import 'package:app/widgets/light_appbar.dart';
+import 'package:app/widgets/next_button.dart';
 
 class LaunchScreen extends StatefulWidget {
   @override
@@ -12,6 +12,7 @@ class LaunchScreen extends StatefulWidget {
 
 class _LaunchScreenState extends State<LaunchScreen>
     with SingleTickerProviderStateMixin {
+  final _typografie = Typografie();
   final PageController _pageController = PageController(initialPage: 0);
   double _currentIndex = 0;
   bool _showContinueButton = false;
@@ -24,8 +25,9 @@ class _LaunchScreenState extends State<LaunchScreen>
       height: double.infinity,
       color: Palette.white,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        title("Reuse"),
-        subtitle("Find reusable items and make them."),
+        Typografie().DisplaySmall("Reuse", Palette.sapphire),
+        Typografie().LabelMedium(
+            "Find reusable items and make them.", Palette.darkgrey),
         SizedBox(height: 10.0),
         Placeholder()
       ]),
@@ -34,8 +36,9 @@ class _LaunchScreenState extends State<LaunchScreen>
       padding: const EdgeInsets.all(Spacing.small),
       color: Palette.white,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        title("Recovery"),
-        subtitle("Find and use the climate community."),
+        Typografie().DisplaySmall("Recovery", Palette.sapphire),
+        Typografie().LabelMedium(
+            "Find and use the climate community.", Palette.darkgrey),
         SizedBox(height: 10.0),
         Placeholder()
       ]),
@@ -44,8 +47,9 @@ class _LaunchScreenState extends State<LaunchScreen>
       padding: const EdgeInsets.all(Spacing.small),
       color: Palette.white,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        title("Recycle"),
-        subtitle("Find out what you can recycle."),
+        Typografie().DisplaySmall("Recycle", Palette.sapphire),
+        Typografie()
+            .LabelMedium("Find out what you can recycle.", Palette.darkgrey),
         SizedBox(height: 10.0),
         Placeholder(),
       ]),
