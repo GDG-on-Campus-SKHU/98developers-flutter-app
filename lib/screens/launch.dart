@@ -1,3 +1,4 @@
+import 'package:app/widgets/light_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:app/utilities/palette.dart';
 import 'package:app/utilities/text_generator.dart';
@@ -11,10 +12,12 @@ class LaunchScreen extends StatefulWidget {
 
 class _LaunchScreenState extends State<LaunchScreen>
     with SingleTickerProviderStateMixin {
-  Animation<double>? _linearAnimation;
-  AnimationController? _linearAnimationController;
-  PageController _pageController = PageController();
-  int _currentIndex = 0;
+  final PageController _pageController = PageController(initialPage: 0);
+  double _currentIndex = 0;
+  bool _showContinueButton = false;
+  late AnimationController _animationController;
+  late Animation<double> _smoothLinearAnimation;
+
   List<Widget> _pages = [
     Container(
       padding: EdgeInsets.all(Spacing.small),
@@ -53,102 +56,134 @@ class _LaunchScreenState extends State<LaunchScreen>
   void initState() {
     super.initState();
 
-    //Animation Controller
-    _linearAnimationController =
-        AnimationController(duration: Duration(milliseconds: 200), vsync: this);
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
 
-    //Defind Animation
-    _linearAnimation =
-        Tween(begin: begin, end: end).animate(_linearAnimationController!);
+    _smoothLinearAnimation =
+        Tween<double>(begin: 0, end: 1).animate(_animationController);
 
-    _setLinearAnimation(0, 1);
-  }
-
-  double step = 0.0;
-  double begin = 0.0;
-  double end = 0.0;
-  int total = 3;
-
-  _setLinearAnimation(double max, int currentIndex) {
-    setState(() {
-      step = max / total;
-      begin = step * (currentIndex - 1);
-      end = step * currentIndex;
-
-      _linearAnimation = Tween<double>(begin: begin, end: end)
-          .animate(_linearAnimationController!);
+    _pageController.addListener(() {
+      if (_pageController.position.isScrollingNotifier.value) {
+        if (_pageController.position.axis == Axis.horizontal) {
+          _animationController.animateTo(_pageController.offset /
+              _pageController.position.maxScrollExtent);
+        } else {
+          _animationController.animateTo(
+              _pageController.page! / _pageController.position.maxScrollExtent);
+        }
+      }
     });
-
-    _linearAnimationController?.forward();
   }
 
   @override
   Widget build(BuildContext context) {
-    final maxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Palette.white,
         body: Stack(children: [
           PageView(
             onPageChanged: (index) {
-              _linearAnimationController?.reset();
-              _setLinearAnimation(maxWidth, index + 1);
-              /*
               setState(() {
-                _currentIndex = index;
+                _currentIndex = index.toDouble();
+                _showContinueButton = _currentIndex == 2;
               });
-              */
             },
-            //controller: _pageController,
+            scrollDirection: Axis.horizontal,
+            controller: _pageController,
             children: _pages,
           ),
           Positioned(
-              child: Container(
-            height: 7.0,
-            width: double.infinity,
-            decoration: BoxDecoration(color: Palette.sliver),
+              child: AnimatedBuilder(
+            animation: _smoothLinearAnimation,
+            builder: (context, child) {
+              return LinearProgressIndicator(
+                value: _smoothLinearAnimation.value,
+                valueColor: AlwaysStoppedAnimation<Color>(Palette.sapphire),
+                minHeight: 5.0,
+              );
+            },
           )),
           Positioned(
-              child: Container(
-            height: 7.0,
-            width: 50.0,
-            decoration: BoxDecoration(color: Palette.sapphire),
-          )),
-          NextButton(onPressed: () {})
+              left: 150.0,
+              bottom: 100.0,
+              child: Row(
+                children: [
+                  AnimatedOpacity(
+                    duration: Duration(milliseconds: 500),
+                    opacity: _showContinueButton ? 1.0 : 0.0,
+                    child: _showContinueButton
+                        ? ContinueButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Continue",
+                              style: TextStyle(
+                                  color: Palette.white,
+                                  fontFamily: "NotoSans",
+                                  fontSize: 19.0,
+                                  fontWeight: FontWeight.w500),
+                            ))
+                        : SizedBox.shrink(),
+                  ),
+                  if (_currentIndex < 2 && !_showContinueButton)
+                    NextButton(onPressed: () {
+                      _pageController.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut);
+                    })
+                ],
+              )),
         ]),
-        appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          backgroundColor: Palette.white,
+        appBar: LightAppBar(
           actions: <Widget>[
-            TextButton(onPressed: () {}, child: const Text("Skip"))
+            SkipButton(
+              onPressed: () {},
+              child: const Text("Skip"),
+            )
           ],
         ));
   }
 
-  Widget _buildPageIndicator(int index) {
-    bool isCurrentIndex = index == _currentIndex;
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 9.0),
-      width: isCurrentIndex ? 25.0 : 17.0,
-      height: isCurrentIndex ? 9.0 : 7.0,
-      decoration: BoxDecoration(
-        color: isCurrentIndex ? Palette.sapphire : Palette.deepsliver,
-        borderRadius: BorderRadius.circular(2),
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _pageController.dispose();
+    super.dispose();
+  }
+}
+
+class SkipButton extends StatelessWidget {
+  SkipButton({Key? key, required this.onPressed, required this.child});
+
+  final VoidCallback onPressed;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        onPressed: onPressed,
+        child: child,
+        style: TextButton.styleFrom(
+          elevation: 0,
+          foregroundColor: Palette.darkgrey,
+        ));
+  }
+}
+
+class ContinueButton extends StatelessWidget {
+  ContinueButton({Key? key, required this.onPressed, required this.child});
+
+  final VoidCallback onPressed;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: onPressed,
+      child: child,
+      fillColor: Palette.sapphire,
+      constraints: BoxConstraints(minHeight: 55.0, minWidth: 90.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25.0)),
       ),
     );
   }
 }
-/*
-class PageLinearIndicator extends AnimatedWidget {
-  PageLinearIndicator({Key? key, required Animation<double> animation})
-      : super(key: key, listenable: animation);
-
-  @override
-  Widget build(BuildContext context) {
-    final Listenable animation;
-    return Container(
-      width: animation,
-      decoration: BoxDecoration(color: Palette.sapphire),
-    );
-  }
-}*/
