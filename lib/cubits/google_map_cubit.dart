@@ -1,52 +1,44 @@
+import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'google_map_state.dart';
 
 class GoogleMapCubit extends Cubit<GoogleMapState> {
-  GoogleMapCubit() : super(GoogleMapInitial());
-
-  GoogleMapController? _googleMapController;
-
-  void onMapCreated(GoogleMapController googleMapController) {
-    _googleMapController = googleMapController;
-    emit(GoogleMapLoaded(_googleMapController!));
+  GoogleMapCubit() : super(GoogleMapLoading()) {
+    _getCurrentLocation();
   }
 
-  void onCameraMove(CameraPosition cameraPosition) {
-    emit(GoogleMapLoaded(_googleMapController!));
-  }
-  /*
-  static const EXPLORE_URL = "http://zikiza.duckdns.org/explore";
-  double _latitude;
-  double _longitude;
-  Set<Marker> _markers = {};
+  final Completer<GoogleMapController> _completer = Completer();
+  final Set<Marker> _markers = {};
 
-  Future<void> getLocation() async {
+  Future<void> _getCurrentLocation() async {
     try {
-      final position = await Geolocator.getCurrentPosition(
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+      Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
-      _latitude = position.latitude;
-      _longitude = position.longitude;
+      //Geolocator로 전달 받은 High 좌표를 현재 위치로 적용
+      LatLng _currentLocation = LatLng(position.latitude, position.longitude);
+      //Loaded 상태로 업데이트
       emit(GoogleMapLoaded(
-          latitude: _latitude, longitude: _longitude, markers: _markers));
+          initialCameraPosition: _currentLocation, markers: _markers));
     } catch (e) {
-      emit(GoogleMapError());
+      emit(GoogleMapError("$e: Failed to get current location"));
     }
   }
 
-  void addMarker(LatLng position, String name, String tag, String address) {
-    _markers.add(
-      Marker(
-          markerId: MarkerId(name),
-          position: position,
-          infoWindow: InfoWindow(
-            title: name,
-          )),
-    );
-    emit(GoogleMapLoaded(
-        latitude: _latitude, longitude: _longitude, markers: _markers));
+  Future<void> onMapCreated(GoogleMapController googleMapController) async {
+    if (!_completer.isCompleted) {
+      _completer.complete(googleMapController);
+    }
   }
-  */
+
+  void onCameraMove(CameraPosition cameraPosition) {
+    emit(GoogleMapCameraMove(cameraPosition: cameraPosition));
+  }
 }
