@@ -15,7 +15,10 @@ class _HomeScreenState extends State<HomeScreen> {
     final _height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Palette.white,
-      body: SafeArea(child: Column()),
+      body: SafeArea(
+          child: Center(
+        child: Text('data'),
+      )),
     );
   }
 }
