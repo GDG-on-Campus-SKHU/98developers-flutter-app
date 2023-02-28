@@ -1,6 +1,8 @@
+
 import 'package:zikiza/screens/home.dart';
 import 'package:zikiza/utilities/palette.dart';
 import './screens/challenge.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,6 +21,7 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.light,
         fontFamily: 'NotoSans',
       ),
+
       home: BottonNavigation(),
     );
   }
@@ -113,6 +116,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
           ),
         ],
       ),
+
     );
   }
 }
