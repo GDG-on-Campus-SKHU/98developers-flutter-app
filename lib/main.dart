@@ -1,5 +1,5 @@
-import 'package:app/screens/home.dart';
-import 'package:app/utilities/palette.dart';
+import 'package:zikiza/screens/home.dart';
+import 'package:zikiza/utilities/palette.dart';
 import 'package:flutter/material.dart';
 
 void main() {

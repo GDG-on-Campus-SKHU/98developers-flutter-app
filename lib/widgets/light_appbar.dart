@@ -1,4 +1,4 @@
-import 'package:app/utilities/palette.dart';
+import 'package:zikiza/utilities/palette.dart';
 import 'package:flutter/material.dart';
 
 class LightAppBar extends StatelessWidget implements PreferredSizeWidget {

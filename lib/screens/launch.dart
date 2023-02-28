@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:app/utilities/palette.dart';
-import 'package:app/utilities/typografie.dart';
-import 'package:app/utilities/constants.dart';
-import 'package:app/widgets/light_appbar.dart';
-import 'package:app/widgets/next_button.dart';
+import 'package:zikiza/utilities/palette.dart';
+import 'package:zikiza/utilities/typografie.dart';
+import 'package:zikiza/utilities/constants.dart';
+import 'package:zikiza/widgets/light_appbar.dart';
+import 'package:zikiza/widgets/next_button.dart';
 
 class LaunchScreen extends StatefulWidget {
   @override
