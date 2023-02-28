@@ -1,4 +1,4 @@
-import 'package:app/utilities/palette.dart';
+import 'package:zikiza/utilities/palette.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -17,6 +17,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
+        backgroundColor: Color(0xFFEDEEFA),
         title: Container(
             width: _width,
             padding: EdgeInsets.only(left: 10),
@@ -40,6 +41,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SafeArea(
           child: Column(
         children: [
+          SizedBox(
+            height: 10,
+          ),
           Container(
             width: _width,
             height: _height * 0.15,
@@ -124,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Divider(color: Palette.jetblack, thickness: 2.0)),
           Container(
               width: _width,
-              height: _height * 0.55,
+              height: _height * 0.45,
               child: challengLogList(challengeLog.length, _width, challengeLog))
         ],
       )),

@@ -1,8 +1,7 @@
-
 import 'package:zikiza/screens/home.dart';
 import 'package:zikiza/utilities/palette.dart';
 import './screens/challenge.dart';
-
+import './screens/profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +20,6 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.light,
         fontFamily: 'NotoSans',
       ),
-
       home: BottonNavigation(),
     );
   }
@@ -55,7 +53,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
         HomeScreen(),
         ChallengeScreen(),
         HomeScreen(),
-        HomeScreen()
+        ProfileScreen()
       ][_selectedIndex],
       bottomNavigationBar: NavigationBar(
         backgroundColor: Palette.white,
@@ -116,7 +114,6 @@ class _BottonNavigationState extends State<BottonNavigation> {
           ),
         ],
       ),
-
     );
   }
 }
