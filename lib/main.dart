@@ -1,7 +1,6 @@
-
 import 'package:zikiza/screens/home.dart';
 import 'package:zikiza/utilities/palette.dart';
-
+import './screens/challenge.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +19,6 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.light,
         fontFamily: 'NotoSans',
       ),
-
       home: BottonNavigation(),
     );
   }
@@ -36,13 +34,6 @@ class BottonNavigation extends StatefulWidget {
 class _BottonNavigationState extends State<BottonNavigation> {
   int _selectedIndex = 0;
 
-  final List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-  ];
-
   @override
   void initState() {
     //해당 클래스가 호출되었을떄
@@ -57,9 +48,12 @@ class _BottonNavigationState extends State<BottonNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: const [
+        HomeScreen(),
+        ChallengeScreen(),
+        HomeScreen(),
+        HomeScreen()
+      ][_selectedIndex],
       bottomNavigationBar: NavigationBar(
         backgroundColor: Palette.white,
         selectedIndex: _selectedIndex,
@@ -119,7 +113,6 @@ class _BottonNavigationState extends State<BottonNavigation> {
           ),
         ],
       ),
-
     );
   }
 }
