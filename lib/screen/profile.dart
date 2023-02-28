@@ -16,15 +16,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final _height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80,
+        title: Container(
+            width: _width,
+            padding: EdgeInsets.only(left: 10),
+            child: Text(
+              'Profile',
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
+            )),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 25),
-            child: Icon(
-              Icons.settings,
-              size: 28,
-              color: Palette.jetblack,
-            ),
-          )
+              padding: const EdgeInsets.only(right: 25),
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Color.fromARGB(84, 85, 136, 238)),
+                  child: IconButton(
+                    icon: Icon(Icons.settings, size: 30),
+                    onPressed: () {},
+                  )))
         ],
       ),
       body: SafeArea(
@@ -74,14 +84,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 19,
+                          height: 10,
                         ),
                         Container(
                           width: _width * 0.5,
                           child: Text(
                             'test@gmail.com',
                             style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 11,
                                 fontWeight: FontWeight.w500,
                                 color: Palette.grey),
                           ),
@@ -94,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 30,
           ),
           Container(
             width: _width,
