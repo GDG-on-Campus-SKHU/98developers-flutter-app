@@ -17,12 +17,6 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.light,
         fontFamily: 'NotoSans',
       ),
-      // home: Scaffold(
-      //   body: Center(
-      //     child: Text('Hello World!'),
-      //   ),
-      // ),
-      home: ProfileScreen(),
     );
   }
 }
