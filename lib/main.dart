@@ -18,11 +18,6 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.light,
         fontFamily: 'NotoSans',
       ),
-      // home: Scaffold(
-      //   body: Center(
-      //     child: Text('Hello World!'),
-      //   ),
-      // ),
       home: BottonNavigation(),
     );
   }
@@ -44,11 +39,6 @@ class _BottonNavigationState extends State<BottonNavigation> {
     HomeScreen(),
     HomeScreen(),
   ];
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   void initState() {
@@ -67,45 +57,65 @@ class _BottonNavigationState extends State<BottonNavigation> {
       body: SafeArea(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Palette.white,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                size: 35,
-              ),
-              label: 'home',
+      bottomNavigationBar: NavigationBar(
+        backgroundColor: Palette.white,
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        destinations: const <NavigationDestination>[
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.home,
+              size: 35,
+              color: Palette.babyblue,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.fireplace_sharp,
-                size: 35,
-              ),
-              label: 'fire',
+            icon: Icon(
+              Icons.home,
+              size: 35,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.navigation_outlined,
-                size: 35,
-              ),
-              label: 'exp',
+            label: 'Home',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.local_fire_department_rounded,
+              size: 35,
+              color: Palette.babyblue,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                size: 35,
-              ),
-              label: 'exp',
+            icon: Icon(
+              Icons.local_fire_department_rounded,
+              size: 35,
             ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Palette.sapphire,
-          unselectedItemColor: Palette.grey,
-          onTap: _onItemTapped),
+            label: 'Challenges',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.near_me_rounded,
+              size: 35,
+              color: Palette.babyblue,
+            ),
+            icon: Icon(
+              Icons.near_me_rounded,
+              size: 35,
+            ),
+            label: 'Explore',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.person,
+              size: 35,
+              color: Palette.babyblue,
+            ),
+            icon: Icon(
+              Icons.person,
+              size: 35,
+            ),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 }
