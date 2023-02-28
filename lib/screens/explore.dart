@@ -45,7 +45,6 @@ class GoogleMapWidget extends StatelessWidget {
       child: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: currentLocation,
-          zoom: 14.4747,
         ),
         onMapCreated: (GoogleMapController googleMapController) {
           if (!_googleMapController.isCompleted) {
