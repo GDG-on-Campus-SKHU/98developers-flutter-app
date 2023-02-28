@@ -9,6 +9,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  List<String> challengeLog = [];
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -55,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   SizedBox(
-                    width: 56,
+                    width: 20,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 32),
@@ -63,11 +64,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: _width * 0.4,
+                          width: _width * 0.5,
                           child: Text(
-                            'yeezinu',
+                            'Hyeonbok Lee',
                             style: TextStyle(
-                                fontSize: 29,
+                                fontSize: 22,
                                 fontWeight: FontWeight.w700,
                                 color: Palette.white),
                           ),
@@ -76,11 +77,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: 19,
                         ),
                         Container(
-                          width: _width * 0.4,
+                          width: _width * 0.5,
                           child: Text(
                             'test@gmail.com',
                             style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 17,
                                 fontWeight: FontWeight.w500,
                                 color: Palette.grey),
                           ),
@@ -91,9 +92,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-          )
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            width: _width,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                'History',
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+              width: _width * 0.9,
+              child: Divider(color: Palette.jetblack, thickness: 2.0)),
+          Container(
+              width: _width,
+              height: _height * 0.55,
+              child: challengLogList(challengeLog.length, _width, challengeLog))
         ],
       )),
+    );
+  }
+}
+
+Widget challengLogList(cnt, mainWidth, list) {
+  if (cnt == 0 || cnt == null) {
+    return Center(
+      child: Text(
+        'The challenge history is displayed here',
+        style: TextStyle(fontSize: 17),
+      ),
+    );
+  } else {
+    return ListView.builder(
+      itemCount: cnt,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          width: mainWidth * 0.9,
+          alignment: Alignment.center,
+          child: Text('${list[index]}'),
+        );
+      },
     );
   }
 }
