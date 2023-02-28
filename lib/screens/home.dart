@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utilities/palette.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -68,109 +69,27 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Container(
-            width: _width * 0.9,
-            height: 220,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Palette.sapphire),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            height: 240,
+            child: ListView(
               children: [
-                SizedBox(
-                  height: 38,
-                ),
-                Container(
-                  width: _width * 0.9,
-                  padding: EdgeInsets.only(left: 18),
-                  child: Text(
-                    'Eating home-cooked food',
-                    style: TextStyle(
-                        fontSize: 22,
-                        color: Palette.white,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                SizedBox(
-                  height: 17,
-                ),
-                Container(
-                  width: _width * 0.9,
-                  height: 110,
-                  padding: EdgeInsets.only(left: 18),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            'Cooking with fresh ingredients',
-                            style:
-                                TextStyle(fontSize: 14, color: Palette.white),
-                          ),
-                          Container(
-                              width: _width * 0.5,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    alignment: Alignment.center,
-                                    height: 28,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(25),
-                                        color: Color(0xFFD9E2FF)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10.0, right: 10),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.person,
-                                            size: 16,
-                                            color: Palette.sapphire,
-                                          ),
-                                          Text(
-                                            ' 379',
-                                            style: TextStyle(
-                                                color: Palette.sapphire,
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w500),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    alignment: Alignment.center,
-                                    height: 28,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(25),
-                                        color: Color(0xFFD9E2FF)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10.0, right: 10),
-                                      child: Text('21days left',
-                                          style: TextStyle(
-                                              color: Palette.sapphire,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500)),
-                                    ),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ),
-                      Container(
-                        height: 100,
-                        child: Icon(
-                          Icons.local_fire_department_rounded,
-                          color: Palette.grapefruit,
-                          size: 100,
-                        ),
-                      )
-                    ],
+                CarouselSlider(
+                  items: [
+                    sliderContainer(
+                        _width,
+                        'Eating home-cooked food',
+                        'Cooking with fresh ingredients',
+                        ' 379',
+                        '21days left'),
+                  ],
+                  options: CarouselOptions(
+                    height: 230,
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                    aspectRatio: 16 / 9,
+                    autoPlayCurve: Curves.easeInOutSine,
+                    enableInfiniteScroll: true,
+                    autoPlayAnimationDuration: Duration(milliseconds: 1500),
+                    viewportFraction: 1,
                   ),
                 )
               ],
@@ -197,4 +116,114 @@ class _HomeScreenState extends State<HomeScreen> {
       )),
     );
   }
+}
+
+Widget sliderContainer(_width, titleText, subtitleText, person, day) {
+  return Container(
+    width: _width * 0.9,
+    height: 220,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25), color: Palette.sapphire),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 38,
+        ),
+        Container(
+          width: _width * 0.9,
+          padding: EdgeInsets.only(left: 18),
+          child: Text(
+            titleText,
+            style: TextStyle(
+                fontSize: 22,
+                color: Palette.white,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        SizedBox(
+          height: 17,
+        ),
+        Container(
+          width: _width * 0.9,
+          height: 110,
+          padding: EdgeInsets.only(left: 18),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    subtitleText,
+                    style: TextStyle(fontSize: 14, color: Palette.white),
+                  ),
+                  Container(
+                      width: _width * 0.5,
+                      child: Row(
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            height: 28,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color(0xFFD9E2FF)),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 10),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.person,
+                                    size: 16,
+                                    color: Palette.sapphire,
+                                  ),
+                                  Text(
+                                    person,
+                                    style: TextStyle(
+                                        color: Palette.sapphire,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 28,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color(0xFFD9E2FF)),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 10),
+                              child: Text(day,
+                                  style: TextStyle(
+                                      color: Palette.sapphire,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500)),
+                            ),
+                          )
+                        ],
+                      )),
+                ],
+              ),
+              Container(
+                height: 100,
+                child: Icon(
+                  Icons.local_fire_department_rounded,
+                  color: Palette.grapefruit,
+                  size: 100,
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  );
 }
