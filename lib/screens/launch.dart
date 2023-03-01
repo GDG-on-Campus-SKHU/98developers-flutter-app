@@ -51,9 +51,10 @@ class _LaunchScreenState extends State<LaunchScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Typografie().DisplayMedium("Reuse", dynamicColor.onPrimary),
-            Typografie().LabelMedium(
-                "Find reusable items and make them.", dynamicColor.onPrimary),
+            Typografie().DisplayMedium("Challenge", dynamicColor.onPrimary),
+            SizedBox(height: 10.0),
+            Typografie().LabelMedium("Select a challenge. Then also Enroll.",
+                dynamicColor.onPrimary),
             SizedBox(height: 10.0),
             Placeholder()
           ],
@@ -65,9 +66,10 @@ class _LaunchScreenState extends State<LaunchScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Typografie().DisplayMedium("Recovery", dynamicColor.onPrimary),
-            Typografie().LabelMedium(
-                "Find and use the climate community.", dynamicColor.onPrimary),
+            Typografie().DisplayMedium("Reward", dynamicColor.onPrimary),
+            SizedBox(height: 10.0),
+            Typografie().LabelMedium("Submit all submissions and earn rewards.",
+                dynamicColor.onPrimary),
             SizedBox(height: 10.0),
             Placeholder()
           ],
@@ -79,9 +81,10 @@ class _LaunchScreenState extends State<LaunchScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Typografie().DisplayMedium("Recycle", dynamicColor.onPrimary),
+            Typografie().DisplayMedium("Explore", dynamicColor.onPrimary),
+            SizedBox(height: 10.0),
             Typografie().LabelMedium(
-                "Find out what you can recycle.", dynamicColor.onPrimary),
+                "Find Climate community with Maps", dynamicColor.onPrimary),
             SizedBox(height: 10.0),
             Placeholder(),
           ],
