@@ -8,9 +8,14 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
-  carousel_slider: ^4.2.1
   flutter:
     sdk: flutter
+  carousel_slider: ^4.2.1
+  dynamic_color: ^1.6.2
+  equatable: ^2.0.5
+  flutter_bloc: ^8.1.2
+  freezed: ^2.3.2
+  geolocator: ^9.0.2
   google_maps_flutter: ^2.2.4
 
 dev_dependencies:
