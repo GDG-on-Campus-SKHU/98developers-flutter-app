@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zikiza/utilities/palette.dart';
 import 'package:zikiza/utilities/typografie.dart';
 import 'package:zikiza/utilities/constants.dart';
 import 'package:zikiza/widgets/light_appbar.dart';
@@ -12,49 +11,11 @@ class LaunchScreen extends StatefulWidget {
 
 class _LaunchScreenState extends State<LaunchScreen>
     with SingleTickerProviderStateMixin {
-  final _typografie = Typografie();
   final PageController _pageController = PageController(initialPage: 0);
   double _currentIndex = 0;
   bool _showContinueButton = false;
   late AnimationController _animationController;
   late Animation<double> _smoothLinearAnimation;
-
-  List<Widget> _pages = [
-    Container(
-      padding: EdgeInsets.all(Spacing.small),
-      height: double.infinity,
-      color: Palette.white,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Typografie().DisplaySmall("Reuse", Palette.sapphire),
-        Typografie().LabelMedium(
-            "Find reusable items and make them.", Palette.darkgrey),
-        SizedBox(height: 10.0),
-        Placeholder()
-      ]),
-    ),
-    Container(
-      padding: const EdgeInsets.all(Spacing.small),
-      color: Palette.white,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Typografie().DisplaySmall("Recovery", Palette.sapphire),
-        Typografie().LabelMedium(
-            "Find and use the climate community.", Palette.darkgrey),
-        SizedBox(height: 10.0),
-        Placeholder()
-      ]),
-    ),
-    Container(
-      padding: const EdgeInsets.all(Spacing.small),
-      color: Palette.white,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Typografie().DisplaySmall("Recycle", Palette.sapphire),
-        Typografie()
-            .LabelMedium("Find out what you can recycle.", Palette.darkgrey),
-        SizedBox(height: 10.0),
-        Placeholder(),
-      ]),
-    ),
-  ];
 
   @override
   void initState() {
@@ -80,70 +41,130 @@ class _LaunchScreenState extends State<LaunchScreen>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
+    final dynamicColor = Theme.of(_).colorScheme;
+    List<Widget> _pages = [
+      Container(
+        padding: EdgeInsets.all(Spacing.small),
+        height: double.infinity,
+        color: dynamicColor.primary,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Typografie().DisplayMedium("Reuse", dynamicColor.onPrimary),
+            Typografie().LabelMedium(
+                "Find reusable items and make them.", dynamicColor.onPrimary),
+            SizedBox(height: 10.0),
+            Placeholder()
+          ],
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.all(Spacing.small),
+        color: dynamicColor.primary,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Typografie().DisplayMedium("Recovery", dynamicColor.onPrimary),
+            Typografie().LabelMedium(
+                "Find and use the climate community.", dynamicColor.onPrimary),
+            SizedBox(height: 10.0),
+            Placeholder()
+          ],
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.all(Spacing.small),
+        color: dynamicColor.primary,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Typografie().DisplayMedium("Recycle", dynamicColor.onPrimary),
+            Typografie().LabelMedium(
+                "Find out what you can recycle.", dynamicColor.onPrimary),
+            SizedBox(height: 10.0),
+            Placeholder(),
+          ],
+        ),
+      ),
+    ];
     return Scaffold(
-        backgroundColor: Palette.white,
-        body: Stack(children: [
+      backgroundColor: dynamicColor.primary,
+      body: Stack(
+        children: [
           PageView(
             onPageChanged: (index) {
-              setState(() {
-                _currentIndex = index.toDouble();
-                _showContinueButton = _currentIndex == 2;
-              });
+              setState(
+                () {
+                  _currentIndex = index.toDouble();
+                  _showContinueButton = _currentIndex == 2;
+                },
+              );
             },
             scrollDirection: Axis.horizontal,
             controller: _pageController,
             children: _pages,
           ),
           Positioned(
-              child: AnimatedBuilder(
-            animation: _smoothLinearAnimation,
-            builder: (context, child) {
-              return LinearProgressIndicator(
-                value: _smoothLinearAnimation.value,
-                valueColor: AlwaysStoppedAnimation<Color>(Palette.sapphire),
-                minHeight: 5.0,
-              );
-            },
-          )),
+            child: AnimatedBuilder(
+              animation: _smoothLinearAnimation,
+              builder: (_, child) {
+                return LinearProgressIndicator(
+                  value: _smoothLinearAnimation.value,
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(dynamicColor.background),
+                  minHeight: 5.0,
+                );
+              },
+            ),
+          ),
           Positioned(
-              left: 150.0,
-              bottom: 100.0,
-              child: Row(
-                children: [
-                  AnimatedOpacity(
-                    duration: Duration(milliseconds: 500),
-                    opacity: _showContinueButton ? 1.0 : 0.0,
-                    child: _showContinueButton
-                        ? ContinueButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Continue",
-                              style: TextStyle(
-                                  color: Palette.white,
-                                  fontFamily: "NotoSans",
-                                  fontSize: 19.0,
-                                  fontWeight: FontWeight.w500),
-                            ))
-                        : SizedBox.shrink(),
-                  ),
-                  if (_currentIndex < 2 && !_showContinueButton)
-                    NextButton(onPressed: () {
+            left: 150.0,
+            bottom: 100.0,
+            child: Row(
+              children: [
+                AnimatedOpacity(
+                  duration: Duration(milliseconds: 500),
+                  opacity: _showContinueButton ? 1.0 : 0.0,
+                  child: _showContinueButton
+                      ? ContinueButton(
+                          onPressed: () {},
+                          child: Typografie().BodyLarge(
+                            "Continue",
+                            dynamicColor.onPrimaryContainer,
+                          ),
+                          color: dynamicColor.primaryContainer,
+                        )
+                      : SizedBox.shrink(),
+                ),
+                if (_currentIndex < 2 && !_showContinueButton)
+                  NextButton(
+                    onPressed: () {
                       _pageController.nextPage(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.easeInOut);
-                    })
-                ],
-              )),
-        ]),
-        appBar: LightAppBar(
-          actions: <Widget>[
-            SkipButton(
-              onPressed: () {},
-              child: const Text("Skip"),
-            )
-          ],
-        ));
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    color: dynamicColor.onPrimaryContainer,
+                    fillColor: dynamicColor.primaryContainer,
+                  )
+              ],
+            ),
+          ),
+        ],
+      ),
+      appBar: LightAppBar(
+        actions: <Widget>[
+          SkipButton(
+            onPressed: () {},
+            child: const Text("Skip"),
+            foregroundColor: dynamicColor.onPrimary,
+          ),
+        ],
+        title: const Text(""),
+        color: dynamicColor.primary,
+      ),
+    );
   }
 
   @override
@@ -155,35 +176,49 @@ class _LaunchScreenState extends State<LaunchScreen>
 }
 
 class SkipButton extends StatelessWidget {
-  SkipButton({Key? key, required this.onPressed, required this.child});
+  SkipButton({
+    Key? key,
+    required this.onPressed,
+    required this.child,
+    required this.foregroundColor,
+  });
 
   final VoidCallback onPressed;
   final Widget child;
+  final Color foregroundColor;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     return TextButton(
-        onPressed: onPressed,
-        child: child,
-        style: TextButton.styleFrom(
-          elevation: 0,
-          foregroundColor: Palette.darkgrey,
-        ));
+      onPressed: onPressed,
+      child: child,
+      style: TextButton.styleFrom(
+        elevation: 0,
+        foregroundColor: foregroundColor,
+        textStyle: TextStyle(fontFamily: "NotoSans", fontSize: 15),
+      ),
+    );
   }
 }
 
 class ContinueButton extends StatelessWidget {
-  ContinueButton({Key? key, required this.onPressed, required this.child});
+  ContinueButton({
+    Key? key,
+    required this.onPressed,
+    required this.child,
+    required this.color,
+  });
 
-  final VoidCallback onPressed;
-  final Widget child;
+  final VoidCallback? onPressed;
+  final Widget? child;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: onPressed,
       child: child,
-      fillColor: Palette.sapphire,
+      fillColor: color,
       constraints: BoxConstraints(minHeight: 55.0, minWidth: 90.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(25.0)),
