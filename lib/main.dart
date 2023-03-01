@@ -3,7 +3,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zikiza/screens/home.dart';
 import 'package:zikiza/screens/challenge.dart';
-//import 'package:zikiza/screens/explore.dart';
+import 'package:zikiza/screens/explore.dart';
 import 'package:zikiza/screens/profile.dart';
 import 'package:zikiza/utilities/dynamic_theme.dart';
 import 'package:zikiza/cubits/navigation_bar_cubit.dart';
@@ -39,10 +39,10 @@ class NavigationBarWidget extends StatelessWidget {
     return BlocBuilder<NavigationBarCubit, int>(
       builder: (_, state) {
         return Scaffold(
-          body: const [
+          body: [
             HomeScreen(),
             ChallengeScreen(),
-            HomeScreen(),
+            ExploreScreen(),
             ProfileScreen(),
           ][state],
           bottomNavigationBar: BlocBuilder<NavigationBarCubit, int>(
@@ -110,6 +110,7 @@ class NavigationBarWidget extends StatelessWidget {
                 backgroundColor: Theme.of(_).colorScheme.background,
                 shadowColor: Theme.of(_).colorScheme.shadow,
                 surfaceTintColor: Theme.of(_).colorScheme.surfaceTint,
+                height: 60.0,
               );
             },
           ),
