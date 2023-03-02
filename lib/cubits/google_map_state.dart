@@ -7,10 +7,10 @@ abstract class GoogleMapState extends Equatable {
   List<Object> get props => [];
 }
 
-//Loading State
+//Loading state
 class GoogleMapLoading extends GoogleMapState {}
 
-//Loaded State
+//Loaded state
 class GoogleMapLoaded extends GoogleMapState {
   //성공적으로 Google Map이 로드되었을 경우 두가지를 props 객체로 전달
   final LatLng initialCameraPosition;
@@ -23,7 +23,10 @@ class GoogleMapLoaded extends GoogleMapState {
   });
 
   @override
-  List<Object> get props => [initialCameraPosition];
+  List<Object> get props => [
+        initialCameraPosition,
+        markers,
+      ];
 }
 
 class GoogleMapCameraMove extends GoogleMapState {
@@ -41,5 +44,5 @@ class GoogleMapError extends GoogleMapState {
   GoogleMapError(this.errorMessage);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [errorMessage];
 }
