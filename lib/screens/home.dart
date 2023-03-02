@@ -35,12 +35,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
-                  color: Color.fromARGB(84, 85, 136, 238)),
+                  color: dynamicColor.primaryContainer),
               child: IconButton(
                 icon: Icon(
                   Icons.notifications,
-                  color: Palette.jetblack,
-                  size: 30,
+                  color: dynamicColor.onPrimaryContainer,
+                  size: 25,
                 ),
                 onPressed: () {},
               ),
@@ -50,93 +50,153 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: Color(0xFFFEFBFF),
       body: SafeArea(
-          child: Column(
+          child: Stack(
         children: [
-          SizedBox(
-            height: 20,
-          ),
           Container(
-            width: _width,
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Status',
-                style: TextStyle(
-                    fontSize: 32,
-                    color: dynamicColor.primary,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            width: _width * 0.9,
-            height: 100,
-            decoration: BoxDecoration(
-                color: dynamicColor.secondaryContainer,
-                borderRadius: BorderRadius.circular(25)),
-            child: Text(
-              'Oops! Your submission is empty',
-              style: TextStyle(color: dynamicColor.onSecondaryContainer),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            width: _width,
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Popular',
-                style: TextStyle(
-                    fontSize: 32,
-                    color: dynamicColor.primary,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-          ),
-          Container(
-            height: 240,
-            child: ListView(
-              children: [
-                CarouselSlider(
-                  items: [
-                    sliderContainer(
-                      _width,
-                      'Eating home-cooked food',
-                      'Cooking with fresh ingredients',
-                      ' 379',
-                      '21days left',
-                      dynamicColor.onPrimaryContainer,
-                      dynamicColor.secondaryContainer,
-                      dynamicColor.onPrimaryContainer,
-                      dynamicColor.onSecondary,
-                    ),
-                  ],
-                  options: CarouselOptions(
-                    height: 230,
-                    enlargeCenterPage: true,
-                    autoPlay: true,
-                    aspectRatio: 16 / 9,
-                    autoPlayCurve: Curves.easeInOutSine,
-                    enableInfiniteScroll: true,
-                    autoPlayAnimationDuration: Duration(milliseconds: 1500),
-                    viewportFraction: 1,
-                  ),
+            height: _height * 0.6,
+            child: CarouselSlider(
+              items: [
+                Container(
+                  width: _width,
+                  height: _height,
+                  color: Colors.amber,
+                ),
+                Container(
+                  width: _width,
+                  height: _height,
+                  color: Colors.green,
+                ),
+                Container(
+                  width: _width,
+                  height: _height,
+                  color: Colors.red,
                 )
               ],
+              options: CarouselOptions(
+                height: _height,
+                enlargeCenterPage: false,
+                autoPlay: true,
+                aspectRatio: 16 / 9,
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enableInfiniteScroll: true,
+                autoPlayAnimationDuration: Duration(milliseconds: 1500),
+                viewportFraction: 1,
+              ),
             ),
           ),
-          SizedBox(
-            height: 20,
+          DraggableScrollableSheet(
+            initialChildSize: 0.30,
+            minChildSize: 0.25,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return SingleChildScrollView(
+                controller: scrollController,
+                child: bottomContent(_width, context),
+              );
+            },
           ),
         ],
       )),
     );
   }
+}
+
+Widget bottomContent(_width, context) {
+  final dynamicColor = Theme.of(context).colorScheme;
+  return Container(
+    height: MediaQuery.of(context).size.height * 0.75,
+    decoration: BoxDecoration(
+      color: dynamicColor.background,
+      // borderRadius: BorderRadius.only(
+      //   topLeft: Radius.circular(25),
+      //   topRight: Radius.circular(25),
+      // )
+    ),
+    child: Column(
+      children: [
+        SizedBox(
+          height: 20,
+        ),
+        Container(
+          width: _width,
+          height: 60,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              'Status',
+              style: TextStyle(
+                  fontSize: 32,
+                  color: dynamicColor.primary,
+                  fontWeight: FontWeight.w900),
+            ),
+          ),
+        ),
+        Container(
+          alignment: Alignment.center,
+          width: _width * 0.9,
+          height: 100,
+          decoration: BoxDecoration(
+              color: dynamicColor.secondaryContainer,
+              borderRadius: BorderRadius.circular(25)),
+          child: Text(
+            'Oops! Your submission is empty',
+            style: TextStyle(color: dynamicColor.onSecondaryContainer),
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Container(
+          width: _width,
+          height: 60,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              'Popular',
+              style: TextStyle(
+                  fontSize: 32,
+                  color: dynamicColor.primary,
+                  fontWeight: FontWeight.w900),
+            ),
+          ),
+        ),
+        Container(
+          height: 240,
+          child: ListView(
+            children: [
+              CarouselSlider(
+                items: [
+                  sliderContainer(
+                    _width,
+                    'Eating home-cooked food',
+                    'Cooking with fresh ingredients',
+                    ' 379',
+                    '21days left',
+                    dynamicColor.onPrimaryContainer,
+                    dynamicColor.secondaryContainer,
+                    dynamicColor.onPrimaryContainer,
+                    dynamicColor.onSecondary,
+                  ),
+                ],
+                options: CarouselOptions(
+                  height: 230,
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  aspectRatio: 16 / 9,
+                  autoPlayCurve: Curves.easeInOutSine,
+                  enableInfiniteScroll: true,
+                  autoPlayAnimationDuration: Duration(milliseconds: 1500),
+                  viewportFraction: 1,
+                ),
+              )
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+      ],
+    ),
+  );
 }
 
 Widget sliderContainer(_width, titleText, subtitleText, person, day,
