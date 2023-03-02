@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:zikiza/cubits/google_map_cubit.dart';
-import 'package:zikiza/utilities/palette.dart';
 
 class ExploreScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     return BlocProvider(
       create: (_) => GoogleMapCubit(),
       child: GoogleMapWidget(),
@@ -17,7 +16,7 @@ class ExploreScreen extends StatelessWidget {
 
 class GoogleMapWidget extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     return BlocBuilder<GoogleMapCubit, GoogleMapState>(
       builder: (_, state) {
         if (state is GoogleMapLoading) {
@@ -37,10 +36,11 @@ class GoogleMapWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildGoogleMap(BuildContext context, GoogleMapLoaded state) {
+  Widget _buildGoogleMap(BuildContext _, GoogleMapLoaded state) {
     final LatLng currentLocation = state.initialCameraPosition;
     final Set<Marker> markers = state.markers;
     final Completer<GoogleMapController> _googleMapController = Completer();
+    final dynamicColor = Theme.of(_).colorScheme;
     return SafeArea(
       child: GoogleMap(
         initialCameraPosition: CameraPosition(
