@@ -2,7 +2,11 @@ import 'package:zikiza/utilities/palette.dart';
 import 'package:flutter/material.dart';
 
 class LightAppBar extends StatelessWidget implements PreferredSizeWidget {
-  LightAppBar({Key? key, required this.actions});
+  LightAppBar(
+      {Key? key,
+      required this.actions,
+      required Text title,
+      required Color color});
 
   final List<Widget>? actions;
 
