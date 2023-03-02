@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zikiza/screens/initial.dart';
 import 'package:zikiza/utilities/typografie.dart';
 import 'package:zikiza/utilities/constants.dart';
 import 'package:zikiza/widgets/light_appbar.dart';
@@ -131,7 +132,12 @@ class _LaunchScreenState extends State<LaunchScreen>
                   opacity: _showContinueButton ? 1.0 : 0.0,
                   child: _showContinueButton
                       ? ContinueButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                _,
+                                MaterialPageRoute(
+                                    builder: (_) => InitialScreen()));
+                          },
                           child: Typografie().BodyLarge(
                             "Continue",
                             dynamicColor.onPrimaryContainer,
@@ -159,7 +165,12 @@ class _LaunchScreenState extends State<LaunchScreen>
       appBar: LightAppBar(
         actions: <Widget>[
           SkipButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                Navigator.push(
+                    _, MaterialPageRoute(builder: (_) => InitialScreen()));
+              });
+            },
             child: const Text("Skip"),
             foregroundColor: dynamicColor.onPrimary,
           ),
