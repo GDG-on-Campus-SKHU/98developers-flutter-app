@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zikiza/screens/home.dart';
 import 'package:zikiza/screens/challenge.dart';
 import 'package:zikiza/screens/explore.dart';
+import 'package:zikiza/screens/launch.dart';
 import 'package:zikiza/screens/profile.dart';
 import 'package:zikiza/utilities/dynamic_theme.dart';
 import 'package:zikiza/cubits/navigation_bar_cubit.dart';
@@ -24,7 +25,9 @@ class MainApp extends StatelessWidget {
         darkTheme: DynamicTheme.darkTheme(darkColorScheme),
         //디바이스 시스템 설정에 따라 theme 모드 전환
         themeMode: ThemeMode.system,
-        home: BlocProvider(
+        home: // LaunchScreen(),
+
+            BlocProvider(
           create: (_) => NavigationBarCubit(),
           child: NavigationBarWidget(),
         ),
