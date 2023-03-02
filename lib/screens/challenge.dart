@@ -11,30 +11,30 @@ class ChallengeScreen extends StatefulWidget {
 class _ChallengeScreenState extends State<ChallengeScreen> {
   List<String> nowTitle = [
     'Eating home-cooked food',
+    'picking up a certain amount of street trash '
   ];
-  List<String> exportTitle = [
-    'Visiting recycling Club',
-  ];
+
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
+    final dynamicColor = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Color(0xFFEDEEFA),
+        backgroundColor: dynamicColor.surfaceVariant,
         title: Container(
           width: _width,
           child: Text(
             'Challenge',
             style: TextStyle(
                 fontSize: 28,
-                fontWeight: FontWeight.w700,
-                color: Palette.jetblack),
+                fontWeight: FontWeight.w400,
+                color: dynamicColor.onPrimaryContainer),
           ),
         ),
       ),
-      backgroundColor: Color(0xFFFEFBFF),
+      backgroundColor: dynamicColor.background,
       body: SafeArea(
           child: Column(
         children: [
@@ -47,28 +47,29 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
             child: Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text(
-                'NOW',
+                'Available',
                 style: TextStyle(
-                    fontSize: 32,
-                    color: Palette.babyblue,
-                    fontWeight: FontWeight.w900),
+                    fontSize: 23,
+                    color: dynamicColor.primary,
+                    fontWeight: FontWeight.w400),
               ),
             ),
           ),
           Container(
             //now listview
             width: _width * 0.9,
-            height: _height * 0.15,
+            height: _height * 0.6,
             child: ListView.builder(
                 itemCount: nowTitle.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
                     child: Container(
                       width: _width * 0.9,
-                      height: 100,
+                      height: 120,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
-                          color: Color.fromARGB(255, 217, 226, 255)),
+                          color: dynamicColor.primaryContainer),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Row(
@@ -82,8 +83,8 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                     '${nowTitle[index]}',
                                     style: TextStyle(
                                         fontSize: 19,
-                                        color: Palette.jetblack,
-                                        fontWeight: FontWeight.w700),
+                                        color: dynamicColor.onPrimaryContainer,
+                                        fontWeight: FontWeight.w400),
                                   ),
                                 ),
                                 Container(
@@ -96,7 +97,8 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(25),
-                                              color: Palette.sapphire),
+                                              color: dynamicColor
+                                                  .onPrimaryContainer),
                                           child: Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 10),
@@ -105,12 +107,14 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                                 Icon(
                                                   Icons.person,
                                                   size: 16,
-                                                  color: Palette.white,
+                                                  color:
+                                                      dynamicColor.onTertiary,
                                                 ),
                                                 Text(
                                                   ' 379',
                                                   style: TextStyle(
-                                                      color: Palette.white,
+                                                      color: dynamicColor
+                                                          .onTertiary,
                                                       fontSize: 13,
                                                       fontWeight:
                                                           FontWeight.w500),
@@ -128,13 +132,15 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(25),
-                                              color: Palette.sapphire),
+                                              color: dynamicColor
+                                                  .onPrimaryContainer),
                                           child: Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 10.0, right: 10),
                                             child: Text('21days left',
                                                 style: TextStyle(
-                                                    color: Palette.white,
+                                                    color:
+                                                        dynamicColor.onTertiary,
                                                     fontSize: 13,
                                                     fontWeight:
                                                         FontWeight.w500)),
@@ -148,137 +154,15 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                               height: 100,
                               child: IconButton(
                                 icon: Icon(
-                                  Icons.local_fire_department_rounded,
-                                  color: Palette.grapefruit,
-                                  size: 33,
+                                  Icons.arrow_forward,
+                                  color: dynamicColor.onPrimaryContainer,
+                                  size: 25,
                                 ),
                                 onPressed: () {},
                               ),
                             )
                           ],
                         ),
-                      ),
-                    ),
-                    onTap: () {},
-                  );
-                }),
-          ),
-          Container(
-            width: _width,
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Available',
-                style: TextStyle(
-                    fontSize: 32,
-                    color: Palette.babyblue,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-          ),
-          Container(
-            //now listview
-            width: _width * 0.9,
-            height: _height * 0.3,
-            child: ListView.builder(
-                itemCount: exportTitle.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: _width * 0.9,
-                    height: 100,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(255, 217, 226, 255)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: _width * 0.7,
-                                child: Text(
-                                  '${exportTitle[index]}',
-                                  style: TextStyle(
-                                      fontSize: 19,
-                                      color: Palette.jetblack,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
-                              Container(
-                                  width: _width * 0.7,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 28,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            color: Palette.sapphire),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10.0, right: 10),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.person,
-                                                size: 16,
-                                                color: Palette.white,
-                                              ),
-                                              Text(
-                                                ' 18',
-                                                style: TextStyle(
-                                                    color: Palette.white,
-                                                    fontSize: 13,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 28,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            color: Palette.sapphire),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10.0, right: 10),
-                                          child: Text('21days left',
-                                              style: TextStyle(
-                                                  color: Palette.white,
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      )
-                                    ],
-                                  )),
-                            ],
-                          ),
-                          Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Palette.sapphire),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.arrow_forward,
-                                color: Palette.white,
-                                size: 33,
-                              ),
-                              onPressed: () {},
-                            ),
-                          )
-                        ],
                       ),
                     ),
                   );
