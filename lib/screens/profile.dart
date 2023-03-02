@@ -12,12 +12,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<String> challengeLog = [];
   @override
   Widget build(BuildContext context) {
+    final dynamicColor = Theme.of(context).colorScheme;
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Color(0xFFEDEEFA),
+        backgroundColor: dynamicColor.surfaceVariant,
         title: Container(
             width: _width,
             padding: EdgeInsets.only(left: 10),
@@ -31,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Color.fromARGB(84, 85, 136, 238)),
+                      color: dynamicColor.primaryContainer),
                   child: IconButton(
                     icon: Icon(Icons.settings, size: 30),
                     onPressed: () {},
@@ -50,9 +51,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             alignment: Alignment.center,
             child: Container(
               width: _width * 0.9,
-              decoration: BoxDecoration(
-                  color: Palette.darkgrey,
-                  borderRadius: BorderRadius.circular(25)),
               child: Row(
                 children: [
                   Padding(
@@ -69,11 +67,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 32),
+                    padding: const EdgeInsets.only(left: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -82,9 +77,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: Text(
                             'Hyeonbok Lee',
                             style: TextStyle(
-                                fontSize: 22,
+                                fontSize: 28,
                                 fontWeight: FontWeight.w700,
-                                color: Palette.white),
+                                color: dynamicColor.onPrimaryContainer),
                           ),
                         ),
                         SizedBox(
@@ -95,9 +90,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: Text(
                             'test@gmail.com',
                             style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
-                                color: Palette.grey),
+                                color: dynamicColor.onPrimaryContainer),
                           ),
                         ),
                       ],
@@ -115,8 +110,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text(
-                'History',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+                'My history',
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400,
+                    color: dynamicColor.onPrimaryContainer),
               ),
             ),
           ),
@@ -125,23 +123,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           Container(
               width: _width * 0.9,
-              child: Divider(color: Palette.jetblack, thickness: 2.0)),
+              child: Divider(
+                  color: dynamicColor.onPrimaryContainer, thickness: 2.0)),
           Container(
               width: _width,
               height: _height * 0.45,
-              child: challengLogList(challengeLog.length, _width, challengeLog))
+              child: challengLogList(challengeLog.length, _width, challengeLog,
+                  dynamicColor.secondary))
         ],
       )),
     );
   }
 }
 
-Widget challengLogList(cnt, mainWidth, list) {
+Widget challengLogList(cnt, mainWidth, list, textColor) {
   if (cnt == 0 || cnt == null) {
     return Center(
       child: Text(
         'The challenge history is displayed here',
-        style: TextStyle(fontSize: 17),
+        style: TextStyle(fontSize: 17, color: textColor),
       ),
     );
   } else {
