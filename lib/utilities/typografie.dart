@@ -81,7 +81,7 @@ class Typografie {
       style: TextStyle(
         color: color,
         fontSize: 27.0,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w300,
         fontFamily: "NotoSans",
       ),
     );
@@ -93,7 +93,7 @@ class Typografie {
       style: TextStyle(
         color: color,
         fontSize: 25.0,
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w500,
         fontFamily: "NotoSans",
       ),
     );
