@@ -4,7 +4,11 @@ import 'package:zikiza/utilities/palette.dart';
 
 /** NextButton 클래스는 Launch 스크린의 Pageview 이동을 도와주는 버튼을 포함하고 있어요. */
 class NextButton extends StatelessWidget {
-  const NextButton({Key? key, required this.onPressed});
+  const NextButton(
+      {Key? key,
+      required this.onPressed,
+      required Color color,
+      required Color fillColor});
 
   final VoidCallback onPressed;
 

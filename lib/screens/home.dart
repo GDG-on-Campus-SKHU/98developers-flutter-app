@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final dynamicColor = Theme.of(context).colorScheme;
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -60,10 +61,39 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text(
+                'Status',
+                style: TextStyle(
+                    fontSize: 32,
+                    color: dynamicColor.primary,
+                    fontWeight: FontWeight.w900),
+              ),
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: _width * 0.9,
+            height: 100,
+            decoration: BoxDecoration(
+                color: dynamicColor.secondaryContainer,
+                borderRadius: BorderRadius.circular(25)),
+            child: Text(
+              'Oops! Your submission is empty',
+              style: TextStyle(color: dynamicColor.onSecondaryContainer),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            width: _width,
+            height: 60,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
                 'Popular',
                 style: TextStyle(
                     fontSize: 32,
-                    color: Palette.babyblue,
+                    color: dynamicColor.primary,
                     fontWeight: FontWeight.w900),
               ),
             ),
@@ -75,11 +105,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 CarouselSlider(
                   items: [
                     sliderContainer(
-                        _width,
-                        'Eating home-cooked food',
-                        'Cooking with fresh ingredients',
-                        ' 379',
-                        '21days left'),
+                      _width,
+                      'Eating home-cooked food',
+                      'Cooking with fresh ingredients',
+                      ' 379',
+                      '21days left',
+                      dynamicColor.onPrimaryContainer,
+                      dynamicColor.secondaryContainer,
+                      dynamicColor.onPrimaryContainer,
+                      dynamicColor.onSecondary,
+                    ),
                   ],
                   options: CarouselOptions(
                     height: 230,
@@ -98,32 +133,19 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 20,
           ),
-          Container(
-            width: _width,
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Status',
-                style: TextStyle(
-                    fontSize: 32,
-                    color: Palette.babyblue,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-          ),
         ],
       )),
     );
   }
 }
 
-Widget sliderContainer(_width, titleText, subtitleText, person, day) {
+Widget sliderContainer(_width, titleText, subtitleText, person, day,
+    titleTextColor, containerColor, circleContainerColor, circleTextColor) {
   return Container(
     width: _width * 0.9,
     height: 220,
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25), color: Palette.sapphire),
+        borderRadius: BorderRadius.circular(25), color: containerColor),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -137,7 +159,7 @@ Widget sliderContainer(_width, titleText, subtitleText, person, day) {
             titleText,
             style: TextStyle(
                 fontSize: 22,
-                color: Palette.white,
+                color: titleTextColor,
                 fontWeight: FontWeight.w500),
           ),
         ),
@@ -156,7 +178,7 @@ Widget sliderContainer(_width, titleText, subtitleText, person, day) {
                 children: [
                   Text(
                     subtitleText,
-                    style: TextStyle(fontSize: 14, color: Palette.white),
+                    style: TextStyle(fontSize: 14, color: titleTextColor),
                   ),
                   Container(
                       width: _width * 0.5,
@@ -167,7 +189,7 @@ Widget sliderContainer(_width, titleText, subtitleText, person, day) {
                             height: 28,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
-                                color: Color(0xFFD9E2FF)),
+                                color: circleContainerColor),
                             child: Padding(
                               padding:
                                   const EdgeInsets.only(left: 10.0, right: 10),
@@ -176,12 +198,12 @@ Widget sliderContainer(_width, titleText, subtitleText, person, day) {
                                   Icon(
                                     Icons.person,
                                     size: 16,
-                                    color: Palette.sapphire,
+                                    color: circleTextColor,
                                   ),
                                   Text(
                                     person,
                                     style: TextStyle(
-                                        color: Palette.sapphire,
+                                        color: circleTextColor,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w500),
                                   )
@@ -197,13 +219,13 @@ Widget sliderContainer(_width, titleText, subtitleText, person, day) {
                             height: 28,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
-                                color: Color(0xFFD9E2FF)),
+                                color: circleContainerColor),
                             child: Padding(
                               padding:
                                   const EdgeInsets.only(left: 10.0, right: 10),
                               child: Text(day,
                                   style: TextStyle(
-                                      color: Palette.sapphire,
+                                      color: circleTextColor,
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500)),
                             ),
@@ -216,7 +238,7 @@ Widget sliderContainer(_width, titleText, subtitleText, person, day) {
                 height: 100,
                 child: Icon(
                   Icons.local_fire_department_rounded,
-                  color: Palette.grapefruit,
+                  color: Color(0xFFFD6D6D),
                   size: 100,
                 ),
               )
