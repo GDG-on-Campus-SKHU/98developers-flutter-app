@@ -1,14 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 part 'google_auth_state.dart';
 
 class GoogleAuthCubit extends Cubit<GoogleAuthState> {
-  GoogleAuthCubit() : super(GoogleAuthInitial());
+  GoogleAuthCubit(this._secureStorage) : super(GoogleAuthInitial()) {
+    _secureStorage;
+    _googleSignIn;
+    _fireBaseAuth;
+  }
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn.standard();
+  final FlutterSecureStorage _secureStorage;
+  final GoogleSignIn _googleSignIn = GoogleSignIn.standard(scopes: ["email"]);
   final FirebaseAuth _fireBaseAuth = FirebaseAuth.instance;
 
   //Google account Sign in
@@ -29,6 +35,12 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
         final UserCredential userCredential =
             await _fireBaseAuth.signInWithCredential(_credential);
         final User? _user = userCredential.user;
+
+        //Save encrypt user data
+        await _secureStorage.write(key: "user_id", value: _user?.uid);
+        await _secureStorage.write(key: "user_email", value: _user?.email);
+        await _secureStorage.write(key: "user_name", value: _user?.displayName);
+        await _secureStorage.write(key: "user_avatar", value: _user?.photoURL);
 
         if (_user != null) {
           emit(GoogleAuthSuccess(user: _user));
