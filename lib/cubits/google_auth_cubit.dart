@@ -17,12 +17,11 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
   final GoogleSignIn _googleSignIn = GoogleSignIn.standard(scopes: ["email"]);
   final FirebaseAuth _fireBaseAuth = FirebaseAuth.instance;
 
-  //Google account Sign in
+  //Sign in Google account
   Future<void> signInWithGoogle() async {
-    emit(GoogleAuthLoading());
-
     try {
       final GoogleSignInAccount? _googleAccount = await _googleSignIn.signIn();
+
       if (_googleAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =
             await _googleAccount.authentication;
@@ -46,23 +45,25 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
           emit(GoogleAuthSuccess(user: _user));
         } else {
           emit(GoogleAuthFailed(errorMessage: "Sign in failed."));
+          emit(GoogleAuthLoading());
         }
       } else {
-        emit(GoogleAuthFailed(errorMessage: "Cancelled Google Sign in."));
+        emit(GoogleAuthFailed(errorMessage: "Canceled Google Sign in."));
       }
     } catch (error) {
       emit(GoogleAuthFailed(errorMessage: error.toString()));
     }
   }
 
-  //Google account sign out
+  //Sign out Google account
   Future<void> signOutWithGoogle() async {
     try {
       await _googleSignIn.signOut();
       await _fireBaseAuth.signOut();
+      await _secureStorage.deleteAll();
       emit(GoogleAuthInitial());
     } catch (error) {
-      emit(GoogleAuthFailed(errorMessage: error.toString()));
+      emit(GoogleSignOutFailed(errorMessage: error.toString()));
     }
   }
 }
