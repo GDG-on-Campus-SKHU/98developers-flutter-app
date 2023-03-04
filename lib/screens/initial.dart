@@ -13,7 +13,7 @@ class InitialScreen extends StatelessWidget {
     return BlocBuilder<GoogleAuthCubit, GoogleAuthState>(
       builder: (_, state) {
         return Scaffold(
-          backgroundColor: Theme.of(_).colorScheme.primary,
+          backgroundColor: Theme.of(_).colorScheme.background,
           body: Stack(
             children: [
               Center(
@@ -21,19 +21,25 @@ class InitialScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 95.0),
                   width: _width * 0.9,
                   height: double.infinity,
-                  color: Theme.of(_).colorScheme.primary,
+                  color: Theme.of(_).colorScheme.background,
                   child: Column(
                     children: [
                       Typografie().DisplayMedium(
                         "ZIKIZA",
-                        Theme.of(_).colorScheme.onPrimary,
+                        Theme.of(_).colorScheme.primary,
                       ),
                       SizedBox(height: 10.0),
                       Typografie().TitleLarge(
                         "Join us for the Earth.",
-                        Theme.of(_).colorScheme.onPrimary,
+                        Theme.of(_).colorScheme.secondary,
                       ),
-                      SizedBox(height: _height * 0.4),
+                      SizedBox(height: _height * 0.1),
+                      Image.asset(
+                        "assets/images/app_zikiza.png",
+                        width: 175.0,
+                        height: 175.0,
+                      ),
+                      SizedBox(height: _height * 0.1),
                       GoogleSignInButton(
                         onTap: () {
                           _.read<GoogleAuthCubit>().signInWithGoogle();
@@ -49,38 +55,49 @@ class InitialScreen extends StatelessWidget {
                             ),
                             Typografie().LabelLarge(
                               "Sign in with Google",
-                              Theme.of(_).colorScheme.primary,
+                              Theme.of(_).colorScheme.secondary,
                             )
                           ],
                         ),
                         decoration: BoxDecoration(
                           color: Theme.of(_).colorScheme.background,
                           borderRadius: BorderRadius.circular(25.0),
+                          border: Border.all(
+                              color: Theme.of(_).colorScheme.secondary),
                         ),
                         padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                         width: _width * 0.8,
-                        height: 55.0,
+                        height: 50.0,
                       ),
-                      SizedBox(height: 10.0),
+                      SizedBox(height: 25.0),
                       CreateAccountButton(
-                        onTap: () {},
+                        onTap: () => showDialog(
+                          context: _,
+                          builder: (_) {
+                            return AlertDialog(
+                              title: const Text("Caution"),
+                              content: const Text(
+                                  "Local Account service is not currently available."),
+                            );
+                          },
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Typografie().LabelLarge(
-                              "Create an account",
-                              Theme.of(_).colorScheme.onPrimary,
+                              "Create a ZIKIZA account",
+                              Theme.of(_).colorScheme.secondary,
                             )
                           ],
                         ),
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: Theme.of(_).colorScheme.onPrimary),
+                              color: Theme.of(_).colorScheme.secondary),
                           borderRadius: BorderRadius.circular(25.0),
                         ),
                         padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                         width: _width * 0.8,
-                        height: 55,
+                        height: 50.0,
                       ),
                     ],
                   ),
