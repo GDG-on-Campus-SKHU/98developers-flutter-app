@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:equatable/equatable.dart';
@@ -32,16 +33,16 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
           idToken: googleSignInAuthentication.idToken,
         );
         await _secureStorage.write(
-            key: "accessToken", value: _credential.accessToken);
+            key: "access_token", value: _credential.accessToken);
 
         final UserCredential userCredential =
             await _fireBaseAuth.signInWithCredential(_credential);
         final User? _user = userCredential.user;
 
         //Save encrypt user data
-        await _secureStorage.write(key: "userIdentifier", value: _user?.uid);
+        await _secureStorage.write(key: "user_identifier", value: _user?.uid);
         await _secureStorage.write(
-            key: "refreshToken", value: _user?.refreshToken);
+            key: "refresh_token", value: _user?.refreshToken);
 
         if (_user != null) {
           emit(GoogleAuthSuccess(user: _user));
@@ -61,7 +62,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
   Future<void> getUserData() async {
     const String url = "http://zikiza.duckdns.org/users";
     String? accessToken =
-        await _secureStorage.read(key: "accessToken").toString();
+        await _secureStorage.read(key: "access_token").toString();
     try {
       var response = await http.get(
         Uri.parse(url),
@@ -69,14 +70,15 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
       );
 
       if (response.statusCode == 200) {
-        print("getUserData(): http get user data successfully.");
+        final response_data = response.body;
+        log("getUserData(): [200]Http get user data successfully.\n${response_data}");
       } else if (response.statusCode == 401) {
-        print("getUserData(): Not valid access token. 401.");
+        log("getUserData(): [401]Not valid access token.");
       } else if (response.statusCode == 403) {
-        print("getUserData(): http get user data failed. 403.");
+        log("getUserData(): [403]Http get user data failed.");
       }
     } catch (error) {
-      return print(error);
+      return log("${error}");
     }
   }
 
