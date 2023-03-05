@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:http/http.dart' as http;
 import 'package:equatable/equatable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,19 +31,21 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
         );
+        await _secureStorage.write(
+            key: "accessToken", value: _credential.accessToken);
 
         final UserCredential userCredential =
             await _fireBaseAuth.signInWithCredential(_credential);
         final User? _user = userCredential.user;
 
         //Save encrypt user data
-        await _secureStorage.write(key: "user_id", value: _user?.uid);
-        await _secureStorage.write(key: "user_email", value: _user?.email);
-        await _secureStorage.write(key: "user_name", value: _user?.displayName);
-        await _secureStorage.write(key: "user_avatar", value: _user?.photoURL);
+        await _secureStorage.write(key: "userIdentifier", value: _user?.uid);
+        await _secureStorage.write(
+            key: "refreshToken", value: _user?.refreshToken);
 
         if (_user != null) {
           emit(GoogleAuthSuccess(user: _user));
+          getUserData();
         } else {
           emit(GoogleAuthFailed(errorMessage: "Sign in failed."));
           emit(GoogleAuthLoading());
@@ -52,6 +55,28 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
       }
     } catch (error) {
       emit(GoogleAuthFailed(errorMessage: error.toString()));
+    }
+  }
+
+  Future<void> getUserData() async {
+    const String url = "http://zikiza.duckdns.org/users";
+    String? accessToken =
+        await _secureStorage.read(key: "accessToken").toString();
+    try {
+      var response = await http.get(
+        Uri.parse(url),
+        headers: {"accessToken": accessToken},
+      );
+
+      if (response.statusCode == 200) {
+        print("getUserData(): http get user data successfully.");
+      } else if (response.statusCode == 401) {
+        print("getUserData(): Not valid access token. 401.");
+      } else if (response.statusCode == 403) {
+        print("getUserData(): http get user data failed. 403.");
+      }
+    } catch (error) {
+      return print(error);
     }
   }
 
