@@ -36,6 +36,9 @@ class GoogleAuthFailed extends GoogleAuthState {
   List<Object> get props => [errorMessage];
 }
 
+/** Sign out success state class */
+class GoogleSignOutSuccess extends GoogleAuthState {}
+
 /** Sign out failed state class */
 class GoogleSignOutFailed extends GoogleAuthState {
   final String errorMessage;
