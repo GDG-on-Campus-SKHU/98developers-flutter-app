@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:equatable/equatable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -16,7 +17,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
   }
 
   final FlutterSecureStorage _secureStorage;
-  final GoogleSignIn _googleSignIn = GoogleSignIn.standard(scopes: ["email"]);
+  final GoogleSignIn _googleSignIn = GoogleSignIn.standard();
   final FirebaseAuth _fireBaseAuth = FirebaseAuth.instance;
 
   //Sign in Google account
@@ -49,14 +50,20 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
           emit(GoogleAuthSuccess(user: _user));
           getUserData(verifiedIdToken!);
         } else {
-          emit(GoogleAuthFailed(errorMessage: "Sign in failed."));
-          emit(GoogleAuthLoading());
+          emit(GoogleAuthFailed(
+              errorMessage: "Sign in failed. Re-try Sign-in flow."));
+          emit(GoogleAuthInitial());
         }
       } else {
-        emit(GoogleAuthFailed(errorMessage: "Canceled Google Sign in."));
+        emit(GoogleAuthFailed(errorMessage: "Google Sign in canceled."));
       }
     } catch (error) {
-      emit(GoogleAuthFailed(errorMessage: error.toString()));
+      if (error is PlatformException && error.code == "sign_in_canceled") {
+        print("${error}");
+        emit(GoogleAuthInitial());
+      } else {
+        log("${error}");
+      }
     }
   }
 
