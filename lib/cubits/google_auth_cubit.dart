@@ -32,21 +32,22 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
         );
-        await _secureStorage.write(
-            key: "access_token", value: _credential.accessToken);
 
         final UserCredential userCredential =
             await _fireBaseAuth.signInWithCredential(_credential);
         final User? _user = userCredential.user;
 
-        //Save encrypt user data
-        await _secureStorage.write(key: "user_identifier", value: _user?.uid);
-        await _secureStorage.write(
-            key: "refresh_token", value: _user?.refreshToken);
-
         if (_user != null) {
+          final _currentIdToken = await _fireBaseAuth.currentUser!.getIdToken();
+          String _idToken = _currentIdToken;
+          //Save encrypt user data
+          await _secureStorage.write(key: "id_token", value: _idToken);
+          await _secureStorage.write(key: "user_identifier", value: _user.uid);
+          //Re-load verifying id token
+          final verifiedIdToken = await _secureStorage.read(key: "id_token");
+          log("verifiedIdToken: ${verifiedIdToken}");
           emit(GoogleAuthSuccess(user: _user));
-          getUserData();
+          getUserData(verifiedIdToken!);
         } else {
           emit(GoogleAuthFailed(errorMessage: "Sign in failed."));
           emit(GoogleAuthLoading());
@@ -59,23 +60,24 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
     }
   }
 
-  Future<void> getUserData() async {
-    const String url = "http://zikiza.duckdns.org/users";
-    String? accessToken =
-        await _secureStorage.read(key: "access_token").toString();
+  Future<void> getUserData(String idToken) async {
+    const String url = "https://zikiza.duckdns.org/users";
+    log("getUserData(): ${idToken.toString()}");
     try {
       var response = await http.get(
         Uri.parse(url),
-        headers: {"accessToken": accessToken},
+        headers: {"Authorization": "Bearer " + idToken.toString()},
       );
 
       if (response.statusCode == 200) {
         final response_data = response.body;
         log("getUserData(): [200]Http get user data successfully.\n${response_data}");
       } else if (response.statusCode == 401) {
-        log("getUserData(): [401]Not valid access token.");
+        final response_data = response.body;
+        log("getUserData(): [401]Not valid access token.\n${response_data}");
       } else if (response.statusCode == 403) {
-        log("getUserData(): [403]Http get user data failed.");
+        final response_data = response.body;
+        log("getUserData(): [403]Http get user data failed.\n${response_data}");
       }
     } catch (error) {
       return log("${error}");
