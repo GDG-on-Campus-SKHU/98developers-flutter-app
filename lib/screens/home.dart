@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zikiza/utilities/advertisement.dart';
+
 import '../utilities/palette.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart' as http;
@@ -59,9 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final _height = MediaQuery.of(context).size.height;
     List<Widget> getSlideList() {
       List<Widget> childs = [];
-      for (var i = 0; i < 10; i++) {
-        childs.add(
-            imgSlider(_width, _height, _imgUrl[i], _imgtitleText[i], context));
+      for (var i = 0; i < 3; i++) {
+        childs.add(imgSlider(_width, _height, _imgUrl[i],
+            _imgtitleText[i].replaceAll('기간:', ''), context));
       }
       return childs;
     }
@@ -159,8 +159,11 @@ Widget imgSlider(_width, _height, slideImg, imgTitle, context) {
             Container(
                 alignment: Alignment.center,
                 width: _width,
+                height: _height * 0.05,
                 child: Text('${imgTitle}',
-                    style: TextStyle(color: dynamicColor.background))),
+                    style: TextStyle(
+                        color: dynamicColor.background,
+                        fontWeight: FontWeight.w500))),
             Container(
                 alignment: Alignment.center,
                 width: _width,
