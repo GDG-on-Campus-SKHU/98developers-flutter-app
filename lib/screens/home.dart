@@ -144,6 +144,7 @@ Widget imgSlider(_width, _height, slideImg, imgTitle, context) {
   return Container(
     width: _width,
     height: _height * 0.9,
+    alignment: Alignment.center,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       image: DecorationImage(
@@ -157,18 +158,25 @@ Widget imgSlider(_width, _height, slideImg, imgTitle, context) {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
-                alignment: Alignment.center,
-                width: _width,
-                height: _height * 0.05,
-                child: Text('${imgTitle}',
-                    style: TextStyle(
-                        color: dynamicColor.background,
-                        fontWeight: FontWeight.w500))),
-            Container(
-                alignment: Alignment.center,
-                width: _width,
-                child: Text('신청하려면 이미지 클릭하셈',
-                    style: TextStyle(color: dynamicColor.background))),
+              width: _width,
+              height: _height * 0.6,
+              color: dynamicColor.onSecondaryContainer.withOpacity(0.5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                      alignment: Alignment.center,
+                      width: _width,
+                      child: Text('$imgTitle',
+                          style: TextStyle(color: dynamicColor.background))),
+                  Container(
+                      alignment: Alignment.center,
+                      width: _width,
+                      child: Text('신청하려면 이미지 클릭하셈',
+                          style: TextStyle(color: dynamicColor.background))),
+                ],
+              ),
+            ),
           ],
         )
       ],
