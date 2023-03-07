@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zikiza/screens/takepicture.dart';
 
 class submissionScreen extends StatefulWidget {
   const submissionScreen({super.key});
@@ -79,7 +80,10 @@ class _submissionScreenState extends State<submissionScreen> {
               size: 40,
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => TakePictureScreen()));
+          },
         ),
       ),
     );
