@@ -20,7 +20,7 @@ class LightAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       title: title,
       scrolledUnderElevation: 0,
-      elevation: 0,
+      elevation: 2,
       toolbarHeight: 65.0,
       backgroundColor: backgroundColor,
       automaticallyImplyLeading: false,
