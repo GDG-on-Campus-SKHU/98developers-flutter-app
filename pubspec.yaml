@@ -17,6 +17,8 @@ dependencies:
   freezed: ^2.3.2
   geolocator: ^9.0.2
   google_maps_flutter: ^2.2.4
+  html: ^0.15.1
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
