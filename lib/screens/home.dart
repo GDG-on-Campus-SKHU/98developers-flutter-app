@@ -69,15 +69,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Color(0xFFEDEEFA),
+        backgroundColor: dynamicColor.surfaceVariant,
         title: Container(
           width: _width,
           child: Text(
-            'Home',
+            '',
             style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w700,
-                color: Palette.jetblack),
+                color: dynamicColor.onPrimaryContainer),
           ),
         ),
         actions: [
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      backgroundColor: Color(0xFFFEFBFF),
+      backgroundColor: dynamicColor.background,
       body: SafeArea(
           child: Stack(
         children: [
