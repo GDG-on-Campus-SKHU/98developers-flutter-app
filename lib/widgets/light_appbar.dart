@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class LightAppBar extends StatelessWidget implements PreferredSizeWidget {
   LightAppBar({
     Key? key,
-    required this.actions,
-    required this.title,
-    required this.color,
+    this.actions,
+    this.title,
+    this.color,
     required this.backgroundColor,
   });
 
   final List<Widget>? actions;
   final Widget? title;
-  final Color color;
+  final Color? color;
   final Color backgroundColor;
 
   @override
@@ -24,6 +24,7 @@ class LightAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 65.0,
       backgroundColor: backgroundColor,
       automaticallyImplyLeading: false,
+      centerTitle: false,
     );
   }
 
