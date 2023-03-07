@@ -110,26 +110,63 @@ class InitialScreen extends StatelessWidget {
               ],
             );
           } else if (state is GoogleAuthSuccess) {
+            //테스트 완료 후 Navigator 위젯으로 Link
             return Scaffold(
-              body: Column(
-                children: [
-                  const Text("Google login is successfully"),
-                  Text("email: ${state.user.displayName}"),
-                  Text("display Name: ${state.user.email}"),
-                  ElevatedButton(
-                    onPressed: () {
-                      BlocProvider.of<GoogleAuthCubit>(_).signOutWithGoogle();
-                    },
-                    child: const Text("Sign out"),
-                  ),
-                ],
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Google login is successfully"),
+                    Text("name: ${state.user.displayName}"),
+                    Text("email: ${state.user.email}"),
+                    CircleAvatar(
+                        child: Image.network("${state.user.photoURL}")),
+                    ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                          context: _,
+                          builder: (_) {
+                            return AlertDialog(
+                              title: Typografie().TitleMedium(
+                                "Please Note",
+                                Theme.of(_).colorScheme.onPrimaryContainer,
+                              ),
+                              content: Typografie().BodyLarge(
+                                "Are you sure sign out this current account?",
+                                Theme.of(_).colorScheme.onPrimaryContainer,
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () async {
+                                      await Future.delayed(
+                                          Duration(milliseconds: 1000));
+                                      BlocProvider.of<GoogleAuthCubit>(_)
+                                          .signOutWithGoogle();
+                                      Navigator.pop(_);
+                                    },
+                                    child: const Text("Yes")),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(_);
+                                  },
+                                  child: const Text("No"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: const Text("Sign out"),
+                    ),
+                  ],
+                ),
               ),
             );
           } else if (state is GoogleAuthLoading) {
             if (Platform.isIOS)
-              return CupertinoActivityIndicator();
+              return Center(child: CupertinoActivityIndicator());
             else
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
           } else if (state is GoogleAuthFailed) {
             return InitialScreen();
           } else {
