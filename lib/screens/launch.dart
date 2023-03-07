@@ -56,8 +56,12 @@ class _LaunchScreenState extends State<LaunchScreen>
             SizedBox(height: 10.0),
             Typografie().LabelMedium("Select a challenge. Then also Enroll.",
                 dynamicColor.onPrimary),
-            SizedBox(height: 10.0),
-            Placeholder()
+            SizedBox(height: 65.0),
+            Icon(
+              Icons.workspace_premium_rounded,
+              size: 250.0,
+              color: dynamicColor.primaryContainer,
+            ),
           ],
         ),
       ),
@@ -71,8 +75,12 @@ class _LaunchScreenState extends State<LaunchScreen>
             SizedBox(height: 10.0),
             Typografie().LabelMedium("Submit all submissions and earn rewards.",
                 dynamicColor.onPrimary),
-            SizedBox(height: 10.0),
-            Placeholder()
+            SizedBox(height: 65.0),
+            Icon(
+              Icons.redeem_rounded,
+              size: 250.0,
+              color: dynamicColor.primaryContainer,
+            ),
           ],
         ),
       ),
@@ -87,7 +95,12 @@ class _LaunchScreenState extends State<LaunchScreen>
             Typografie().LabelMedium(
                 "Find Climate community with Maps", dynamicColor.onPrimary),
             SizedBox(height: 10.0),
-            Placeholder(),
+            SizedBox(height: 65.0),
+            Icon(
+              Icons.pin_drop_rounded,
+              size: 250.0,
+              color: dynamicColor.primaryContainer,
+            ),
           ],
         ),
       ),
@@ -114,10 +127,11 @@ class _LaunchScreenState extends State<LaunchScreen>
               animation: _smoothLinearAnimation,
               builder: (_, child) {
                 return LinearProgressIndicator(
+                  minHeight: 5.0,
+                  backgroundColor: dynamicColor.primary,
                   value: _smoothLinearAnimation.value,
                   valueColor:
                       AlwaysStoppedAnimation<Color>(dynamicColor.background),
-                  minHeight: 5.0,
                 );
               },
             ),
@@ -133,10 +147,13 @@ class _LaunchScreenState extends State<LaunchScreen>
                   child: _showContinueButton
                       ? ContinueButton(
                           onPressed: () {
+                            Navigator.pop(_);
                             Navigator.push(
-                                _,
-                                MaterialPageRoute(
-                                    builder: (_) => InitialScreen()));
+                              _,
+                              MaterialPageRoute(
+                                builder: (_) => InitialScreen(),
+                              ),
+                            );
                           },
                           child: Typografie().BodyLarge(
                             "Continue",
@@ -154,8 +171,8 @@ class _LaunchScreenState extends State<LaunchScreen>
                         curve: Curves.easeInOut,
                       );
                     },
-                    color: dynamicColor.onPrimaryContainer,
-                    fillColor: dynamicColor.primaryContainer,
+                    color: Theme.of(_).colorScheme.onPrimaryContainer,
+                    fillColor: Theme.of(_).colorScheme.primaryContainer,
                   )
               ],
             ),
@@ -167,8 +184,11 @@ class _LaunchScreenState extends State<LaunchScreen>
           SkipButton(
             onPressed: () {
               setState(() {
+                Navigator.pop(_);
                 Navigator.push(
-                    _, MaterialPageRoute(builder: (_) => InitialScreen()));
+                  _,
+                  MaterialPageRoute(builder: (_) => InitialScreen()),
+                );
               });
             },
             child: const Text("Skip"),
@@ -177,6 +197,7 @@ class _LaunchScreenState extends State<LaunchScreen>
         ],
         title: const Text(""),
         color: dynamicColor.primary,
+        backgroundColor: dynamicColor.primary,
       ),
     );
   }

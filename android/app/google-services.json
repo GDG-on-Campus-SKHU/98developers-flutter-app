@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "575132232397",
+    "project_id": "zikiza",
+    "storage_bucket": "zikiza.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575132232397:android:69963fda93f281f0655784",
+        "android_client_info": {
+          "package_name": "com.android.zikiza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575132232397-qt4kam0dl8msajr612bu47ugqbkra97j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzslooyz9p3zMAGj89dacp4ejv4R9UXEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575132232397-ffupb4tuvjr3ka0kkim3l2k8lfpoa9j2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "575132232397-bpn5sgr65ho1vd24acq1tod38iu2alj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zikiza.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
