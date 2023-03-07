@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:dynamic_color/dynamic_color.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:zikiza/cubits/google_auth_cubit.dart';
+import 'package:zikiza/firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:zikiza/screens/home.dart';
 import 'package:zikiza/screens/challenge.dart';
 import 'package:zikiza/screens/explore.dart';
-import 'package:zikiza/screens/launch.dart';
 import 'package:zikiza/screens/profile.dart';
+import 'package:zikiza/screens/launch.dart';
 import 'package:zikiza/utilities/dynamic_theme.dart';
 import 'package:zikiza/cubits/navigation_bar_cubit.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MainApp());
 }
 
@@ -19,20 +26,26 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext _) {
     return DynamicColorBuilder(
-        builder: (ColorScheme? lightColorScheme, ColorScheme? darkColorScheme) {
-      return MaterialApp(
-        theme: DynamicTheme.lightTheme(lightColorScheme),
-        darkTheme: DynamicTheme.darkTheme(darkColorScheme),
-        //디바이스 시스템 설정에 따라 theme 모드 전환
-        themeMode: ThemeMode.system,
-        home: // LaunchScreen(),
-
-            BlocProvider(
-          create: (_) => NavigationBarCubit(),
-          child: NavigationBarWidget(),
-        ),
-      );
-    });
+      builder: (ColorScheme? lightColorScheme, ColorScheme? darkColorScheme) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<GoogleAuthCubit>(
+              create: (_) => GoogleAuthCubit(),
+            ),
+            BlocProvider<NavigationBarCubit>(
+              create: (_) => NavigationBarCubit(),
+            ),
+          ],
+          child: MaterialApp(
+            theme: DynamicTheme.lightTheme(lightColorScheme),
+            darkTheme: DynamicTheme.darkTheme(darkColorScheme),
+            //디바이스 시스템 설정에 따라 theme 모드 전환
+            themeMode: ThemeMode.system,
+            home: LaunchScreen(),
+          ),
+        );
+      },
+    );
   }
 }
 
