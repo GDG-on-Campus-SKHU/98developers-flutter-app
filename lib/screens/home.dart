@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zikiza/screens/submission.dart';
 
 import '../utilities/palette.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -210,17 +211,23 @@ Widget bottomContent(_width, context) {
             ),
           ),
         ),
-        Container(
-          alignment: Alignment.center,
-          width: _width * 0.9,
-          height: 100,
-          decoration: BoxDecoration(
-              color: dynamicColor.secondaryContainer,
-              borderRadius: BorderRadius.circular(25)),
-          child: Text(
-            'Oops! Your submission is empty',
-            style: TextStyle(color: dynamicColor.onSecondaryContainer),
+        GestureDetector(
+          child: Container(
+            alignment: Alignment.center,
+            width: _width * 0.9,
+            height: 100,
+            decoration: BoxDecoration(
+                color: dynamicColor.secondaryContainer,
+                borderRadius: BorderRadius.circular(25)),
+            child: Text(
+              'Oops! Your submission is empty',
+              style: TextStyle(color: dynamicColor.onSecondaryContainer),
+            ),
           ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => submissionScreen()));
+          },
         ),
         SizedBox(
           height: 20,
