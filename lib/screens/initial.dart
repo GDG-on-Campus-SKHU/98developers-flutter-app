@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zikiza/cubits/google_auth_cubit.dart';
+import 'package:zikiza/main.dart';
 import 'package:zikiza/utilities/typografie.dart';
 
 class InitialScreen extends StatelessWidget {
@@ -110,58 +111,7 @@ class InitialScreen extends StatelessWidget {
               ],
             );
           } else if (state is GoogleAuthSuccess) {
-            //테스트 완료 후 Navigator 위젯으로 Link
-            return Scaffold(
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Google login is successfully"),
-                    Text("name: ${state.user.displayName}"),
-                    Text("email: ${state.user.email}"),
-                    CircleAvatar(
-                        child: Image.network("${state.user.photoURL}")),
-                    ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                          context: _,
-                          builder: (_) {
-                            return AlertDialog(
-                              title: Typografie().TitleMedium(
-                                "Please Note",
-                                Theme.of(_).colorScheme.onPrimaryContainer,
-                              ),
-                              content: Typografie().BodyLarge(
-                                "Are you sure sign out this current account?",
-                                Theme.of(_).colorScheme.onPrimaryContainer,
-                              ),
-                              actions: [
-                                TextButton(
-                                    onPressed: () async {
-                                      await Future.delayed(
-                                          Duration(milliseconds: 1000));
-                                      BlocProvider.of<GoogleAuthCubit>(_)
-                                          .signOutWithGoogle();
-                                      Navigator.pop(_);
-                                    },
-                                    child: const Text("Yes")),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(_);
-                                  },
-                                  child: const Text("No"),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      child: const Text("Sign out"),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return NavigationBarWidget();
           } else if (state is GoogleAuthLoading) {
             if (Platform.isIOS)
               return Center(child: CupertinoActivityIndicator());
