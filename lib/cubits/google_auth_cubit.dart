@@ -10,13 +10,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 part 'google_auth_state.dart';
 
 class GoogleAuthCubit extends Cubit<GoogleAuthState> {
-  GoogleAuthCubit(this._secureStorage) : super(GoogleAuthInitial()) {
-    _secureStorage;
-    _googleSignIn;
-    _fireBaseAuth;
-  }
+  GoogleAuthCubit() : super(GoogleAuthInitial());
 
-  final FlutterSecureStorage _secureStorage;
+  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
   final GoogleSignIn _googleSignIn = GoogleSignIn.standard();
   final FirebaseAuth _fireBaseAuth = FirebaseAuth.instance;
 
