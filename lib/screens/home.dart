@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../utilities/palette.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:http/http.dart' as http;
+import 'package:html/parser.dart' as parser;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,23 +13,71 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<String> _imgUrl = [];
+  List<String> _imgtitleText = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getHomePostData();
+  }
+
+  void getHomePostData() async {
+    final response = await http
+        .get(Uri.parse('https://www.greenpeace.org/korea/make-a-change/'));
+    final document = parser.parse(response.body);
+
+    if (response.statusCode == 200) {
+      final textElement =
+          document.querySelectorAll('div.box > div.content > p');
+      _imgtitleText = textElement.map((element) => element.innerHtml).toList();
+      document.getElementsByTagName('div').forEach((element) {
+        final String? style = element.attributes['style'];
+
+        if (style != null) {
+          String imgSrc = element.attributes.toString();
+
+          int srcStart = imgSrc.indexOf('(');
+          int end = imgSrc.indexOf(')');
+
+          if (srcStart == -1 || end == -1) {
+            print('object');
+          } else {
+            setState(() {
+              _imgUrl.add(imgSrc.substring(srcStart + 1, end));
+            });
+          }
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final dynamicColor = Theme.of(context).colorScheme;
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
+    List<Widget> getSlideList() {
+      List<Widget> childs = [];
+      for (var i = 0; i < 3; i++) {
+        childs.add(imgSlider(_width, _height, _imgUrl[i],
+            _imgtitleText[i].replaceAll('기간:', ''), context));
+      }
+      return childs;
+    }
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Color(0xFFEDEEFA),
+        backgroundColor: dynamicColor.surfaceVariant,
         title: Container(
           width: _width,
           child: Text(
-            'Home',
+            '',
             style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w700,
-                color: Palette.jetblack),
+                color: dynamicColor.onPrimaryContainer),
           ),
         ),
         actions: [
@@ -35,12 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
-                  color: Color.fromARGB(84, 85, 136, 238)),
+                  color: dynamicColor.primaryContainer),
               child: IconButton(
                 icon: Icon(
                   Icons.notifications,
-                  color: Palette.jetblack,
-                  size: 30,
+                  color: dynamicColor.onPrimaryContainer,
+                  size: 25,
                 ),
                 onPressed: () {},
               ),
@@ -48,95 +99,184 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      backgroundColor: Color(0xFFFEFBFF),
+      backgroundColor: dynamicColor.background,
       body: SafeArea(
-          child: Column(
+          child: Stack(
         children: [
-          SizedBox(
-            height: 20,
-          ),
           Container(
-            width: _width,
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Status',
-                style: TextStyle(
-                    fontSize: 32,
-                    color: dynamicColor.primary,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            width: _width * 0.9,
-            height: 100,
-            decoration: BoxDecoration(
-                color: dynamicColor.secondaryContainer,
-                borderRadius: BorderRadius.circular(25)),
-            child: Text(
-              'Oops! Your submission is empty',
-              style: TextStyle(color: dynamicColor.onSecondaryContainer),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            width: _width,
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Popular',
-                style: TextStyle(
-                    fontSize: 32,
-                    color: dynamicColor.primary,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-          ),
-          Container(
-            height: 240,
-            child: ListView(
-              children: [
-                CarouselSlider(
-                  items: [
-                    sliderContainer(
-                      _width,
-                      'Eating home-cooked food',
-                      'Cooking with fresh ingredients',
-                      ' 379',
-                      '21days left',
-                      dynamicColor.onPrimaryContainer,
-                      dynamicColor.secondaryContainer,
-                      dynamicColor.onPrimaryContainer,
-                      dynamicColor.onSecondary,
-                    ),
-                  ],
-                  options: CarouselOptions(
-                    height: 230,
-                    enlargeCenterPage: true,
-                    autoPlay: true,
-                    aspectRatio: 16 / 9,
-                    autoPlayCurve: Curves.easeInOutSine,
-                    enableInfiniteScroll: true,
-                    autoPlayAnimationDuration: Duration(milliseconds: 1500),
-                    viewportFraction: 1,
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
+              height: _height * 0.6,
+              child: _imgUrl.isEmpty == false
+                  ? CarouselSlider(
+                      items: getSlideList(),
+                      options: CarouselOptions(
+                        height: _height,
+                        enlargeCenterPage: false,
+                        autoPlay: true,
+                        aspectRatio: 16 / 9,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enableInfiniteScroll: true,
+                        autoPlayAnimationDuration: Duration(milliseconds: 1500),
+                        viewportFraction: 1,
+                      ),
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(
+                      color: dynamicColor.primaryContainer,
+                    ))),
+          DraggableScrollableSheet(
+            initialChildSize: 0.30,
+            minChildSize: 0.25,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return SingleChildScrollView(
+                controller: scrollController,
+                child: bottomContent(_width, context),
+              );
+            },
           ),
         ],
       )),
     );
   }
+}
+
+Widget imgSlider(_width, _height, slideImg, imgTitle, context) {
+  final dynamicColor = Theme.of(context).colorScheme;
+  return Container(
+    width: _width,
+    height: _height * 0.9,
+    alignment: Alignment.center,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      image: DecorationImage(
+        image: NetworkImage(slideImg),
+        fit: BoxFit.cover,
+      ),
+    ),
+    child: Stack(
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              width: _width,
+              height: _height * 0.6,
+              color: dynamicColor.onSecondaryContainer.withOpacity(0.5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                      alignment: Alignment.center,
+                      width: _width,
+                      child: Text('$imgTitle',
+                          style: TextStyle(color: dynamicColor.background))),
+                  Container(
+                      alignment: Alignment.center,
+                      width: _width,
+                      child: Text('신청하려면 이미지 클릭하셈',
+                          style: TextStyle(color: dynamicColor.background))),
+                ],
+              ),
+            ),
+          ],
+        )
+      ],
+    ),
+  );
+}
+
+Widget bottomContent(_width, context) {
+  final dynamicColor = Theme.of(context).colorScheme;
+  return Container(
+    height: MediaQuery.of(context).size.height * 0.75,
+    decoration: BoxDecoration(
+      color: dynamicColor.background,
+    ),
+    child: Column(
+      children: [
+        SizedBox(
+          height: 20,
+        ),
+        Container(
+          width: _width,
+          height: 60,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              'Status',
+              style: TextStyle(
+                  fontSize: 32,
+                  color: dynamicColor.primary,
+                  fontWeight: FontWeight.w900),
+            ),
+          ),
+        ),
+        Container(
+          alignment: Alignment.center,
+          width: _width * 0.9,
+          height: 100,
+          decoration: BoxDecoration(
+              color: dynamicColor.secondaryContainer,
+              borderRadius: BorderRadius.circular(25)),
+          child: Text(
+            'Oops! Your submission is empty',
+            style: TextStyle(color: dynamicColor.onSecondaryContainer),
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Container(
+          width: _width,
+          height: 60,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              'Popular',
+              style: TextStyle(
+                  fontSize: 32,
+                  color: dynamicColor.primary,
+                  fontWeight: FontWeight.w900),
+            ),
+          ),
+        ),
+        Container(
+          height: 240,
+          child: ListView(
+            children: [
+              CarouselSlider(
+                items: [
+                  sliderContainer(
+                    _width,
+                    'Eating home-cooked food',
+                    'Cooking with fresh ingredients',
+                    ' 379',
+                    '21days left',
+                    dynamicColor.onPrimaryContainer,
+                    dynamicColor.secondaryContainer,
+                    dynamicColor.onPrimaryContainer,
+                    dynamicColor.onSecondary,
+                  ),
+                ],
+                options: CarouselOptions(
+                  height: 230,
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  aspectRatio: 16 / 9,
+                  autoPlayCurve: Curves.easeInOutSine,
+                  enableInfiniteScroll: true,
+                  autoPlayAnimationDuration: Duration(milliseconds: 1500),
+                  viewportFraction: 1,
+                ),
+              )
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+      ],
+    ),
+  );
 }
 
 Widget sliderContainer(_width, titleText, subtitleText, person, day,

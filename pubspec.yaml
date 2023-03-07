@@ -22,6 +22,7 @@ dependencies:
   google_sign_in: ^6.0.1
   flutter_secure_storage: ^8.0.0
   http: ^0.13.5
+  html: ^0.15.1
   rive: ^0.10.2
 
 dev_dependencies:
