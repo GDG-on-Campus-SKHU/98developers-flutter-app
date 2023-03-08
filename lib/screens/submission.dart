@@ -1,5 +1,12 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:zikiza/screens/takepicture.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
 
 class submissionScreen extends StatefulWidget {
   const submissionScreen({super.key});
@@ -9,11 +16,60 @@ class submissionScreen extends StatefulWidget {
 }
 
 class _submissionScreenState extends State<submissionScreen> {
+  XFile? _pickedFile;
+  _showBottomSheet(bgColor, buttonColor, textColor) {
+    return showModalBottomSheet(
+      context: context,
+      backgroundColor: bgColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25),
+        ),
+      ),
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+                child: GestureDetector(
+              onTap: () => _getCameraImage(),
+              child: Text(
+                '사진찍기',
+                style: TextStyle(color: textColor),
+              ),
+            )),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  _getCameraImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      setState(() {
+        _pickedFile = pickedFile;
+      });
+    } else {
+      if (kDebugMode) {
+        print('이미지 선택안함');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final dynamicColor = Theme.of(context).colorScheme;
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: dynamicColor.background,
       appBar: AppBar(
@@ -51,7 +107,7 @@ class _submissionScreenState extends State<submissionScreen> {
               ),
               Container(
                 width: _width,
-                padding: EdgeInsets.only(left: 20, top: 20),
+                padding: EdgeInsets.only(left: 20, top: 20, bottom: 20),
                 child: Text(
                   '기한',
                   style: TextStyle(
@@ -59,33 +115,63 @@ class _submissionScreenState extends State<submissionScreen> {
                       fontWeight: FontWeight.w700,
                       color: dynamicColor.onBackground),
                 ),
-              )
+              ),
+              Container(
+                width: _width * 0.9,
+                height: 300,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        width: 1, color: dynamicColor.secondaryContainer)),
+                child: _pickedFile == null
+                    ? Container(
+                        child: GestureDetector(
+                          onTap: () {
+                            _showBottomSheet(
+                                dynamicColor.background,
+                                dynamicColor.secondaryContainer,
+                                dynamicColor.onSecondaryContainer);
+                          },
+                          child: Center(child: Text('이미지 제출 하셈')),
+                        ),
+                      )
+                    : Center(
+                        child: Container(
+                          width: _width * 0.8,
+                          height: 250,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: FileImage(File(_pickedFile!.path)),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                      ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              _pickedFile == null
+                  ? Container(
+                      width: _width * 0.5,
+                      height: 100,
+                      child: Text('아직 제출 못함 ㅅㄱ'),
+                    )
+                  : Container(
+                      width: _width * 0.5,
+                      height: 50,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: dynamicColor.secondaryContainer),
+                      child: Text(
+                        '제출하기',
+                        style:
+                            TextStyle(color: dynamicColor.onSecondaryContainer),
+                      ),
+                    )
             ],
           ),
         ),
       )),
-      bottomSheet: Container(
-        height: 120,
-        alignment: Alignment.center,
-        child: GestureDetector(
-          child: Container(
-            width: _width * 0.5,
-            height: 100,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: dynamicColor.secondaryContainer),
-            child: Icon(
-              Icons.camera_alt,
-              color: dynamicColor.onSecondaryContainer,
-              size: 40,
-            ),
-          ),
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => TakePictureScreen()));
-          },
-        ),
-      ),
     );
   }
 }
