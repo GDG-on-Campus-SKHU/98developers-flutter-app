@@ -1,12 +1,9 @@
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:zikiza/screens/takepicture.dart';
+
 import 'package:image_picker/image_picker.dart';
-import 'package:video_player/video_player.dart';
 
 class submissionScreen extends StatefulWidget {
   const submissionScreen({super.key});
