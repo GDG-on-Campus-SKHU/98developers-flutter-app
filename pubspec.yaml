@@ -24,6 +24,7 @@ dependencies:
   http: ^0.13.5
   html: ^0.15.1
   rive: ^0.10.2
+  image_picker: ^0.8.6+4
 
 dev_dependencies:
   flutter_test:
