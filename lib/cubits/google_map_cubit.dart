@@ -1,18 +1,23 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
+import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:zikiza/models/markers.dart';
 
 part 'google_map_state.dart';
 
 class GoogleMapCubit extends Cubit<GoogleMapState> {
   GoogleMapCubit() : super(GoogleMapLoading()) {
     _getCurrentLocation();
+    _fetchExploreMarkers();
   }
 
   final Completer<GoogleMapController> _completer = Completer();
-  final Set<Marker> _markers = {};
+  final Set<Marker> _markers = Set<Marker>();
 
   Future<void> _getCurrentLocation() async {
     try {
@@ -27,8 +32,26 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
       //Loaded 상태로 업데이트
       emit(GoogleMapLoaded(
           initialCameraPosition: _currentLocation, markers: _markers));
-    } catch (e) {
-      emit(GoogleMapError("$e: Failed to get current location"));
+    } catch (error) {
+      emit(GoogleMapError("$error: Failed to get current location"));
+    }
+  }
+
+  _fetchExploreMarkers() async {
+    const url = "https://zikiza.duckdns.org/explore";
+    try {
+      var response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final response_data = json.decode(utf8.decode(response.bodyBytes));
+        log("${response_data}");
+        final _markers = Markers.fromJson(response_data);
+        log("_markers: ${_markers}");
+        return new Markers.fromJson(response_data);
+      } else {
+        log("Something went wrong.");
+      }
+    } catch (error) {
+      emit(GoogleMapError("$error: Failed to fetch explore markers."));
     }
   }
 
