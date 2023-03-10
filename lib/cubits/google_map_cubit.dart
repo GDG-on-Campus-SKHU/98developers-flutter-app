@@ -17,7 +17,7 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
   }
 
   final Completer<GoogleMapController> _completer = Completer();
-  final Set<Marker> _markers = Set<Marker>();
+  final Markers _markers = Markers();
 
   Future<void> _getCurrentLocation() async {
     try {
@@ -41,18 +41,22 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
     const url = "https://zikiza.duckdns.org/explore";
     try {
       var response = await http.get(Uri.parse(url));
+
       if (response.statusCode == 200) {
         final response_data = json.decode(utf8.decode(response.bodyBytes));
-        log("${response_data}");
-        final _markers = Markers.fromJson(response_data);
-        log("_markers: ${_markers}");
-        return new Markers.fromJson(response_data);
+        final List<Map<String, dynamic>> _markers =
+            response_data.map((e) => e as Map<String, dynamic>).toList();
+        log("$_markers");
+        return _markers;
       } else {
         log("Something went wrong.");
+        emit(GoogleMapError("Failed fetch marker on Google maps."));
       }
     } catch (error) {
-      emit(GoogleMapError("$error: Failed to fetch explore markers."));
+      log("$_markers");
+      log("_fetchExoloreMarkers: $error");
     }
+    return null;
   }
 
   Future<void> onMapCreated(GoogleMapController googleMapController) async {

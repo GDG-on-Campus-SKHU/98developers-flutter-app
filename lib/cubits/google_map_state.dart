@@ -14,12 +14,11 @@ class GoogleMapLoading extends GoogleMapState {}
 class GoogleMapLoaded extends GoogleMapState {
   //성공적으로 Google Map이 로드되었을 경우 두가지를 props 객체로 전달
   final LatLng initialCameraPosition;
-  final Set<Marker> markers;
+  final Markers markers;
 
   GoogleMapLoaded({
     required this.initialCameraPosition,
     required this.markers,
-    // required this.markers,
   });
 
   @override
