@@ -42,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
           int end = imgSrc.indexOf(')');
 
           if (srcStart == -1 || end == -1) {
-            print('object');
           } else {
             setState(() {
               _imgUrl.add(imgSrc.substring(srcStart + 1, end));

@@ -11,6 +11,7 @@ import 'package:zikiza/screens/profile.dart';
 import 'package:zikiza/screens/launch.dart';
 import 'package:zikiza/utilities/dynamic_theme.dart';
 import 'package:zikiza/cubits/navigation_bar_cubit.dart';
+import './cubits/challenge_list_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +35,9 @@ class MainApp extends StatelessWidget {
             ),
             BlocProvider<NavigationBarCubit>(
               create: (_) => NavigationBarCubit(),
+            ),
+            BlocProvider<ChallengeListCubit>(
+              create: (_) => ChallengeListCubit(),
             ),
           ],
           child: MaterialApp(
