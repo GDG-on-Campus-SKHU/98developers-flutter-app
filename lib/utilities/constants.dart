@@ -1,3 +1,13 @@
+/**
+ * 클라이언트에서 서버와 통신하기 위해 필요한 Scheme 정의하는 클래스
+ */
+class Constants {
+  static const host = "zikiza.duckdns.org";
+  static const user = "/user";
+  static const explore = "/explore";
+  static const challenges = "/challenges";
+}
+
 /** This class is include setting padding of values */
 class Spacing {
   static const double small = 9.0;
