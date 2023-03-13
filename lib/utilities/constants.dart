@@ -15,10 +15,13 @@ class Spacing {
   static const double large = 27.0;
 }
 
-/** This class is include setting Pageview Indicator of size values */
-class PageIndicatorSize {
-  static const double positionedWidth = 25.0;
-  static const double notPositionedWidth = 17.0;
-  static const double positionedHeight = 9.0;
-  static const double notPositionedHeight = 7.0;
-}
+/**
+ * PageView 위젯 사용 시 커스텀 dot 인디케이터 사이즈 조정 클래스
+ * 현재는 사용하지 않기 때문에 주석처리
+*/
+// class PageIndicatorSize {
+//   static const double positionedWidth = 25.0;
+//   static const double notPositionedWidth = 17.0;
+//   static const double positionedHeight = 9.0;
+//   static const double notPositionedHeight = 7.0;
+// }
