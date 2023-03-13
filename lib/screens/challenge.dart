@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zikiza/cubits/challenge_list_cubit.dart';
 import 'package:zikiza/screens/enroll.dart';
 
-import '../models/challng_model.dart';
-
 class ChallengeScreen extends StatefulWidget {
   const ChallengeScreen({super.key});
 
