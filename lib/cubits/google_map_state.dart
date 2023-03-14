@@ -62,33 +62,3 @@ class OnCameraMove extends GoogleMapState {
   @override
   List<Object> get props => [cameraPosition];
 }
-
-/**
- * Google Map Marker 클래스
- * GoogleMapLoaded state 일때 정상적으로 마커 정보를 불러오면 적용되는 상태 클래스
- */
-class FetchPlaceMarkerSuccess extends GoogleMapState {
-  final Set<Marker> markers;
-
-  FetchPlaceMarkerSuccess({
-    required this.markers,
-  });
-
-  @override
-  List<Object> get props => [markers];
-}
-
-/**
- * Google Map Marker 클래스
- * GoogleMapLoaded state 일때 마커 정보를 불러오는데 실패하면 적용되는 상태 클래스
- */
-class FetchPlaceMarkerFailed extends GoogleMapState {
-  final String message;
-
-  FetchPlaceMarkerFailed({
-    required this.message,
-  });
-
-  @override
-  List<Object> get props => [message];
-}
