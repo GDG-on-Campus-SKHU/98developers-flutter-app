@@ -45,8 +45,15 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
   }
 
   Future<Set<Marker>> fetchPlaceMarkers() async {
-    final Set<Marker> markers = Set<Marker>();
     final ExploreBundle exploreBundle;
+    final Set<Marker> markers = Set<Marker>();
+    final BitmapDescriptor tertiaryIcon = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(
+        size: Size(48.0, 48.0),
+        devicePixelRatio: 2.5,
+      ),
+      "assets/images/custom_marker.png",
+    );
 
     try {
       var response = await http.get(
@@ -65,6 +72,7 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
           (element) {
             Marker marker = Marker(
               markerId: MarkerId("${element.id}"),
+              icon: tertiaryIcon,
               position: LatLng(
                 element.latitude.toDouble(),
                 element.longitude.toDouble(),
