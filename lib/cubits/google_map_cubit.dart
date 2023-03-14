@@ -2,70 +2,98 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:zikiza/models/markers.dart';
+import 'package:zikiza/models/explore_bundle.dart';
+import 'package:zikiza/utilities/constants.dart';
 
 part 'google_map_state.dart';
 
 class GoogleMapCubit extends Cubit<GoogleMapState> {
-  GoogleMapCubit() : super(GoogleMapLoading()) {
-    _getCurrentLocation();
-    _fetchExploreMarkers();
+  final Completer<GoogleMapController> _completer = Completer();
+
+  GoogleMapCubit() : super(MapInitial()) {
+    fetchCurrentLocation();
   }
 
-  final Completer<GoogleMapController> _completer = Completer();
-  final Markers _markers = Markers();
-
-  Future<void> _getCurrentLocation() async {
+  fetchCurrentLocation() async {
     try {
+      emit(IsMapLoading());
+
       LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-      }
+
+      if (permission == LocationPermission.denied)
+        await Geolocator.requestPermission();
+
       Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      //Geolocator로 전달 받은 High 좌표를 현재 위치로 적용
-      LatLng _currentLocation = LatLng(position.latitude, position.longitude);
-      //Loaded 상태로 업데이트
-      emit(GoogleMapLoaded(
-          initialCameraPosition: _currentLocation, markers: _markers));
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      LatLng currentLocation = LatLng(position.latitude, position.longitude);
+
+      if (state is IsMapLoading) {
+        final markers = await fetchPlaceMarkers();
+        emit(IsMapLoaded(
+            initialCameraPosition: currentLocation, markers: markers));
+      }
     } catch (error) {
-      emit(GoogleMapError("$error: Failed to get current location"));
+      emit(IsMapError(message: "${error.toString()}"));
     }
   }
 
-  _fetchExploreMarkers() async {
-    const url = "https://zikiza.duckdns.org/explore";
+  Future<Set<Marker>> fetchPlaceMarkers() async {
+    final Set<Marker> markers = Set<Marker>();
+    final ExploreBundle exploreBundle;
+
     try {
-      var response = await http.get(Uri.parse(url));
+      var response = await http.get(
+        Uri.https(
+          Constants.host,
+          Constants.explore,
+        ),
+      );
 
       if (response.statusCode == 200) {
-        final response_data = json.decode(utf8.decode(response.bodyBytes));
-        final List<Map<String, dynamic>> _markers =
-            response_data.map((e) => e as Map<String, dynamic>).toList();
-        log("$_markers");
-        return _markers;
+        final responseData = json.decode(utf8.decode(response.bodyBytes));
+
+        exploreBundle = ExploreBundle.fromJson(responseData);
+
+        exploreBundle.exploreDataList.forEach(
+          (element) {
+            Marker marker = Marker(
+              markerId: MarkerId("${element.id}"),
+              position: LatLng(
+                element.latitude.toDouble(),
+                element.longitude.toDouble(),
+              ),
+              infoWindow: InfoWindow(
+                title: element.name,
+                snippet: element.address,
+              ),
+            );
+            markers.add(marker);
+          },
+        );
+        return markers;
       } else {
-        log("Something went wrong.");
-        emit(GoogleMapError("Failed fetch marker on Google maps."));
+        emit(IsMapError(message: "Failed to place marker on Google maps."));
       }
     } catch (error) {
-      log("$_markers");
-      log("_fetchExoloreMarkers: $error");
+      log("fetchPlaceMarkers: ${error.toString()}");
     }
-    return null;
+    return markers;
   }
 
-  Future<void> onMapCreated(GoogleMapController googleMapController) async {
+  void onMapCreated(GoogleMapController googleMapController) async {
     if (!_completer.isCompleted) {
       _completer.complete(googleMapController);
     }
   }
 
   void onCameraMove(CameraPosition cameraPosition) {
-    emit(GoogleMapCameraMove(cameraPosition: cameraPosition));
+    emit(OnCameraMove(cameraPosition: cameraPosition));
   }
 }
