@@ -1,33 +1,40 @@
-class ExploreData {
-  final int? id;
-  final String? name;
-  final String? tag;
-  final String? address;
-  final String? tele;
-  final String? image;
-  final double? latitude;
-  final double? longitude;
+import 'dart:convert';
 
-  ExploreData({
+class ExploreBundle {
+  ExploreBundle({
     required this.id,
-    this.name,
-    this.tag,
-    this.address,
-    this.tele,
-    this.image,
+    required this.name,
+    required this.tag,
+    required this.address,
+    required this.tele,
+    required this.image,
     required this.latitude,
     required this.longitude,
   });
 
-  factory ExploreData.fromJson(Map<String, dynamic> json) => ExploreData(
+  final int id;
+  final String name;
+  final String tag;
+  final String address;
+  final String tele;
+  final String image;
+  final double latitude;
+  final double longitude;
+
+  factory ExploreBundle.fromRawJson(String element) =>
+      ExploreBundle.fromJson(json.decode(element));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory ExploreBundle.fromJson(Map<String, dynamic> json) => ExploreBundle(
         id: json["id"] ?? 0,
         name: json["name"] ?? "-",
         tag: json["tag"] ?? "-",
         address: json["address"] ?? "-",
         tele: json["tele"] ?? "-",
         image: json["image"] ?? "-",
-        latitude: json["latitude"],
-        longitude: json["longitude"],
+        latitude: json["latitude"]?.toDouble(),
+        longitude: json["longitude"]?.toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
