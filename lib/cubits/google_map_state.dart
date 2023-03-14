@@ -43,13 +43,15 @@ class IsMapError extends GoogleMapState {
  */
 class IsMapLoaded extends GoogleMapState {
   final LatLng initialCameraPosition;
+  final Set<Marker> markers;
 
   IsMapLoaded({
     required this.initialCameraPosition,
+    required this.markers,
   });
 
   @override
-  List<Object> get props => [initialCameraPosition];
+  List<Object> get props => [initialCameraPosition, markers];
 }
 
 class OnCameraMove extends GoogleMapState {
