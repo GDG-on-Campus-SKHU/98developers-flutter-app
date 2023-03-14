@@ -1,7 +1,20 @@
-import 'dart:convert';
-
 class ExploreBundle {
   ExploreBundle({
+    required this.exploreDataList,
+  });
+
+  final List<ExploreData> exploreDataList;
+
+  factory ExploreBundle.fromJson(List<dynamic> parsedJson) {
+    List<ExploreData> exploreDataList = <ExploreData>[];
+    exploreDataList =
+        parsedJson.map((element) => ExploreData.fromJson(element)).toList();
+    return new ExploreBundle(exploreDataList: exploreDataList);
+  }
+}
+
+class ExploreData {
+  ExploreData({
     required this.id,
     required this.name,
     required this.tag,
@@ -21,12 +34,7 @@ class ExploreBundle {
   final double latitude;
   final double longitude;
 
-  factory ExploreBundle.fromRawJson(String element) =>
-      ExploreBundle.fromJson(json.decode(element));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory ExploreBundle.fromJson(Map<String, dynamic> json) => ExploreBundle(
+  factory ExploreData.fromJson(Map<String, dynamic> json) => ExploreData(
         id: json["id"] ?? 0,
         name: json["name"] ?? "-",
         tag: json["tag"] ?? "-",
