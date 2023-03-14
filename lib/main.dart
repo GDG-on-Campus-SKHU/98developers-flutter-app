@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:zikiza/cubits/challenge_enroll_cubit.dart';
 import 'package:zikiza/cubits/google_auth_cubit.dart';
 import 'package:zikiza/firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +39,9 @@ class MainApp extends StatelessWidget {
             ),
             BlocProvider<ChallengeListCubit>(
               create: (_) => ChallengeListCubit(),
+            ),
+            BlocProvider<ChallengeEnrollCubit>(
+              create: (_) => ChallengeEnrollCubit(),
             ),
           ],
           child: MaterialApp(

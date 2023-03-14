@@ -71,6 +71,8 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                           child: ListView.builder(
                             itemCount: snapshot.data!.listData.length,
                             itemBuilder: (BuildContext context, int index) {
+                              var challengeId =
+                                  snapshot.data!.listData[index].id;
                               var title = snapshot.data!.listData[index].topic;
                               var startDate = snapshot
                                   .data!.listData[index].periodStartDate!
@@ -203,7 +205,9 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (_) =>
-                                                            enrollScreen()));
+                                                            enrollScreen(
+                                                              id: challengeId,
+                                                            )));
                                               },
                                             ),
                                           )

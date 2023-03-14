@@ -8,7 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 part 'challenge_list_state.dart';
 
 class ChallengeListCubit extends Cubit<ChallengeListState> {
-  ChallengeListCubit() : super(ChallengeListInitial());
+  ChallengeListCubit() : super(ChallengeListInitial()) {}
   final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
   Future<getChallengeList?> getChalllengeList() async {
     const String url = "https://zikiza.duckdns.org/challenges";
@@ -30,12 +30,12 @@ class ChallengeListCubit extends Cubit<ChallengeListState> {
       log("getChalllengeList(): [200]Http get Challenge data successfully.\n${response_data}");
     } else if (response.statusCode == 401) {
       final response_data = response.body;
+
       log("getChalllengeList(): [401]Not valid access token.\n${response_data}");
     } else if (response.statusCode == 403) {
       final response_data = response.body;
       log("getChalllengeList(): [403]Http get user data failed.\n${response_data}");
     }
-
     return challengeList;
   }
 }
