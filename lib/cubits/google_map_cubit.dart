@@ -1,6 +1,6 @@
+import 'dart:ui';
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -101,12 +101,17 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
 
   Future<Uint8List> loadNetworkImage(imageUrl) async {
     final completed = Completer<ImageInfo>();
+
     var image = NetworkImage(imageUrl);
+
     image.resolve(const ImageConfiguration()).addListener(
         ImageStreamListener((info, _) => completed.complete(info)));
+
     final imageInfo = await completed.future;
+
     final byteData =
         await imageInfo.image.toByteData(format: ImageByteFormat.png);
+
     return byteData!.buffer.asUint8List();
   }
 
