@@ -1,9 +1,12 @@
+import 'dart:io';
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:zikiza/cubits/google_map_cubit.dart';
 import 'package:zikiza/utilities/typografie.dart';
+import 'package:zikiza/widgets/light_appbar.dart';
 
 class ExploreScreen extends StatelessWidget {
   @override
@@ -23,9 +26,15 @@ class GoogleMapWidget extends StatelessWidget {
     return BlocBuilder<GoogleMapCubit, GoogleMapState>(
       builder: (_, state) {
         if (state is IsMapLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          if (Platform.isIOS) {
+            return Center(
+              child: CupertinoActivityIndicator(),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         } else if (state is IsMapError) {
           return Center(
             child: Column(
@@ -50,7 +59,16 @@ class GoogleMapWidget extends StatelessWidget {
             ),
           );
         } else if (state is IsMapLoaded) {
-          return _buildGoogleMap(_, state);
+          return Scaffold(
+            body: _buildGoogleMap(_, state),
+            appBar: LightAppBar(
+              title: Typografie().HeadlineSmall(
+                "Explore",
+                Theme.of(_).colorScheme.onPrimaryContainer,
+              ),
+              backgroundColor: Theme.of(_).colorScheme.background,
+            ),
+          );
         }
         return Container();
       },
@@ -71,28 +89,19 @@ class GoogleMapWidget extends StatelessWidget {
         if (!_googleMapController.isCompleted) {
           _googleMapController.complete(googleMapController);
         }
+        print(markers);
       },
       markers: markers,
-      onTap: (coordinate) {
-        _buildBottomWindow(_, state);
-      },
       mapType: MapType.normal,
-      myLocationButtonEnabled: true,
       myLocationEnabled: true,
       mapToolbarEnabled: true,
-    );
-  }
-
-  Widget _buildBottomWindow(BuildContext _, IsMapLoaded state) {
-    final _width = MediaQuery.of(_).size.width;
-    final _height = MediaQuery.of(_).size.height;
-
-    return Container(
-      width: _width * 0.6,
-      height: _height * 0.2,
-      decoration: BoxDecoration(
-        color: Theme.of(_).colorScheme.onPrimaryContainer,
-      ),
+      zoomControlsEnabled: true,
+      zoomGesturesEnabled: true,
+      myLocationButtonEnabled: true,
+      scrollGesturesEnabled: true,
+      rotateGesturesEnabled: false,
+      minMaxZoomPreference: MinMaxZoomPreference.unbounded,
+      cameraTargetBounds: CameraTargetBounds.unbounded,
     );
   }
 }
