@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ui';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,6 +55,7 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
       ),
       "assets/images/custom_marker.png",
     );
+    Uint8List markerIcon;
 
     try {
       var response = await http.get(
@@ -68,10 +71,11 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
         exploreBundle = ExploreBundle.fromJson(responseData);
 
         exploreBundle.exploreDataList.forEach(
-          (element) {
+          (element) async {
+            markerIcon = await loadNetworkImage(element.image);
             Marker marker = Marker(
               markerId: MarkerId("${element.id}"),
-              icon: tertiaryIcon,
+              icon: BitmapDescriptor.fromBytes(markerIcon),
               position: LatLng(
                 element.latitude.toDouble(),
                 element.longitude.toDouble(),
@@ -93,6 +97,17 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
       emit(IsMapError(message: "fetchPlaceMarkers: ${error.toString()}"));
     }
     return markers;
+  }
+
+  Future<Uint8List> loadNetworkImage(imageUrl) async {
+    final completed = Completer<ImageInfo>();
+    var image = NetworkImage(imageUrl);
+    image.resolve(const ImageConfiguration()).addListener(
+        ImageStreamListener((info, _) => completed.complete(info)));
+    final imageInfo = await completed.future;
+    final byteData =
+        await imageInfo.image.toByteData(format: ImageByteFormat.png);
+    return byteData!.buffer.asUint8List();
   }
 
   void onMapCreated(GoogleMapController googleMapController) async {
