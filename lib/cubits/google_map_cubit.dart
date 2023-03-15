@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:zikiza/models/explore_bundle.dart';
+import 'package:zikiza/screens/explore.dart';
 import 'package:zikiza/utilities/constants.dart';
 
 part 'google_map_state.dart';
@@ -81,6 +82,7 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
                 title: element.name,
                 snippet: element.address,
               ),
+              onTap: () {},
             );
             markers.add(marker);
           },
