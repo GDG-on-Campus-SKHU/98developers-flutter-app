@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +7,6 @@ import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:zikiza/models/explore_bundle.dart';
-import 'package:zikiza/screens/explore.dart';
 import 'package:zikiza/utilities/constants.dart';
 
 part 'google_map_state.dart';
@@ -92,7 +90,7 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
         emit(IsMapError(message: "Failed to place marker on Google maps."));
       }
     } catch (error) {
-      log("fetchPlaceMarkers: ${error.toString()}");
+      emit(IsMapError(message: "fetchPlaceMarkers: ${error.toString()}"));
     }
     return markers;
   }
