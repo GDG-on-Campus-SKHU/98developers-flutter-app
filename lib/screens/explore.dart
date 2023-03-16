@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
@@ -66,6 +67,28 @@ class GoogleMapWidget extends StatelessWidget {
                 "Explore",
                 Theme.of(_).colorScheme.onPrimaryContainer,
               ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, right: 20.0),
+                  child: Container(
+                    child: IconButton(
+                      onPressed: () {
+                        _.read<GoogleMapCubit>().fetchCurrentLocation();
+                      },
+                      icon: Icon(
+                        Icons.near_me_rounded,
+                        size: 20.0,
+                      ),
+                    ),
+                    width: 35.0,
+                    height: 35.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(55.0),
+                      color: dynamicColor.primaryContainer,
+                    ),
+                  ),
+                ),
+              ],
               backgroundColor: Theme.of(_).colorScheme.background,
             ),
           );
@@ -89,7 +112,6 @@ class GoogleMapWidget extends StatelessWidget {
         if (!_googleMapController.isCompleted) {
           _googleMapController.complete(googleMapController);
         }
-        print(markers);
       },
       markers: markers,
       mapType: MapType.normal,

@@ -64,3 +64,14 @@ class OnCameraMove extends GoogleMapState {
   @override
   List<Object> get props => [cameraPosition];
 }
+
+class UpdateMyLocation extends GoogleMapState {
+  final LatLng myLocationPosition;
+
+  UpdateMyLocation({
+    required this.myLocationPosition,
+  });
+
+  @override
+  List<Object> get props => [myLocationPosition];
+}

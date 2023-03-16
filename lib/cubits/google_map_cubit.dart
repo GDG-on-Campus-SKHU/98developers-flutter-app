@@ -35,11 +35,9 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
 
       LatLng currentLocation = LatLng(position.latitude, position.longitude);
 
-      if (state is IsMapLoading) {
-        final markers = await fetchPlaceMarkers();
-        emit(IsMapLoaded(
-            initialCameraPosition: currentLocation, markers: markers));
-      }
+      final markers = await fetchPlaceMarkers();
+      emit(IsMapLoaded(
+          initialCameraPosition: currentLocation, markers: markers));
     } catch (error) {
       emit(IsMapError(message: "${error.toString()}"));
     }
@@ -50,7 +48,7 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
     final Set<Marker> markers = Set<Marker>();
     final BitmapDescriptor tertiaryIcon = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(
-        size: Size(48.0, 48.0),
+        size: Size(11.0, 11.0),
         devicePixelRatio: 2.5,
       ),
       "assets/images/custom_marker.png",
@@ -66,30 +64,26 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
       );
 
       if (response.statusCode == 200) {
+        emit(IsMapLoading());
+
         final responseData = json.decode(utf8.decode(response.bodyBytes));
 
         exploreBundle = ExploreBundle.fromJson(responseData);
-
         exploreBundle.exploreDataList.forEach(
-          (element) async {
-            markerIcon = await loadNetworkImage(element.image);
-            Marker marker = Marker(
-              markerId: MarkerId("${element.id}"),
-              icon: BitmapDescriptor.fromBytes(markerIcon),
-              position: LatLng(
-                element.latitude.toDouble(),
-                element.longitude.toDouble(),
+          (element) {
+            markers.add(
+              Marker(
+                markerId: MarkerId("${element.id}"),
+                position: LatLng(element.latitude, element.longitude),
+                icon: tertiaryIcon,
+                infoWindow: InfoWindow(
+                  title: element.name,
+                  snippet: "${element.address + "\n" + element.tele}",
+                ),
               ),
-              infoWindow: InfoWindow(
-                title: element.name,
-                snippet: element.address,
-              ),
-              onTap: () {},
             );
-            markers.add(marker);
           },
         );
-        return markers;
       } else {
         emit(IsMapError(message: "Failed to place marker on Google maps."));
       }
@@ -99,13 +93,15 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
     return markers;
   }
 
-  Future<Uint8List> loadNetworkImage(imageUrl) async {
+  Future<Uint8List> loadNetworkImage(image) async {
     final completed = Completer<ImageInfo>();
 
-    var image = NetworkImage(imageUrl);
+    var imageUrl = NetworkImage(image);
 
-    image.resolve(const ImageConfiguration()).addListener(
-        ImageStreamListener((info, _) => completed.complete(info)));
+    imageUrl
+        .resolve(const ImageConfiguration(size: Size(24.0, 24.0)))
+        .addListener(
+            ImageStreamListener((info, _) => completed.complete(info)));
 
     final imageInfo = await completed.future;
 
@@ -123,5 +119,46 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
 
   void onCameraMove(CameraPosition cameraPosition) {
     emit(OnCameraMove(cameraPosition: cameraPosition));
+  }
+
+  void myLocation(LatLng myLocationPosition) {
+    emit(UpdateMyLocation(myLocationPosition: myLocationPosition));
+  }
+}
+
+class BottomSheetExample extends StatelessWidget {
+  const BottomSheetExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        child: const Text('showModalBottomSheet'),
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+                color: Colors.amber,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text('Modal BottomSheet'),
+                      ElevatedButton(
+                        child: const Text('Close BottomSheet'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
   }
 }
