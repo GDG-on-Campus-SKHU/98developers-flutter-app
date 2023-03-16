@@ -25,6 +25,7 @@ dependencies:
   html: ^0.15.1
   rive: ^0.10.2
   image_picker: ^0.8.6+4
+  json_serializable: ^6.6.1
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +39,7 @@ flutter:
     - assets/images/app_zikiza.png
     - assets/images/app_zikiza_light.png
     - assets/images/app_zikiza_dark.png
+    - assets/images/custom_marker.png
   fonts:
      - family: NotoSans
        fonts:
