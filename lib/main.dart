@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:zikiza/cubits/challenge_enroll_cubit.dart';
 import 'package:zikiza/cubits/google_auth_cubit.dart';
 import 'package:zikiza/firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:zikiza/screens/profile.dart';
 import 'package:zikiza/screens/launch.dart';
 import 'package:zikiza/utilities/dynamic_theme.dart';
 import 'package:zikiza/cubits/navigation_bar_cubit.dart';
+import './cubits/challenge_list_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +36,12 @@ class MainApp extends StatelessWidget {
             ),
             BlocProvider<NavigationBarCubit>(
               create: (_) => NavigationBarCubit(),
+            ),
+            BlocProvider<ChallengeListCubit>(
+              create: (_) => ChallengeListCubit(),
+            ),
+            BlocProvider<ChallengeEnrollCubit>(
+              create: (_) => ChallengeEnrollCubit(),
             ),
           ],
           child: MaterialApp(

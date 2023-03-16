@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zikiza/screens/submission.dart';
 
-import '../utilities/palette.dart';
+import '../models/getUserData.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
@@ -42,7 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
           int end = imgSrc.indexOf(')');
 
           if (srcStart == -1 || end == -1) {
-            print('object');
           } else {
             setState(() {
               _imgUrl.add(imgSrc.substring(srcStart + 1, end));
@@ -212,22 +212,51 @@ Widget bottomContent(_width, context) {
           ),
         ),
         GestureDetector(
-          child: Container(
-            alignment: Alignment.center,
-            width: _width * 0.9,
-            height: 100,
-            decoration: BoxDecoration(
-                color: dynamicColor.secondaryContainer,
-                borderRadius: BorderRadius.circular(25)),
-            child: Text(
-              'Oops! Your submission is empty',
-              style: TextStyle(color: dynamicColor.onSecondaryContainer),
-            ),
+          child: FutureBuilder(
+            future: getUserData(),
+            builder: (BuildContext context, snapshot) {
+              if (snapshot.hasData) {
+                var id = snapshot.data!.challenges![0].id;
+                return GestureDetector(
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: _width * 0.9,
+                    height: 100,
+                    decoration: BoxDecoration(
+                        color: dynamicColor.secondaryContainer,
+                        borderRadius: BorderRadius.circular(25)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        '${snapshot.data!.challenges![0].topic}',
+                        style:
+                            TextStyle(color: dynamicColor.onSecondaryContainer),
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => submissionScreen(id: id)));
+                  },
+                );
+              } else {
+                return Container(
+                  alignment: Alignment.center,
+                  width: _width * 0.9,
+                  height: 100,
+                  decoration: BoxDecoration(
+                      color: dynamicColor.secondaryContainer,
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Text(
+                    'Oops! Your submission is empty',
+                    style: TextStyle(color: dynamicColor.onSecondaryContainer),
+                  ),
+                );
+              }
+            },
           ),
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => submissionScreen()));
-          },
         ),
         SizedBox(
           height: 20,
