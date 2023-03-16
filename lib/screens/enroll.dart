@@ -14,7 +14,9 @@ class enrollScreen extends StatelessWidget {
     final _height = MediaQuery.of(context).size.height;
     final dynamicColor = Theme.of(context).colorScheme;
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: dynamicColor.surfaceVariant,
+        ),
         body: BlocBuilder<ChallengeEnrollCubit, ChallengeEnrollState>(
           builder: (_, state) {
             if (state is ChallengeEnrollInitial) {

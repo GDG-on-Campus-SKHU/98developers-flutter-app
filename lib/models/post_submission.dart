@@ -48,28 +48,49 @@ import 'package:http/http.dart' as http;
 //     print('실패');
 //   }
 // }
+// Future<dynamic> postSubmission(id, dynamic input) async {
+//   print("챌린지 사진을 서버에 업로드 합니다.");
+//   var dio = new Dio();
+//   try {
+//     var formData =
+//         FormData.fromMap({'file': await MultipartFile.fromFile(input)});
+
+//     dio.options.contentType = 'multipart/form-data;boundary=--WebAppBoundary';
+//     dio.options.maxRedirects.isFinite;
+//     final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+//     String? token = await _secureStorage.read(key: 'id_token');
+
+//     dio.options.headers = {'Authorization': 'Bearer ' + token.toString()};
+//     var response = await dio.post(
+//       'https://zikiza.duckdns.org/user/$id/takePhoto',
+//       data: formData,
+//     );
+//     print('성공적으로 업로드했습니다');
+//     return response.data;
+//   } catch (e) {
+//     print(e);
+//   }
+// }
+
 Future<dynamic> postSubmission(id, dynamic input) async {
-  print("챌린지 사진을 서버에 업로드 합니다.");
-  var dio = new Dio();
-  try {
-    final data = await MultipartFile.fromFile(
-      input,
-      filename: input,
-    );
+  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+  String? token = await _secureStorage.read(key: 'id_token');
+  var headers = {'Authorization': 'Bearer ' + token.toString()};
+  var request = http.MultipartRequest(
+      'POST', Uri.parse('https://zikiza.duckdns.org/user/$id/takePhoto'));
 
-    dio.options.contentType = 'multipart/form-data;boundary=--WebAppBoundary';
-    dio.options.maxRedirects.isFinite;
-    final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
-    String? token = await _secureStorage.read(key: 'id_token');
+  request.files.add(await http.MultipartFile.fromPath('image', input,
+      filename: '$input.jpg',
+      contentType: MediaType.parse('multipart/form-data')));
+  // request.files.add(await http.MultipartFile('imgae',input,filename: '$input',contentType: MediaType.parse('multipart/form-data')));
+  request.headers.addAll(headers);
 
-    dio.options.headers = {'Authorization': 'Bearer ' + token.toString()};
-    var response = await dio.post(
-      'https://zikiza.duckdns.org/user/$id/takePhoto',
-      data: data,
-    );
-    print('성공적으로 업로드했습니다');
-    return response.data;
-  } catch (e) {
-    print(e);
+  http.StreamedResponse response = await request.send();
+
+  if (response.statusCode == 200) {
+    print(await response.stream.bytesToString());
+    print('suc');
+  } else {
+    print(response.reasonPhrase);
   }
 }
