@@ -1,8 +1,13 @@
+import 'dart:developer';
+import 'dart:io';
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:zikiza/cubits/google_map_cubit.dart';
+import 'package:zikiza/utilities/typografie.dart';
+import 'package:zikiza/widgets/light_appbar.dart';
 
 class ExploreScreen extends StatelessWidget {
   @override
@@ -17,46 +22,108 @@ class ExploreScreen extends StatelessWidget {
 class GoogleMapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext _) {
+    final dynamicColor = Theme.of(_).colorScheme;
+
     return BlocBuilder<GoogleMapCubit, GoogleMapState>(
       builder: (_, state) {
-        if (state is GoogleMapLoading) {
+        if (state is IsMapLoading) {
+          if (Platform.isIOS) {
+            return Center(
+              child: CupertinoActivityIndicator(),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        } else if (state is IsMapError) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Typografie().BodyMedium(
+                  "${state.message}",
+                  dynamicColor.onBackground,
+                ),
+                SizedBox(height: 25),
+                Typografie().BodyMedium(
+                  "Refresh",
+                  dynamicColor.onBackground,
+                ),
+                IconButton(
+                  onPressed: () {
+                    _.read<GoogleMapCubit>().fetchCurrentLocation();
+                  },
+                  icon: Icon(Icons.refresh_rounded),
+                ),
+              ],
+            ),
           );
-        } else if (state is GoogleMapError) {
-          return Center(
-            child: Text("${state.errorMessage}"),
+        } else if (state is IsMapLoaded) {
+          return Scaffold(
+            body: _buildGoogleMap(_, state),
+            appBar: LightAppBar(
+              title: Typografie().HeadlineSmall(
+                "Explore",
+                Theme.of(_).colorScheme.onPrimaryContainer,
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, right: 20.0),
+                  child: Container(
+                    child: IconButton(
+                      onPressed: () {
+                        _.read<GoogleMapCubit>().fetchCurrentLocation();
+                      },
+                      icon: Icon(
+                        Icons.near_me_rounded,
+                        size: 20.0,
+                      ),
+                    ),
+                    width: 35.0,
+                    height: 35.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(55.0),
+                      color: dynamicColor.primaryContainer,
+                    ),
+                  ),
+                ),
+              ],
+              backgroundColor: Theme.of(_).colorScheme.background,
+            ),
           );
-        } else if (state is GoogleMapLoaded) {
-          return _buildGoogleMap(_, state);
-        } else {
-          return Container();
         }
+        return Container();
       },
     );
   }
 
-  Widget _buildGoogleMap(BuildContext _, GoogleMapLoaded state) {
+  Widget _buildGoogleMap(BuildContext _, IsMapLoaded state) {
+    final Completer<GoogleMapController> _googleMapController = Completer();
     final LatLng currentLocation = state.initialCameraPosition;
     final Set<Marker> markers = state.markers;
-    final Completer<GoogleMapController> _googleMapController = Completer();
-    final dynamicColor = Theme.of(_).colorScheme;
-    return SafeArea(
-      child: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: currentLocation,
-        ),
-        onMapCreated: (GoogleMapController googleMapController) {
-          if (!_googleMapController.isCompleted) {
-            _googleMapController.complete(googleMapController);
-          }
-        },
-        markers: markers,
-        mapType: MapType.normal,
-        myLocationButtonEnabled: true,
-        myLocationEnabled: true,
-        mapToolbarEnabled: true,
+
+    return GoogleMap(
+      initialCameraPosition: CameraPosition(
+        target: currentLocation,
+        zoom: 8.0,
       ),
+      onMapCreated: (GoogleMapController googleMapController) {
+        if (!_googleMapController.isCompleted) {
+          _googleMapController.complete(googleMapController);
+        }
+      },
+      markers: markers,
+      mapType: MapType.normal,
+      myLocationEnabled: true,
+      mapToolbarEnabled: true,
+      zoomControlsEnabled: true,
+      zoomGesturesEnabled: true,
+      myLocationButtonEnabled: true,
+      scrollGesturesEnabled: true,
+      rotateGesturesEnabled: false,
+      minMaxZoomPreference: MinMaxZoomPreference.unbounded,
+      cameraTargetBounds: CameraTargetBounds.unbounded,
     );
   }
 }
