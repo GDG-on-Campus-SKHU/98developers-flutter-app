@@ -5,19 +5,24 @@ import 'package:zikiza/utilities/typografie.dart';
 import 'package:zikiza/widgets/light_appbar.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
   List<String> challengeLog = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext _) {
     final dynamicColor = Theme.of(_).colorScheme;
     final _width = MediaQuery.of(_).size.width;
     final _height = MediaQuery.of(_).size.height;
+
     return Scaffold(
       body: BlocBuilder<GoogleAuthCubit, GoogleAuthState>(
         builder: (_, state) {
@@ -55,8 +60,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Container(
                                   width: _width * 0.5,
                                   child: Typografie().LabelLarge(
-                                      "${state.user.displayName}",
-                                      dynamicColor.onPrimaryContainer),
+                                    "${state.user.displayName}",
+                                    dynamicColor.onPrimaryContainer,
+                                  ),
                                 ),
                                 SizedBox(height: 10.0),
                                 Container(
@@ -96,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     width: _width,
                     height: _height * 0.45,
-                    child: challengLogList(challengeLog.length, _width,
+                    child: historyList(challengeLog.length, _width,
                         challengeLog, dynamicColor.secondary),
                   ),
                 ],
@@ -115,13 +121,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 25.0),
             child: Container(
+              width: 35.0,
+              height: 35.0,
+              child: IconButton(
+                icon: Icon(Icons.settings, size: 20.0),
+                onPressed: () {
+                  showMenu(
+                    context: _,
+                    position: RelativeRect.fill,
+                    items: [
+                      PopupMenuItem<int>(
+                        value: 0,
+                        child: const Text("View Licenses"),
+                        onTap: () => LicensePage(
+                          applicationName: "ZIKIZA",
+                          applicationVersion: "1.0",
+                        ),
+                      ),
+                      PopupMenuItem<int>(
+                        value: 1,
+                        child: Text('Sign out'),
+                        onTap: () {
+                          _.read<GoogleAuthCubit>().signOutWithGoogle();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   color: dynamicColor.primaryContainer),
-              child: IconButton(
-                icon: Icon(Icons.settings, size: 25.0),
-                onPressed: () {},
-              ),
             ),
           ),
         ],
@@ -130,8 +160,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-Widget challengLogList(cnt, mainWidth, list, textColor) {
-  if (cnt == 0 || cnt == null) {
+Widget historyList(count, width, list, textColor) {
+  if (count == 0 || count == null) {
     return Center(
       child: Text(
         'The challenge history is displayed here',
@@ -140,10 +170,10 @@ Widget challengLogList(cnt, mainWidth, list, textColor) {
     );
   } else {
     return ListView.builder(
-      itemCount: cnt,
+      itemCount: count,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          width: mainWidth * 0.9,
+          width: width * 0.9,
           alignment: Alignment.center,
           child: Text('${list[index]}'),
         );
