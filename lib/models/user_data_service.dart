@@ -1,25 +1,27 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:zikiza/utilities/constants.dart';
 
-Future<getUserModel> getUserData() async {
-  /**userData 조회 */
-  String url = "https://zikiza.duckdns.org/users";
+Future<CurrentUser> getUserData() async {
   final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
   String? token = await _secureStorage.read(key: 'id_token');
-  getUserModel? userModel;
+  CurrentUser? currentUser;
 
   var response = await http.get(
-    Uri.parse(url),
-    headers: {"Authorization": "Bearer " + token.toString()},
+    Uri.parse("https://zikiza.duckdns.org/users"),
+    headers: {
+      "Authorization": "Bearer " + token.toString(),
+    },
   );
 
-  final response_data = utf8.decode(response.bodyBytes);
-  log("getUserData(): [200]Http get Challenge data successfully.\n${response_data}");
-  var data = json.decode(utf8.decode(response.bodyBytes));
-  userModel = getUserModel(
+  final responseData = json.decode(utf8.decode(response.bodyBytes));
+  var data = responseData;
+
+  log("getUserData(): [200]Http get Challenge data successfully.\n${responseData}");
+
+  currentUser = CurrentUser(
     uid: data['uid'],
     email: data['email'],
     name: data['name'],
@@ -27,19 +29,19 @@ Future<getUserModel> getUserData() async {
         ? [Challenges.fromJson(data['challenges'][0])]
         : null,
   );
-  return userModel;
+  return currentUser;
 }
 
-class getUserModel {
+class CurrentUser {
   String? uid;
   String? email;
   String? name;
   String? avatar;
   List<Challenges>? challenges;
 
-  getUserModel({this.uid, this.email, this.name, this.avatar, this.challenges});
+  CurrentUser({this.uid, this.email, this.name, this.avatar, this.challenges});
 
-  getUserModel.fromJson(Map<String, dynamic> json) {
+  CurrentUser.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
     email = json['email'];
     name = json['name'];
