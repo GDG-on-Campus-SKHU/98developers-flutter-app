@@ -4,6 +4,7 @@
 class Constants {
   static const host = "zikiza.duckdns.org";
   static const user = "/user";
+  static const users = "/users";
   static const explore = "/explore";
   static const challenges = "/challenges";
 }
