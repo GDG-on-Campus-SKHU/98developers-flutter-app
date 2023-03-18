@@ -1,12 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:zikiza/models/post_submission.dart';
-
-import '../models/getChallenge.dart';
+import 'package:zikiza/models/challenge_service.dart';
 
 class submissionScreen extends StatefulWidget {
   const submissionScreen({super.key, required this.id});
