@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:zikiza/screens/submission.dart';
-
-import '../models/getUserData.dart';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:zikiza/screens/submission.dart';
+import 'package:zikiza/models/user_data_service.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -17,9 +13,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<String> _imgUrl = [];
   List<String> _imgtitleText = [];
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getHomePostData();
   }
@@ -33,23 +29,25 @@ class _HomeScreenState extends State<HomeScreen> {
       final textElement =
           document.querySelectorAll('div.box > div.content > p');
       _imgtitleText = textElement.map((element) => element.innerHtml).toList();
-      document.getElementsByTagName('div').forEach((element) {
-        final String? style = element.attributes['style'];
+      document.getElementsByTagName('div').forEach(
+        (element) {
+          final String? style = element.attributes['style'];
 
-        if (style != null) {
-          String imgSrc = element.attributes.toString();
+          if (style != null) {
+            String imgSrc = element.attributes.toString();
 
-          int srcStart = imgSrc.indexOf('(');
-          int end = imgSrc.indexOf(')');
+            int srcStart = imgSrc.indexOf('(');
+            int end = imgSrc.indexOf(')');
 
-          if (srcStart == -1 || end == -1) {
-          } else {
-            setState(() {
-              _imgUrl.add(imgSrc.substring(srcStart + 1, end));
-            });
+            if (srcStart == -1 || end == -1) {
+            } else {
+              setState(() {
+                _imgUrl.add(imgSrc.substring(srcStart + 1, end));
+              });
+            }
           }
-        }
-      });
+        },
+      );
     }
   }
 
@@ -102,41 +100,50 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: dynamicColor.background,
       body: SafeArea(
-          child: Stack(
-        children: [
-          Container(
-              height: _height * 0.6,
-              child: _imgUrl.isEmpty == false
-                  ? CarouselSlider(
-                      items: getSlideList(),
-                      options: CarouselOptions(
-                        height: _height,
-                        enlargeCenterPage: false,
-                        autoPlay: true,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enableInfiniteScroll: true,
-                        autoPlayAnimationDuration: Duration(milliseconds: 1500),
-                        viewportFraction: 1,
-                      ),
-                    )
-                  : Center(
-                      child: CircularProgressIndicator(
-                      color: dynamicColor.primaryContainer,
-                    ))),
-          DraggableScrollableSheet(
-            initialChildSize: 0.30,
-            minChildSize: 0.25,
-            builder: (BuildContext context, ScrollController scrollController) {
-              return SingleChildScrollView(
-                controller: scrollController,
-                child: bottomContent(_width, context),
-              );
-            },
-          ),
-        ],
-      )),
+        child: Stack(
+          children: [
+            Container(
+                height: _height * 0.6,
+                child: _imgUrl.isEmpty == false
+                    ? CarouselSlider(
+                        items: getSlideList(),
+                        options: CarouselOptions(
+                          height: _height,
+                          enlargeCenterPage: false,
+                          autoPlay: true,
+                          aspectRatio: 16 / 9,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 1500),
+                          viewportFraction: 1,
+                        ),
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(
+                        color: dynamicColor.primaryContainer,
+                      ))),
+            DraggableScrollableSheet(
+              initialChildSize: 0.30,
+              minChildSize: 0.25,
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
+                return SingleChildScrollView(
+                  controller: scrollController,
+                  child: bottomContent(_width, context),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    getHomePostData();
+    super.dispose();
   }
 }
 
