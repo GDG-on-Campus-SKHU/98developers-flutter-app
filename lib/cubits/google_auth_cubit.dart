@@ -6,17 +6,19 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:zikiza/utilities/constants.dart';
 
 part 'google_auth_state.dart';
 
 class GoogleAuthCubit extends Cubit<GoogleAuthState> {
-  GoogleAuthCubit() : super(GoogleAuthInitial());
 
   final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
   final GoogleSignIn _googleSignIn = GoogleSignIn.standard();
   final FirebaseAuth _fireBaseAuth = FirebaseAuth.instance;
 
-  //Sign in Google account
+  GoogleAuthCubit() : super(GoogleAuthInitial());
+
+  
   Future<void> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? _googleAccount = await _googleSignIn.signIn();
@@ -35,23 +37,26 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
         final User? _user = userCredential.user;
 
         if (_user != null) {
+          
           final _currentIdToken = await _fireBaseAuth.currentUser!.getIdToken();
           String _idToken = _currentIdToken;
-          //Save encrypt user data
+          
+          
           await _secureStorage.write(key: "id_token", value: _idToken);
           await _secureStorage.write(key: "user_identifier", value: _user.uid);
-          //Re-load verifying id token
+          
+          
           final verifiedIdToken = await _secureStorage.read(key: "id_token");
-          log("verifiedIdToken: ${verifiedIdToken}");
+          
           emit(GoogleAuthSuccess(user: _user));
           getUserData(verifiedIdToken!);
         } else {
           emit(GoogleAuthFailed(
-              errorMessage: "Sign in failed. Re-try Sign-in flow."));
+              message: "Sign in failed. Re-try Sign-in flow."));
           emit(GoogleAuthInitial());
         }
       } else {
-        emit(GoogleAuthFailed(errorMessage: "Google Sign in canceled."));
+        emit(GoogleAuthFailed(message: "Google Sign in canceled."));
       }
     } catch (error) {
       if (error is PlatformException && error.code == "sign_in_canceled") {
@@ -64,11 +69,10 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
   }
 
   Future<void> getUserData(String idToken) async {
-    const String url = "https://zikiza.duckdns.org/users";
-    log("getUserData(): ${idToken.toString()}");
+
     try {
       var response = await http.get(
-        Uri.parse(url),
+        Uri.parse(Constants.host + Constants.users),
         headers: {"Authorization": "Bearer " + idToken.toString()},
       );
 
@@ -87,7 +91,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
     }
   }
 
-  //Sign out Google account
+  
   Future<void> signOutWithGoogle() async {
     try {
       await _googleSignIn.signOut();
@@ -95,7 +99,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
       await _secureStorage.deleteAll();
       emit(GoogleAuthInitial());
     } catch (error) {
-      emit(GoogleSignOutFailed(errorMessage: error.toString()));
+      emit(GoogleSignOutFailed(message: error.toString()));
     }
   }
 }
