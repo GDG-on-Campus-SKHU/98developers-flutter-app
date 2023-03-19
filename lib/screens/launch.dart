@@ -238,10 +238,9 @@ class SkipButton extends StatelessWidget {
 
 class ContinueButton extends StatelessWidget {
   ContinueButton({
-    Key? key,
-    required this.onPressed,
-    required this.child,
-    required this.color,
+    this.onPressed,
+    this.child,
+    this.color,
   });
 
   final VoidCallback? onPressed;
@@ -249,12 +248,13 @@ class ContinueButton extends StatelessWidget {
   final Color? color;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     return RawMaterialButton(
       onPressed: onPressed,
       child: child,
       fillColor: color,
-      constraints: BoxConstraints(minHeight: 55.0, minWidth: 90.0),
+      elevation: 0.0,
+      constraints: BoxConstraints(minHeight: 55.0, minWidth: 85.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(25.0)),
       ),
