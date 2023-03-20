@@ -10,11 +10,11 @@ PODS:
     - FirebaseAuth (~> 10.3.0)
   - Firebase/CoreOnly (10.3.0):
     - FirebaseCore (= 10.3.0)
-  - firebase_auth (4.2.9):
+  - firebase_auth (4.2.10):
     - Firebase/Auth (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.7.0):
+  - firebase_core (2.7.1):
     - Firebase/CoreOnly (= 10.3.0)
     - Flutter
   - FirebaseAuth (10.3.0):
@@ -151,8 +151,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
-  firebase_auth: 4e8c693e848ed13b263de2d702d55fa82ed04a79
-  firebase_core: 128d8c43c3a453a4a67463314fc3761bedff860b
+  firebase_auth: e94093901bee37bdba241fd8647c1d3ea6f55c8b
+  firebase_core: 1ae9f9aa76e6e1edc14fb181637ad466fd6c6fa4
   FirebaseAuth: 0e415d29d846c1dce2fb641e46f35e9888d9bec6
   FirebaseCore: 988754646ab3bd4bdcb740f1bfe26b9f6c0d5f2a
   FirebaseCoreInternal: c7cd505e2136811096b225ac388d6254a2622362
@@ -160,8 +160,8 @@ SPEC CHECKSUMS:
   flutter_image_compress: 5a5e9aee05b6553048b8df1c3bc456d0afaac433
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
-  google_maps_flutter_ios: 53f75334bad87ccd0473f4b0142756169846b42b
-  google_sign_in_ios: 63e49658400eb806dd30054dc56f8baee3025508
+  google_maps_flutter_ios: 3e0b99383a8003b8169d06e7e324170bd0424105
+  google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
   GoogleMaps: 025272d5876d3b32604e5c080dc25eaf68764693
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
@@ -171,10 +171,10 @@ SPEC CHECKSUMS:
   libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
   Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
-  rive_common: e35144d3b86972f8760b6c9f8b120dfd5fadfa13
+  rive_common: b5b1aa30c63b8f0f00f32cddc9ea394d3d3473b5
   SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
   SDWebImageWebPCoder: 4851414d9f8894e328e8b97c93ea4f4f4e4418ae
 
 PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0
