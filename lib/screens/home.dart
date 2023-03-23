@@ -41,9 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
             if (srcStart == -1 || end == -1) {
             } else {
-              setState(() {
-                _imgUrl.add(imgSrc.substring(srcStart + 1, end));
-              });
+              if (mounted) {
+                setState(() {
+                  _imgUrl.add(imgSrc.substring(srcStart + 1, end));
+                });
+              }
             }
           }
         },

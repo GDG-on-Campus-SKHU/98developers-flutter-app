@@ -59,37 +59,30 @@ class challngeListData {
   int? id;
   String? topic;
   String? howProof;
-  String? expectedResults;
-  String? pleaseNote;
-  String? correctProof;
+
   String? periodStartDate;
   String? periodEndDate;
   String? expiredDay;
-  int? members;
+  int? headCount;
 
   challngeListData(
       {this.id,
       this.topic,
       this.howProof,
-      this.expectedResults,
-      this.pleaseNote,
-      this.correctProof,
       this.periodStartDate,
       this.periodEndDate,
       this.expiredDay,
-      this.members});
+      this.headCount});
 
   challngeListData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     topic = json['topic'];
     howProof = json['howProof'];
-    expectedResults = json['expectedResults'];
-    pleaseNote = json['pleaseNote'];
-    correctProof = json['correctProof'];
+
     periodStartDate = json['periodStartDate'];
     periodEndDate = json['periodEndDate'];
     expiredDay = json['expiredDay'];
-    members = json['members'];
+    headCount = json['headCount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -97,13 +90,11 @@ class challngeListData {
     data['id'] = this.id;
     data['topic'] = this.topic;
     data['howProof'] = this.howProof;
-    data['expectedResults'] = this.expectedResults;
-    data['pleaseNote'] = this.pleaseNote;
-    data['correctProof'] = this.correctProof;
+
     data['periodStartDate'] = this.periodStartDate;
     data['periodEndDate'] = this.periodEndDate;
     data['expiredDay'] = this.expiredDay;
-    data['members'] = this.members;
+    data['headCount'] = this.headCount;
     return data;
   }
 }

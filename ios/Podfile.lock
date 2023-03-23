@@ -5,6 +5,8 @@ PODS:
   - AppAuth/Core (1.6.0)
   - AppAuth/ExternalUserAgent (1.6.0):
     - AppAuth/Core
+  - bootpay_webview_flutter_wkwebview (0.0.1):
+    - Flutter
   - Firebase/Auth (10.3.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 10.3.0)
@@ -34,8 +36,13 @@ PODS:
     - Mantle
     - SDWebImage
     - SDWebImageWebPCoder
+  - flutter_inapp_purchase (0.0.1):
+    - Flutter
   - flutter_secure_storage (6.0.0):
     - Flutter
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
   - geolocator_apple (1.2.0):
     - Flutter
   - google_maps_flutter_ios (0.0.1):
@@ -74,6 +81,9 @@ PODS:
   - GTMSessionFetcher/Core (2.3.0)
   - image_picker_ios (0.0.1):
     - Flutter
+  - in_app_purchase_storekit (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - libwebp (1.2.4):
     - libwebp/demux (= 1.2.4)
     - libwebp/mux (= 1.2.4)
@@ -83,9 +93,13 @@ PODS:
   - libwebp/mux (1.2.4):
     - libwebp/demux
   - libwebp/webp (1.2.4)
+  - local_auth_ios (0.0.1):
+    - Flutter
   - Mantle (2.2.0):
     - Mantle/extobjc (= 2.2.0)
   - Mantle/extobjc (2.2.0)
+  - package_info_plus (0.4.5):
+    - Flutter
   - PromisesObjC (2.2.0)
   - rive_common (0.0.1):
     - Flutter
@@ -95,18 +109,32 @@ PODS:
   - SDWebImageWebPCoder (0.10.1):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.15)
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - Toast (4.0.0)
+  - vibration (1.7.5):
+    - Flutter
 
 DEPENDENCIES:
+  - bootpay_webview_flutter_wkwebview (from `.symlinks/plugins/bootpay_webview_flutter_wkwebview/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - flutter_image_compress (from `.symlinks/plugins/flutter_image_compress/ios`)
+  - flutter_inapp_purchase (from `.symlinks/plugins/flutter_inapp_purchase/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - in_app_purchase_storekit (from `.symlinks/plugins/in_app_purchase_storekit/ios`)
+  - local_auth_ios (from `.symlinks/plugins/local_auth_ios/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - rive_common (from `.symlinks/plugins/rive_common/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - vibration (from `.symlinks/plugins/vibration/ios`)
 
 SPEC REPOS:
   trunk:
@@ -125,8 +153,11 @@ SPEC REPOS:
     - PromisesObjC
     - SDWebImage
     - SDWebImageWebPCoder
+    - Toast
 
 EXTERNAL SOURCES:
+  bootpay_webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/bootpay_webview_flutter_wkwebview/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
@@ -135,8 +166,12 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_image_compress:
     :path: ".symlinks/plugins/flutter_image_compress/ios"
+  flutter_inapp_purchase:
+    :path: ".symlinks/plugins/flutter_inapp_purchase/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
   google_maps_flutter_ios:
@@ -145,11 +180,22 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_sign_in_ios/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
+  in_app_purchase_storekit:
+    :path: ".symlinks/plugins/in_app_purchase_storekit/ios"
+  local_auth_ios:
+    :path: ".symlinks/plugins/local_auth_ios/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   rive_common:
     :path: ".symlinks/plugins/rive_common/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+  vibration:
+    :path: ".symlinks/plugins/vibration/ios"
 
 SPEC CHECKSUMS:
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
+  bootpay_webview_flutter_wkwebview: baf2884591d215ae8bf446f97f1acc282f9527a6
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
   firebase_auth: e94093901bee37bdba241fd8647c1d3ea6f55c8b
   firebase_core: 1ae9f9aa76e6e1edc14fb181637ad466fd6c6fa4
@@ -158,7 +204,9 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: c7cd505e2136811096b225ac388d6254a2622362
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_image_compress: 5a5e9aee05b6553048b8df1c3bc456d0afaac433
+  flutter_inapp_purchase: 5c6a1ac3f11b11d0c8c0321c0c41c1f05805e4c8
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
+  fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
   google_maps_flutter_ios: 3e0b99383a8003b8169d06e7e324170bd0424105
   google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
@@ -168,13 +216,19 @@ SPEC CHECKSUMS:
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  in_app_purchase_storekit: 4fb7ee9e824b1f09107fbfbbce8c4b276366dc43
   libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
+  local_auth_ios: c6cf091ded637a88f24f86a8875d8b0f526e2605
   Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
+  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   rive_common: b5b1aa30c63b8f0f00f32cddc9ea394d3d3473b5
   SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
   SDWebImageWebPCoder: 4851414d9f8894e328e8b97c93ea4f4f4e4418ae
+  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  vibration: 7d883d141656a1c1a6d8d238616b2042a51a1241
 
 PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.11.3
