@@ -20,15 +20,17 @@ Future<CurrentUser> getUserData() async {
   var data = responseData;
 
   log("getUserData(): [200]Http get Challenge data successfully.\n${responseData}");
+  log("getUserData(): [200]Http get Challenge data successfully.\n${data}");
 
   currentUser = CurrentUser(
-    uid: data['uid'],
-    email: data['email'],
-    name: data['name'],
-    challenges: data['challenges'] != null
-        ? [Challenges.fromJson(data['challenges'][0])]
-        : null,
-  );
+      uid: data['uid'],
+      email: data['email'],
+      name: data['name'],
+      challenges: [Challenges.fromJson(data['challenges']?[0])]
+      // data['challenges'] != null
+      //     ?
+      //     : null
+      );
   return currentUser;
 }
 

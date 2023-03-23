@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zikiza/models/post_enroll.dart';
 import 'package:zikiza/screens/home.dart';
+import 'package:zikiza/screens/pay.dart';
 
 import '../cubits/challenge_enroll_cubit.dart';
 
@@ -76,7 +77,10 @@ class enrollScreen extends StatelessWidget {
                     color: dynamicColor.surface),
               ),
               onTap: () {
-                _showEnrolldialog(context, id);
+                // _showEnrolldialog(context, id);
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: ((context) => PayScreen())));
+                PayScreen().bootpayTest(context, id);
               },
             )));
   }

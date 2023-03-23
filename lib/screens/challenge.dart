@@ -52,7 +52,8 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           var challengeId = snapshot.data!.listData[index].id;
                           var title = snapshot.data!.listData[index].topic;
-                          var headCount = 2;
+                          var headCount =
+                              snapshot.data!.listData[index].headCount;
                           var startDate = snapshot
                               .data!.listData[index].periodStartDate!
                               .substring(5, 10);
