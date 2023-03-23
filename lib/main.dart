@@ -12,18 +12,19 @@ import 'package:zikiza/screens/profile.dart';
 import 'package:zikiza/screens/launch.dart';
 import 'package:zikiza/utilities/dynamic_theme.dart';
 import 'package:zikiza/cubits/navigation_bar_cubit.dart';
-import './cubits/challenge_list_cubit.dart';
+import 'package:zikiza/cubits/challenge_list_cubit.dart';
+import 'package:zikiza/widgets/light_appbar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({Key? key}) : super(key: key);
+  MainApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext _) {
