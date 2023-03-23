@@ -4,6 +4,8 @@ import 'package:html/parser.dart' as parser;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:zikiza/screens/submission.dart';
 import 'package:zikiza/models/user_data_service.dart';
+import 'package:zikiza/utilities/typografie.dart';
+import 'package:zikiza/widgets/light_appbar.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -68,39 +70,27 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 80,
-        backgroundColor: dynamicColor.surfaceVariant,
-        title: Container(
-          width: _width,
-          child: Text(
-            '',
-            style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w700,
-                color: dynamicColor.onPrimaryContainer),
-          ),
-        ),
-        actions: [
+      appBar: LightAppBar(
+        backgroundColor: dynamicColor.surface,
+        title: Typografie()
+            .HeadlineMedium("Home", dynamicColor.onPrimaryContainer),
+        actions: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 25.0),
             child: Container(
+              width: 35.0,
+              height: 35.0,
+              child: IconButton(
+                icon: Icon(Icons.notifications_rounded, size: 20.0),
+                onPressed: () {},
+              ),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   color: dynamicColor.primaryContainer),
-              child: IconButton(
-                icon: Icon(
-                  Icons.notifications,
-                  color: dynamicColor.onPrimaryContainer,
-                  size: 25,
-                ),
-                onPressed: () {},
-              ),
             ),
-          )
+          ),
         ],
       ),
-      backgroundColor: dynamicColor.background,
       body: SafeArea(
         child: Stack(
           children: [
@@ -177,13 +167,15 @@ Widget imgSlider(_width, _height, slideImg, imgTitle, context) {
                   Container(
                       alignment: Alignment.center,
                       width: _width,
-                      child: Text('$imgTitle',
-                          style: TextStyle(color: dynamicColor.background))),
+                      child: Typografie().LabelLarge("$imgTitle", dynamicColor.onPrimary),
+                  ),
                   Container(
                       alignment: Alignment.center,
-                      width: _width,
-                      child: Text('신청하려면 이미지 클릭하셈',
-                          style: TextStyle(color: dynamicColor.background))),
+                      width: _width * 0.3,
+                      child: Typografie().BodyMedium("자세히 보기", dynamicColor.onPrimary),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1.0, color: dynamicColor.onPrimary)),
+                  ),
                 ],
               ),
             ),
