@@ -140,7 +140,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (_) => enrollScreen(
+                                              builder: (_) => EnrollScreen(
                                                 id: challengeId,
                                               ),
                                             ),
