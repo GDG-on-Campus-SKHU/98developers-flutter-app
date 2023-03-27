@@ -6,8 +6,8 @@ import 'package:zikiza/screens/pay.dart';
 
 import '../cubits/challenge_enroll_cubit.dart';
 
-class enrollScreen extends StatelessWidget {
-  const enrollScreen({super.key, required this.id});
+class EnrollScreen extends StatelessWidget {
+  const EnrollScreen({super.key, required this.id});
   final id;
   @override
   Widget build(BuildContext context) {
