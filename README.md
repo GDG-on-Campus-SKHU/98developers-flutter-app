@@ -26,3 +26,18 @@
 [Gitbub](https://github.com/GDSC-SKHU/98developers-web)
 ## Server
 [Gitbub](https://github.com/GDSC-SKHU/98developers-backend)
+#### Image
+#### 1. Google Firebase authentication
+- Firebase를 사용하여 구글 계정 인증 / 인가 처리
+- 짧은 개발 기간동안 손쉽게 개발이 가능했으며, 클라이언트에서 쉽게 적용할 수 있어서 사용
+- 인증을 요청한 사용자의 token을 firebase로 분석해 처리할 수 있어 보안성이 강화
+
+#### Image
+#### 2. Google Geocoding API
+- 특정 주소를 입력받으면 latitude, longitude 반환
+- 특정 데이터를 쉽게 데이터베이스에 저장할 수 있음
+
+#### Image
+#### 3. Google Cloud Storage
+- 우리의 프로젝트에서 중요한 챌린지 수행 인증 사진을 업로드하기 위한 기술로 적용
+- 버킷이라는 컨테이너에 객체를 저장하기 때문에 권한이 지정된 사용자가 해당 storage 접근이 쉬움
