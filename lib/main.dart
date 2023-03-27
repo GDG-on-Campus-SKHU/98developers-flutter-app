@@ -13,7 +13,6 @@ import 'package:zikiza/screens/launch.dart';
 import 'package:zikiza/utilities/dynamic_theme.dart';
 import 'package:zikiza/cubits/navigation_bar_cubit.dart';
 import 'package:zikiza/cubits/challenge_list_cubit.dart';
-import 'package:zikiza/widgets/light_appbar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
