@@ -93,7 +93,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                             children: [
                                               BadgeWidget(
                                                 padding: const EdgeInsets.only(
-                                                    right: 10.0),
+                                                    right: 10.0, left: 10),
                                                 color: dynamicColor
                                                     .onPrimaryContainer,
                                                 children: [

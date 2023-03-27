@@ -193,6 +193,7 @@ Widget imgSlider(_width, _height, slideImg, imgTitle, context, postUrl) {
                   Container(
                     alignment: Alignment.center,
                     width: _width,
+                    padding: EdgeInsets.only(left: 20, right: 20),
                     child: Typografie()
                         .LabelLarge("$imgTitle", dynamicColor.onPrimary),
                   ),
@@ -236,15 +237,8 @@ Widget bottomContent(_width, context) {
           width: _width,
           height: 60,
           child: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Text(
-              'Status',
-              style: TextStyle(
-                  fontSize: 32,
-                  color: dynamicColor.primary,
-                  fontWeight: FontWeight.w900),
-            ),
-          ),
+              padding: const EdgeInsets.only(left: 20),
+              child: Typografie().DisplaySmall('Status', dynamicColor.primary)),
         ),
         GestureDetector(
           child: FutureBuilder(
@@ -300,15 +294,9 @@ Widget bottomContent(_width, context) {
           width: _width,
           height: 60,
           child: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Text(
-              'Popular',
-              style: TextStyle(
-                  fontSize: 32,
-                  color: dynamicColor.primary,
-                  fontWeight: FontWeight.w900),
-            ),
-          ),
+              padding: const EdgeInsets.only(left: 20),
+              child:
+                  Typografie().DisplaySmall('Popular', dynamicColor.primary)),
         ),
         Container(
           height: 240,

@@ -5,6 +5,7 @@ import 'package:zikiza/screens/home.dart';
 import 'package:zikiza/screens/pay.dart';
 
 import '../cubits/challenge_enroll_cubit.dart';
+import '../utilities/typografie.dart';
 
 class enrollScreen extends StatelessWidget {
   const enrollScreen({super.key, required this.id});
@@ -38,19 +39,38 @@ class enrollScreen extends StatelessWidget {
                           Container(
                               width: _width,
                               padding: EdgeInsets.all(10),
-                              child: Text('${title}')),
+                              child: Typografie().HeadlineMedium(
+                                  '$title', dynamicColor.onPrimaryContainer)),
+                          Container(
+                              width: _width,
+                              padding: EdgeInsets.only(left: 10, top: 10),
+                              child: Typografie().LabelLarge(
+                                  'certify', dynamicColor.onPrimaryContainer)),
                           Container(
                               width: _width,
                               padding: EdgeInsets.all(10),
-                              child: Text('${proof}')),
+                              child: Typografie().BodyMedium(
+                                  '${proof}', dynamicColor.onPrimaryContainer)),
+                          Container(
+                              width: _width,
+                              padding: EdgeInsets.only(left: 10, top: 10),
+                              child: Typografie().LabelLarge(
+                                  'Benefit', dynamicColor.onPrimaryContainer)),
                           Container(
                               width: _width,
                               padding: EdgeInsets.all(10),
-                              child: Text('${expResult}')),
+                              child: Typografie().BodyMedium('${expResult}',
+                                  dynamicColor.onPrimaryContainer)),
+                          Container(
+                              width: _width,
+                              padding: EdgeInsets.only(left: 10, top: 10),
+                              child: Typografie().LabelLarge(
+                                  'caution', dynamicColor.onPrimaryContainer)),
                           Container(
                               width: _width,
                               padding: EdgeInsets.all(10),
-                              child: Text('${notice}')),
+                              child: Typografie().BodyMedium('${notice}',
+                                  dynamicColor.onPrimaryContainer)),
                         ],
                       ),
                     );
@@ -70,43 +90,43 @@ class enrollScreen extends StatelessWidget {
             color: dynamicColor.secondaryContainer,
             child: GestureDetector(
               child: Container(
+                alignment: Alignment.center,
                 width: _width * 0.5,
                 height: 80,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: dynamicColor.surface),
+                child: Typografie()
+                    .LabelLarge('Enroll', dynamicColor.onPrimaryContainer),
               ),
               onTap: () {
-                _showEnrolldialog(context, id);
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: ((context) => PayScreen())));
-                // PayScreen().bootpayTest(context, id);
+                PayScreen().bootpayTest(context, id);
               },
             )));
   }
 }
 
-Future _showEnrolldialog(context, id) {
-  // final dynamicColor = Theme.of(context).colorScheme;
+// Future _showEnrolldialog(context, id) {
+//   // final dynamicColor = Theme.of(context).colorScheme;
 
-  return showDialog(
-      context: context,
-      builder: ((context) {
-        return AlertDialog(
-          title: Text('신청창'),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('뒤로가기')),
-            TextButton(
-                onPressed: () {
-                  postEnroll(id);
-                  Navigator.pop(context);
-                },
-                child: Text('신청하기')),
-          ],
-        );
-      }));
-}
+//   return showDialog(
+//       context: context,
+//       builder: ((context) {
+//         return AlertDialog(
+//           title: Text('신청창'),
+//           actions: [
+//             TextButton(
+//                 onPressed: () {
+//                   Navigator.pop(context);
+//                 },
+//                 child: Text('뒤로가기')),
+//             TextButton(
+//                 onPressed: () {
+//                   postEnroll(id);
+//                   Navigator.pop(context);
+//                 },
+//                 child: Text('신청하기')),
+//           ],
+//         );
+//       }));
+// }
