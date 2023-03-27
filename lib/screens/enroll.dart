@@ -77,10 +77,10 @@ class enrollScreen extends StatelessWidget {
                     color: dynamicColor.surface),
               ),
               onTap: () {
-                // _showEnrolldialog(context, id);
+                _showEnrolldialog(context, id);
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: ((context) => PayScreen())));
-                PayScreen().bootpayTest(context, id);
+                // PayScreen().bootpayTest(context, id);
               },
             )));
   }

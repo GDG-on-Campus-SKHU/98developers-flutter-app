@@ -32,6 +32,7 @@ dependencies:
   in_app_purchase: ^3.1.5
   bootpay: ^4.5.23
   bootpay_bio: ^4.5.1
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
@@ -6,6 +8,7 @@ import 'package:zikiza/screens/submission.dart';
 import 'package:zikiza/models/user_data_service.dart';
 import 'package:zikiza/utilities/typografie.dart';
 import 'package:zikiza/widgets/light_appbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,6 +18,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<String> _imgUrl = [];
   List<String> _imgtitleText = [];
+  List<String> _postUrl = [
+    'https://cloud.greensk.greenpeace.org/api-abtest/?_ga=2.261739021.1211206065.1679550185-36497864.1677742303',
+    'https://cloud.greensk.greenpeace.org/api-biodiversity-honeybee/?_ga=2.261739021.1211206065.1679550185-36497864.1677742303',
+    'https://cloud.greensk.greenpeace.org/petitions-ocean-sanctuaries2?_ga=2.95099036.1211206065.1679550185-36497864.1677742303'
+  ];
 
   @override
   void initState() {
@@ -30,7 +38,25 @@ class _HomeScreenState extends State<HomeScreen> {
     if (response.statusCode == 200) {
       final textElement =
           document.querySelectorAll('div.box > div.content > p');
+
       _imgtitleText = textElement.map((element) => element.innerHtml).toList();
+      // document.getElementsByTagName('a').forEach(
+      //   (element) {
+      //     final String? href = element.attributes['href'];
+
+      //     if (href != null) {
+      //       String postUrl = element.attributes.toString();
+      //       int endPoint = postUrl.indexOf(',');
+
+      //       if (mounted) {
+      //         setState(() {
+      //           log(postUrl);
+      //           _postUrl.add(postUrl);
+      //         });
+      //       }
+      //     }
+      //   },
+      // );
       document.getElementsByTagName('div').forEach(
         (element) {
           final String? style = element.attributes['style'];
@@ -64,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
       List<Widget> childs = [];
       for (var i = 0; i < 3; i++) {
         childs.add(imgSlider(_width, _height, _imgUrl[i],
-            _imgtitleText[i].replaceAll('기간:', ''), context));
+            _imgtitleText[i].replaceAll('기간:', ''), context, _postUrl[i]));
       }
       return childs;
     }
@@ -139,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-Widget imgSlider(_width, _height, slideImg, imgTitle, context) {
+Widget imgSlider(_width, _height, slideImg, imgTitle, context, postUrl) {
   final dynamicColor = Theme.of(context).colorScheme;
   return Container(
     width: _width,
@@ -165,16 +191,24 @@ Widget imgSlider(_width, _height, slideImg, imgTitle, context) {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                      alignment: Alignment.center,
-                      width: _width,
-                      child: Typografie().LabelLarge("$imgTitle", dynamicColor.onPrimary),
+                    alignment: Alignment.center,
+                    width: _width,
+                    child: Typografie()
+                        .LabelLarge("$imgTitle", dynamicColor.onPrimary),
                   ),
-                  Container(
+                  GestureDetector(
+                    child: Container(
                       alignment: Alignment.center,
                       width: _width * 0.3,
-                      child: Typografie().BodyMedium("자세히 보기", dynamicColor.onPrimary),
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 1.0, color: dynamicColor.onPrimary)),
+                      child: Typografie()
+                          .BodyMedium("자세히 보기", dynamicColor.onPrimary),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1.0, color: dynamicColor.onPrimary)),
+                    ),
+                    onTap: () {
+                      _launchUrl(Uri.parse(postUrl));
+                    },
                   ),
                 ],
               ),
@@ -425,4 +459,10 @@ Widget sliderContainer(_width, titleText, subtitleText, person, day,
       ],
     ),
   );
+}
+
+Future<void> _launchUrl(imgHttpUrl) async {
+  if (!await launchUrl(imgHttpUrl)) {
+    throw Exception('Could not launch $imgHttpUrl');
+  }
 }
