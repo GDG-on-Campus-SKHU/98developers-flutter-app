@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zikiza/models/post_enroll.dart';
-import 'package:zikiza/screens/home.dart';
-import 'package:zikiza/screens/pay.dart';
+import 'package:zikiza/cubits/challenge_enroll_cubit.dart';
+
 
 import '../cubits/challenge_enroll_cubit.dart';
 import '../utilities/typografie.dart';
 
-class enrollScreen extends StatelessWidget {
-  const enrollScreen({super.key, required this.id});
+
+
+class EnrollScreen extends StatelessWidget {
+  const EnrollScreen({super.key, required this.id});
+
   final id;
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
-    final _height = MediaQuery.of(context).size.height;
     final dynamicColor = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(

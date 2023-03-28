@@ -75,7 +75,6 @@ class GoogleMapCubit extends Cubit<GoogleMapState> {
               Marker(
                 markerId: MarkerId("${element.id}"),
                 position: LatLng(element.latitude, element.longitude),
-                icon: tertiaryIcon,
                 infoWindow: InfoWindow(
                   title: element.name,
                   snippet: "${element.address + "\n" + element.tele}",

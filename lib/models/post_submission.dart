@@ -1,11 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'dart:typed_data';
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'dart:developer';
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
