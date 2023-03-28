@@ -12,7 +12,8 @@
 ## Mobile(Google User)
 <p align="left">
  <img width="195" alt="Clay-Home" src="https://user-images.githubusercontent.com/26790710/228124787-38ae5381-cfa2-4125-a4b5-ca51cc3eaf24.png">
- <img width="195" alt="Clay-Challenges" src="https://user-images.githubusercontent.com/26790710/228124794-76f4fc26-c3a5-4d89-a462-6c3c0e15b2e1.png">
+  <img width="195" alt="Clay-Challenges" src="https://user-images.githubusercontent.com/26790710/228132038-4a6a82c6-41e9-44b3-8c76-faaca4daf0dd.png">
+
  <img width="195" alt="Clay-Explore" src="https://user-images.githubusercontent.com/26790710/228127158-a8f1ef4e-4680-4c21-a8b0-ebe805cf473a.png">
  <img width="195" alt="Clay-Profile" src="https://user-images.githubusercontent.com/26790710/228129369-a2629f3c-cb37-48d7-a8ff-debd83f81500.png">
 </p>
