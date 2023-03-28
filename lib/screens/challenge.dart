@@ -100,12 +100,12 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                                   Icon(
                                                     Icons.person_rounded,
                                                     size: 15.0,
-                                                    color:
-                                                        dynamicColor.onPrimary,
+                                                    color: dynamicColor
+                                                        .onSecondary,
                                                   ),
                                                   Typografie().BodyMedium(
                                                     "${headCount}",
-                                                    dynamicColor.onPrimary,
+                                                    dynamicColor.onSecondary,
                                                   ),
                                                 ],
                                               ),
@@ -118,7 +118,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                                 children: [
                                                   Typografie().BodyMedium(
                                                     "${startDate} ~ ${endDate}",
-                                                    dynamicColor.onPrimary,
+                                                    dynamicColor.onSecondary,
                                                   ),
                                                 ],
                                               ),
