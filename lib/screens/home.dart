@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void getHomePostData() async {
     final response = await http
         .get(Uri.parse('https://www.greenpeace.org/korea/make-a-change/'));
+
     final document = parser.parse(response.body);
 
     if (response.statusCode == 200) {
@@ -392,7 +393,7 @@ Widget sliderContainer(
         children: [
           Container(
               width: _width * 0.9,
-              padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+              padding: EdgeInsets.only(left: 15, right: 15, top: 30),
               child: Typografie()
                   .LabelLarge('$titleText', dynamicColor.onPrimaryContainer)),
           Container(
