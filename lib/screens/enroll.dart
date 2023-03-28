@@ -95,50 +95,6 @@ class enrollScreen extends StatelessWidget {
           color: dynamicColor.onPrimaryContainer,
         ),
       ),
-      // bottomSheet: Container(
-      //     height: 100,
-      //     alignment: Alignment.center,
-      //     color: dynamicColor.secondaryContainer,
-      //     child: GestureDetector(
-      //       child: Container(
-      //         alignment: Alignment.center,
-      //         width: _width * 0.5,
-      //         height: 80,
-      //         decoration: BoxDecoration(
-      //             borderRadius: BorderRadius.circular(25),
-      //             color: dynamicColor.surface),
-      //         child: Typografie()
-      //             .LabelLarge('Enroll', dynamicColor.onPrimaryContainer),
-      //       ),
-      //       onTap: () {
-      //         PayScreen().bootpayTest(context, id);
-      //       },
-      //     ))
     );
   }
 }
-
-// Future _showEnrolldialog(context, id) {
-//   // final dynamicColor = Theme.of(context).colorScheme;
-
-//   return showDialog(
-//       context: context,
-//       builder: ((context) {
-//         return AlertDialog(
-//           title: Text('신청창'),
-//           actions: [
-//             TextButton(
-//                 onPressed: () {
-//                   Navigator.pop(context);
-//                 },
-//                 child: Text('뒤로가기')),
-//             TextButton(
-//                 onPressed: () {
-//                   postEnroll(id);
-//                   Navigator.pop(context);
-//                 },
-//                 child: Text('신청하기')),
-//           ],
-//         );
-//       }));
-// }
