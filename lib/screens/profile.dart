@@ -83,17 +83,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     width: _width,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Text(
-                        'My history',
-                        style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400,
-                            color: dynamicColor.onPrimaryContainer),
-                      ),
-                    ),
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Typografie().LabelLarge(
+                            'My History', dynamicColor.onPrimaryContainer)),
                   ),
-                  SizedBox(height: 20.0),
                   Container(
                     width: _width * 0.9,
                     child: Divider(
@@ -103,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: _width,
                     height: _height * 0.45,
                     child: historyList(challengeLog.length, _width,
-                        challengeLog, dynamicColor.secondary),
+                        challengeLog, dynamicColor.onPrimaryContainer),
                   ),
                 ],
               ),
@@ -163,11 +156,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 Widget historyList(count, width, list, textColor) {
   if (count == 0 || count == null) {
     return Center(
-      child: Text(
-        'The challenge history is displayed here',
-        style: TextStyle(fontSize: 17, color: textColor),
-      ),
-    );
+        child: Typografie()
+            .BodyMedium('The challenge history is displayed here', textColor));
   } else {
     return ListView.builder(
       itemCount: count,
