@@ -9,38 +9,39 @@
 - Although you cannot see the progress of others, you can confirm the number of participants who continue to engage, which provides clear motivation.
 - To ensure proper participation, the data of the participants is verified by actual inspectors. Users who continuously engage in improper participation can be subject to sanctions.
 
-## Mobile
+## Mobile(Google User)
 <p align="left">
-  <img width="195" alt="ZIKIZA-Home" src="https://user-images.githubusercontent.com/26790710/227774317-9fad6d54-6bf5-4b56-a1fb-7833383286e9.png" />
-  <img width="195" alt="ZIKIZA-Challenges" src="https://user-images.githubusercontent.com/26790710/227775005-2497884e-7fce-422c-925a-38e114877774.png" />
- </p>
- 
- > *figure 1: left: [Using firebase cloud messaging in Springboot applications](https://www.baeldung.com/spring-fcm)*
- > *figure 2: right: [Using firebase cloud messaging in Springboot applications](https://www.baeldung.com/spring-fcm)*
-
-<p align="left">
-  <img width="195" alt="ZIKIZA-Submission" src="https://user-images.githubusercontent.com/26790710/227882074-b7dc35a8-3dc1-47e6-b176-c1327d471c0c.png" />
-  <img width="195" alt="ZIKIZA-TakePhoto" src="https://user-images.githubusercontent.com/26790710/227882130-b178e979-2fe3-41d9-9694-2f2fb3c84d23.png" />
+ <img width="195" alt="Clay-Home" src="https://user-images.githubusercontent.com/26790710/228124787-38ae5381-cfa2-4125-a4b5-ca51cc3eaf24.png">
+ <img width="195" alt="Clay-Challenges" src="https://user-images.githubusercontent.com/26790710/228124794-76f4fc26-c3a5-4d89-a462-6c3c0e15b2e1.png">
+ <img width="195" alt="Clay-Explore" src="https://user-images.githubusercontent.com/26790710/228127158-a8f1ef4e-4680-4c21-a8b0-ebe805cf473a.png">
+ <img width="195" alt="Clay-Profile" src="https://user-images.githubusercontent.com/26790710/228129369-a2629f3c-cb37-48d7-a8ff-debd83f81500.png">
 </p>
 
-> *figure 3: left: [Using firebase cloud messaging in Springboot applications](https://www.baeldung.com/spring-fcm)*
-> *figure 4: right: [Using firebase cloud messaging in Springboot applications](https://www.baeldung.com/spring-fcm)*
+ > *figure 1: The initial screen that appears when logging in with a Google account*,
+ > *figure 2: Navigated to the challenges screen*,
+ > *figure 3: Navigated to the explore screen*,
+ > *figure 4: Navigated to the explore screen*
 
 <p align="left">
-<img width="195" alt="ZIKIZA-Explore" src="https://user-images.githubusercontent.com/26790710/227848330-5615fcd5-0642-40fc-96e1-61ea4cca9544.png">  
+  <img width="195" alt="Clay-Enroll" src="https://user-images.githubusercontent.com/26790710/228129206-40a9f96f-438e-4f4d-ae42-5e09b6288496.png">
+  <img width="195" alt="Clay-Purchase" src="https://user-images.githubusercontent.com/26790710/228126844-1bbe2f7e-3880-4c54-9bff-26c2f23dbc3c.png">
+  <img width="195" alt="Clay-TakeShot" src="https://user-images.githubusercontent.com/26790710/228128022-d2427d5a-750e-406e-aef1-4b8bce6da0c8.png">
+<img width="195" alt="Clay-Submission" src="https://user-images.githubusercontent.com/26790710/228128059-974d40ad-80bc-426f-8e43-e3c4e9701ca1.png">
 </p>
 
-> *figure 5: left: [Using firebase cloud messaging in Springboot applications](https://www.baeldung.com/spring-fcm)*
-> *figure 6: right: [Using firebase cloud messaging in Springboot applications](https://www.baeldung.com/spring-fcm)*
+> *figure 5: enroll button is join the user this challenge*,
+> *figure 6: Navigated to payment screen*,
+> *figure 7: Take shot*,
+> *figure 8: Submission*
 
-#### 1. Widget styling using Google Material Design 3
+#### 1. On the Home screen, you can submit photos for challenges you are participating in and view the details of challenges currently in progress.
 #### 2. Enhanced visual appeal through the application of dynamic colors
 #### 3. Find available environmental challenges and register by paying the fees.
 #### 4. Once the challenge starts, users take and submit certification photos at designated intervals during a set period of time.
 #### 5. When the challenge begins, users need to take photos to confirm that they have completed the challenge at certain times throughout a specific period. These photos must then be submitted for verification.
 
 
-## Web
+## Web(Adminstrator)
 > [Github](https://github.com/GDSC-SKHU/98developers-web)
 
 ## Server
