@@ -42,61 +42,64 @@
 
 
 ## Web(Adminstrator)
-> [Github](https://github.com/GDSC-SKHU/98developers-web)
+> [Click here for more details](https://github.com/GDSC-SKHU/98developers-web)
 
 ## Server
-> [Github](https://github.com/GDSC-SKHU/98developers-backend)
 
-#### 1. Google Firebase
-- Firebase to easily perform the Google login authentication process.
+### 1. Entity Relationship Diagram
+<img width="450" src="https://user-images.githubusercontent.com/26790710/227912604-f8fcf316-f006-4236-9bae-25378942ce7e.png" />
+
+> *figure 1: This illustrates the relational diagram of the our database.*
+
+### 2. Google Firebase
 
 <img width="350" src="https://user-images.githubusercontent.com/26790710/227830407-9ae81496-e7df-4f8e-9b97-5f17c4f6914d.png" />
 
-> *figure 1: [Using firebase cloud messaging in Springboot applications](https://www.baeldung.com/spring-fcm)*
+> *figure 2: [Using firebase cloud messaging in Springboot applications](https://www.baeldung.com/spring-fcm)*
 
-- User Authenticate / Authorize using Firebase
+- We used Firebase for authentication / authorization handling.
+- Firebase to easily perform the Google sign in process.
 
   <img width="350" src="https://user-images.githubusercontent.com/26790710/227884400-323ef69f-8a57-4ae7-96df-121829e29b73.png" />
 </p>
 
-> *figure 2: [Create a Private Key in the Firebase Project Service Account](https://firework-ham.tistory.com/111)*
+> *figure 3: [Create a private key in the Firebase project service account](https://firework-ham.tistory.com/111)*
+
 - It can be easily developed in a short development period, and login processing is easy on the web and app, so I used it.
 - In addition, in order to save it to DB, you can receive the user's IDToken when you respond to the api, analyze it through the Firebase key, and save it.
 
 <br />
 
-### 2. Google Geocoding
+### 3. Google Geocoding
+
+<img width="550" src="https://user-images.githubusercontent.com/26790710/227831391-5db82a45-337c-4f4d-880b-0cf5f4a8b8cb.png" />
+
+> *figure 4: [Geocoding API process](https://firework-ham.tistory.com/111)*
 
 - This allows recycling stores or community locations to be stored as latitude and longitude and displayed as Google Map markers.
-
-<p align="center"> 
-<img width="550" src="https://user-images.githubusercontent.com/26790710/227831391-5db82a45-337c-4f4d-880b-0cf5f4a8b8cb.png" />
-</p>
-
 - Utilizing a structure that returns latitude and longitude when given an address input.
 - Save the corresponding data to the project database to create a Google Maps marker.
 
 
-### 3. Google Cloud Storage
+### 4. Google Cloud Storage
+
+<img width="350" src="https://user-images.githubusercontent.com/26790710/227833036-8f341d20-46ee-4eb8-b14c-3a540e6beabf.png" />
+
+> *figure 5: [Google Cloud Storage bucket structure](https://firework-ham.tistory.com/111)*
+
 - To successfully store challenge verification photos on the server, we use Google Cloud Storage.
-
-  <img width="250" src="https://user-images.githubusercontent.com/26790710/227833036-8f341d20-46ee-4eb8-b14c-3a540e6beabf.png" />
-
-> *figure 4: [Google Cloud Storage bucket structure](https://firework-ham.tistory.com/111)*
 - Google Cloud Storage is a service that stores objects in Google Cloud. At this point, the object refers to any form of file and stores the object in a container called a bucket.
 
-  <img width="250" src="https://user-images.githubusercontent.com/26790710/227883960-58b7c3cc-3d9e-4794-b396-280cecb3c3c6.png" />
+<img width="350" src="https://user-images.githubusercontent.com/26790710/227883960-58b7c3cc-3d9e-4794-b396-280cecb3c3c6.png" />
 
-> *figure 5: [Create a bucket](https://cloud.google.com/storage/docs/discover-object-storage-console)*
+> *figure 6: [Create a bucket](https://cloud.google.com/storage/docs/discover-object-storage-console)*
 - All buckets are connected to a project and can also be set up to allow the desired user to access the data in storage through project permissions.
 
-
-### 4. Entity Relationship Diagram
-<img width="300" src="https://user-images.githubusercontent.com/26790710/227912604-f8fcf316-f006-4236-9bae-25378942ce7e.png" /> 
+[> Click here for more details](https://github.com/GDSC-SKHU/98developers-backend)
 
 ---
 ## Members
-|![yujinkim1](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/26790710?v=4&h=150&w=150&fit=cover&mask=circle&maxage=10d)|![devPark435](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/112539563?v=4&h=150&w=150&fit=cover&mask=circle)|![LEEHYUNBOK](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/34876989?v=4&h=150&w=150&fit=cover&mask=circle)|![yeeZinu](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/33426203?v=4&h=150&w=150&fit=cover&mask=circle)|
+|![yujinkim1](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/26790710?v=4&h=150&w=150&fit=cover&mask=circle)|![devPark435](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/112539563?v=4&h=150&w=150&fit=cover&mask=circle)|![LEEHYUNBOK](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/34876989?v=4&h=150&w=150&fit=cover&mask=circle)|![yeeZinu](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/33426203?v=4&h=150&w=150&fit=cover&mask=circle)|
 |:---:|:---:|:---:|:---:|
 |[Yujin Kim](https://github.com/yujinkim1)|[Hyunryeol Park](https://github.com/devPark435)|[Hyunbok Lee](https://github.com/LEEHYUNBOK)|[Jinwoo Lee](https://github.com/yeeZinu)|
 |[Gmail](mailto:yujinkim1.dev@gmail.com)|[Gmail](mailto:devpark435@gmail.com)|[Gmail](mailto:l.hn.bk0905@gmail.com)|[Gmail](mailto:doglife222@gmail.com)|
