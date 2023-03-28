@@ -5,7 +5,10 @@
 - There are various and complex problems at play, so it is almost impossible for an individual to protect the environment alone.
 
 - So, what happens when one or two individuals come together to form a majority?
-- A challenge that is carried out by a majority makes it possible for others to monitor individuals. 
+- A challenge that is carried out by a majority makes it possible for others to monitor individuals.
+
+<img width="1000" alt="Goals" src="https://user-images.githubusercontent.com/26790710/228222572-7ca7d558-f39a-45c0-a3a2-6eade01174b6.png">
+
 - Although you cannot see the progress of others, you can confirm the number of participants who continue to engage, which provides clear motivation.
 - To ensure proper participation, the data of the participants is verified by actual inspectors. Users who continuously engage in improper participation can be subject to sanctions.
 
