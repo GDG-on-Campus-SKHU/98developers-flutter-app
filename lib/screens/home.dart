@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:carousel_slider/carousel_slider.dart';
@@ -9,6 +8,9 @@ import 'package:zikiza/models/user_data_service.dart';
 import 'package:zikiza/utilities/typografie.dart';
 import 'package:zikiza/widgets/light_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../cubits/challenge_list_cubit.dart';
+import 'enroll.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -255,13 +257,29 @@ Widget bottomContent(_width, context) {
                         color: dynamicColor.secondaryContainer,
                         borderRadius: BorderRadius.circular(25)),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        '${snapshot.data!.challenges![0].topic}',
-                        style:
-                            TextStyle(color: dynamicColor.onSecondaryContainer),
-                      ),
-                    ),
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: _width * 0.6,
+                              child: Typografie().BodyLarge(
+                                  '${snapshot.data!.challenges![0].topic}',
+                                  dynamicColor.onPrimaryContainer),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            submissionScreen(id: id)));
+                              },
+                              icon: Icon(Icons.camera),
+                              color: dynamicColor.onPrimaryContainer,
+                            )
+                          ],
+                        )),
                   ),
                   onTap: () {
                     Navigator.push(
@@ -272,17 +290,15 @@ Widget bottomContent(_width, context) {
                 );
               } else {
                 return Container(
-                  alignment: Alignment.center,
-                  width: _width * 0.9,
-                  height: 100,
-                  decoration: BoxDecoration(
-                      color: dynamicColor.secondaryContainer,
-                      borderRadius: BorderRadius.circular(25)),
-                  child: Text(
-                    'Oops! Your submission is empty',
-                    style: TextStyle(color: dynamicColor.onSecondaryContainer),
-                  ),
-                );
+                    alignment: Alignment.center,
+                    width: _width * 0.9,
+                    height: 100,
+                    decoration: BoxDecoration(
+                        color: dynamicColor.secondaryContainer,
+                        borderRadius: BorderRadius.circular(25)),
+                    child: Typografie().BodyLarge(
+                        'Oops! Your submission is empty',
+                        dynamicColor.onPrimaryContainer));
               }
             },
           ),
@@ -299,37 +315,60 @@ Widget bottomContent(_width, context) {
                   Typografie().DisplaySmall('Popular', dynamicColor.primary)),
         ),
         Container(
-          height: 240,
-          child: ListView(
-            children: [
-              CarouselSlider(
-                items: [
-                  sliderContainer(
-                    _width,
-                    'Eating home-cooked food',
-                    'Cooking with fresh ingredients',
-                    ' 379',
-                    '21days left',
-                    dynamicColor.onPrimaryContainer,
-                    dynamicColor.secondaryContainer,
-                    dynamicColor.onPrimaryContainer,
-                    dynamicColor.onSecondary,
-                  ),
-                ],
-                options: CarouselOptions(
-                  height: 230,
-                  enlargeCenterPage: true,
-                  autoPlay: true,
-                  aspectRatio: 16 / 9,
-                  autoPlayCurve: Curves.easeInOutSine,
-                  enableInfiniteScroll: true,
-                  autoPlayAnimationDuration: Duration(milliseconds: 1500),
-                  viewportFraction: 1,
-                ),
-              )
-            ],
-          ),
-        ),
+            height: 240,
+            child: BlocBuilder<ChallengeListCubit, ChallengeListState>(
+              builder: (_, state) {
+                return FutureBuilder(
+                  future: _.read<ChallengeListCubit>().getChalllengeList(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    return ListView.builder(
+                      itemCount: 1,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (snapshot.hasData) {
+                          var challengeId = snapshot.data!.listData[index].id;
+                          var title = snapshot.data!.listData[index].topic;
+                          var headCount =
+                              snapshot.data!.listData[index].headCount;
+                          var startDate = snapshot
+                              .data!.listData[index].periodStartDate!
+                              .substring(5, 10);
+                          var endDate = snapshot
+                              .data!.listData[index].periodEndDate!
+                              .substring(5, 10);
+                          return CarouselSlider(
+                            items: [
+                              sliderContainer(
+                                  _width,
+                                  '$title',
+                                  'Cooking with fresh ingredients',
+                                  '$headCount',
+                                  '$startDate ~ $endDate',
+                                  context,
+                                  challengeId),
+                            ],
+                            options: CarouselOptions(
+                              height: 220,
+                              enlargeCenterPage: true,
+                              autoPlay: true,
+                              aspectRatio: 16 / 10,
+                              autoPlayCurve: Curves.easeInOutSine,
+                              enableInfiniteScroll: true,
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 1500),
+                              viewportFraction: 1,
+                            ),
+                          );
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                    );
+                  },
+                );
+              },
+            )),
         SizedBox(
           height: 20,
         ),
@@ -338,114 +377,104 @@ Widget bottomContent(_width, context) {
   );
 }
 
-Widget sliderContainer(_width, titleText, subtitleText, person, day,
-    titleTextColor, containerColor, circleContainerColor, circleTextColor) {
-  return Container(
-    width: _width * 0.9,
-    height: 220,
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25), color: containerColor),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 38,
-        ),
-        Container(
-          width: _width * 0.9,
-          padding: EdgeInsets.only(left: 18),
-          child: Text(
-            titleText,
-            style: TextStyle(
-                fontSize: 22,
-                color: titleTextColor,
-                fontWeight: FontWeight.w500),
-          ),
-        ),
-        SizedBox(
-          height: 17,
-        ),
-        Container(
-          width: _width * 0.9,
-          height: 110,
-          padding: EdgeInsets.only(left: 18),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    subtitleText,
-                    style: TextStyle(fontSize: 14, color: titleTextColor),
-                  ),
-                  Container(
-                      width: _width * 0.5,
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            height: 28,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                color: circleContainerColor),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10.0, right: 10),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.person,
-                                    size: 16,
-                                    color: circleTextColor,
-                                  ),
-                                  Text(
-                                    person,
-                                    style: TextStyle(
-                                        color: circleTextColor,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500),
-                                  )
-                                ],
+Widget sliderContainer(
+    _width, titleText, subtitleText, person, day, context, id) {
+  final dynamicColor = Theme.of(context).colorScheme;
+  return GestureDetector(
+    child: Container(
+      width: _width * 0.9,
+      height: 240,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          color: dynamicColor.secondaryContainer),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+              width: _width * 0.9,
+              padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+              child: Typografie()
+                  .LabelLarge('$titleText', dynamicColor.onPrimaryContainer)),
+          Container(
+            width: _width * 0.9,
+            height: 110,
+            padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Typografie().BodyMedium(
+                        '$subtitleText', dynamicColor.onPrimaryContainer),
+                    Container(
+                        width: _width * 0.45,
+                        child: Row(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: dynamicColor.onPrimaryContainer),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, right: 10),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.person,
+                                      size: 11,
+                                      color: dynamicColor.onSecondary,
+                                    ),
+                                    Typografie().BodySmall(
+                                        '$person', dynamicColor.onSecondary)
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 28,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                color: circleContainerColor),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10.0, right: 10),
-                              child: Text(day,
-                                  style: TextStyle(
-                                      color: circleTextColor,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500)),
+                            SizedBox(
+                              width: 10,
                             ),
-                          )
-                        ],
-                      )),
-                ],
-              ),
-              Container(
-                height: 100,
-                child: Icon(
-                  Icons.local_fire_department_rounded,
-                  color: Color(0xFFFD6D6D),
-                  size: 100,
+                            Container(
+                              alignment: Alignment.center,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: dynamicColor.onPrimaryContainer),
+                              child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, right: 10),
+                                  child: Typografie().BodySmall(
+                                      '$day', dynamicColor.onSecondary)),
+                            )
+                          ],
+                        )),
+                  ],
                 ),
-              )
-            ],
-          ),
-        )
-      ],
+                Container(
+                  height: 100,
+                  child: Icon(
+                    Icons.local_fire_department_rounded,
+                    color: Color(0xFFFD6D6D),
+                    size: 100,
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     ),
+    onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => enrollScreen(
+              id: id,
+            ),
+          ));
+    },
   );
 }
 
