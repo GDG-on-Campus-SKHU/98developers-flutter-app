@@ -12,8 +12,7 @@
 ## Mobile(Google User)
 <p align="left">
  <img width="195" alt="Clay-Home" src="https://user-images.githubusercontent.com/26790710/228124787-38ae5381-cfa2-4125-a4b5-ca51cc3eaf24.png">
-  <img width="195" alt="Clay-Challenges" src="https://user-images.githubusercontent.com/26790710/228132038-4a6a82c6-41e9-44b3-8c76-faaca4daf0dd.png">
-
+<img width="195" alt="Clay-Challenges" src="https://user-images.githubusercontent.com/26790710/228132199-f6a672c4-4520-4aa4-9d18-c0031b84f05c.png">
  <img width="195" alt="Clay-Explore" src="https://user-images.githubusercontent.com/26790710/228127158-a8f1ef4e-4680-4c21-a8b0-ebe805cf473a.png">
  <img width="195" alt="Clay-Profile" src="https://user-images.githubusercontent.com/26790710/228129369-a2629f3c-cb37-48d7-a8ff-debd83f81500.png">
 </p>
@@ -24,8 +23,8 @@
  > *figure 4: Navigated to the explore screen*
 
 <p align="left">
-  <img width="195" alt="Clay-Enroll" src="https://user-images.githubusercontent.com/26790710/228129206-40a9f96f-438e-4f4d-ae42-5e09b6288496.png">
-  <img width="195" alt="Clay-Purchase" src="https://user-images.githubusercontent.com/26790710/228126844-1bbe2f7e-3880-4c54-9bff-26c2f23dbc3c.png">
+   <img width="195" alt="Clay-Enroll" src="https://user-images.githubusercontent.com/26790710/228132038-4a6a82c6-41e9-44b3-8c76-faaca4daf0dd.png">
+<img width="195" alt="Clay-Purchase" src="https://user-images.githubusercontent.com/26790710/228132263-dc1f40fa-d787-4eb6-86ac-13f93a6f406a.png">
   <img width="195" alt="Clay-TakeShot" src="https://user-images.githubusercontent.com/26790710/228128022-d2427d5a-750e-406e-aef1-4b8bce6da0c8.png">
 <img width="195" alt="Clay-Submission" src="https://user-images.githubusercontent.com/26790710/228128059-974d40ad-80bc-426f-8e43-e3c4e9701ca1.png">
 </p>
