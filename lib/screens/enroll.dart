@@ -16,93 +16,105 @@ class enrollScreen extends StatelessWidget {
     final _height = MediaQuery.of(context).size.height;
     final dynamicColor = Theme.of(context).colorScheme;
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: dynamicColor.surfaceVariant,
-        ),
-        body: BlocBuilder<ChallengeEnrollCubit, ChallengeEnrollState>(
-          builder: (_, state) {
-            if (state is ChallengeEnrollInitial) {
-              return FutureBuilder(
-                future: _.read<ChallengeEnrollCubit>().getEnroll(id),
-                builder: (BuildContext context, snapshot) {
-                  if (snapshot.hasData) {
-                    var title = snapshot.data!.topic;
-                    var proof = snapshot.data!.howProof;
-                    var expResult = snapshot.data!.expectedResults;
-                    var notice = snapshot.data!.pleaseNote;
-                    return Container(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                              width: _width,
-                              padding: EdgeInsets.all(10),
-                              child: Typografie().HeadlineMedium(
-                                  '$title', dynamicColor.onPrimaryContainer)),
-                          Container(
-                              width: _width,
-                              padding: EdgeInsets.only(left: 10, top: 10),
-                              child: Typografie().LabelLarge(
-                                  'certify', dynamicColor.onPrimaryContainer)),
-                          Container(
-                              width: _width,
-                              padding: EdgeInsets.all(10),
-                              child: Typografie().BodyMedium(
-                                  '${proof}', dynamicColor.onPrimaryContainer)),
-                          Container(
-                              width: _width,
-                              padding: EdgeInsets.only(left: 10, top: 10),
-                              child: Typografie().LabelLarge(
-                                  'Benefit', dynamicColor.onPrimaryContainer)),
-                          Container(
-                              width: _width,
-                              padding: EdgeInsets.all(10),
-                              child: Typografie().BodyMedium('${expResult}',
-                                  dynamicColor.onPrimaryContainer)),
-                          Container(
-                              width: _width,
-                              padding: EdgeInsets.only(left: 10, top: 10),
-                              child: Typografie().LabelLarge(
-                                  'caution', dynamicColor.onPrimaryContainer)),
-                          Container(
-                              width: _width,
-                              padding: EdgeInsets.all(10),
-                              child: Typografie().BodyMedium('${notice}',
-                                  dynamicColor.onPrimaryContainer)),
-                        ],
-                      ),
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
-        bottomSheet: Container(
-            height: 100,
-            alignment: Alignment.center,
-            color: dynamicColor.secondaryContainer,
-            child: GestureDetector(
-              child: Container(
-                alignment: Alignment.center,
-                width: _width * 0.5,
-                height: 80,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: dynamicColor.surface),
-                child: Typografie()
-                    .LabelLarge('Enroll', dynamicColor.onPrimaryContainer),
-              ),
-              onTap: () {
-                PayScreen().bootpayTest(context, id);
+      appBar: AppBar(
+        backgroundColor: dynamicColor.surfaceVariant,
+      ),
+      body: BlocBuilder<ChallengeEnrollCubit, ChallengeEnrollState>(
+        builder: (_, state) {
+          if (state is ChallengeEnrollInitial) {
+            return FutureBuilder(
+              future: _.read<ChallengeEnrollCubit>().getEnroll(id),
+              builder: (BuildContext context, snapshot) {
+                if (snapshot.hasData) {
+                  var title = snapshot.data!.topic;
+                  var proof = snapshot.data!.howProof;
+                  var expResult = snapshot.data!.expectedResults;
+                  var notice = snapshot.data!.pleaseNote;
+                  return Container(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                            width: _width,
+                            padding: EdgeInsets.all(10),
+                            child: Typografie().HeadlineMedium(
+                                '$title', dynamicColor.onPrimaryContainer)),
+                        Container(
+                            width: _width,
+                            padding: EdgeInsets.only(left: 10, top: 10),
+                            child: Typografie().LabelLarge('About proper proof',
+                                dynamicColor.onPrimaryContainer)),
+                        Container(
+                            width: _width,
+                            padding: EdgeInsets.all(10),
+                            child: Typografie().BodyMedium(
+                                '${proof}', dynamicColor.onPrimaryContainer)),
+                        Container(
+                            width: _width,
+                            padding: EdgeInsets.only(left: 10, top: 10),
+                            child: Typografie().LabelLarge(
+                                'Benefit', dynamicColor.onPrimaryContainer)),
+                        Container(
+                            width: _width,
+                            padding: EdgeInsets.all(10),
+                            child: Typografie().BodyMedium('${expResult}',
+                                dynamicColor.onPrimaryContainer)),
+                        Container(
+                            width: _width,
+                            padding: EdgeInsets.only(left: 10, top: 10),
+                            child: Typografie().LabelLarge('Please note',
+                                dynamicColor.onPrimaryContainer)),
+                        Container(
+                            width: _width,
+                            padding: EdgeInsets.all(10),
+                            child: Typografie().BodyMedium(
+                                '${notice}', dynamicColor.onPrimaryContainer)),
+                      ],
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
               },
-            )));
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          PayScreen().bootpayTest(context, id);
+        },
+        tooltip: 'enroll',
+        backgroundColor: dynamicColor.primaryContainer,
+        child: Icon(
+          Icons.back_hand,
+          color: dynamicColor.onPrimaryContainer,
+        ),
+      ),
+      // bottomSheet: Container(
+      //     height: 100,
+      //     alignment: Alignment.center,
+      //     color: dynamicColor.secondaryContainer,
+      //     child: GestureDetector(
+      //       child: Container(
+      //         alignment: Alignment.center,
+      //         width: _width * 0.5,
+      //         height: 80,
+      //         decoration: BoxDecoration(
+      //             borderRadius: BorderRadius.circular(25),
+      //             color: dynamicColor.surface),
+      //         child: Typografie()
+      //             .LabelLarge('Enroll', dynamicColor.onPrimaryContainer),
+      //       ),
+      //       onTap: () {
+      //         PayScreen().bootpayTest(context, id);
+      //       },
+      //     ))
+    );
   }
 }
 
