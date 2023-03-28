@@ -1,15 +1,19 @@
 # What is ZIKIZA?
-- This phrase in Korean has two meanings:
-  - ***Let's protect the earth by practicing challenges related to the environment as individuals.***
-  - ***Let's complete the challenge that we have participated in.***
-- There are various and complex problems at play, so it is almost impossible for an individual to protect the environment alone.
-
-- So, what happens when one or two individuals come together to form a majority?
-- A challenge that is carried out by a majority makes it possible for others to monitor individuals.
 
 <img width="1000" alt="Goals" src="https://user-images.githubusercontent.com/26790710/228222572-7ca7d558-f39a-45c0-a3a2-6eade01174b6.png">
 
-- Although you cannot see the progress of others, you can confirm the number of participants who continue to engage, which provides clear motivation.
+We are living in an increasingly polluted environment. The fact that the flowering season is a month earlier in spring indicates a lot to us. If the Earth does not become healthier, there will be no place for people to stay. That's why we have decided to provide solutions to protect the environment and address climate change.
+We believed that individual efforts alone would have limited impact on environmental action. Moreover, we thought that without reasonable conditions, personal commitments to environmental protection would gradually weaken over time. That's why we decided to provide a challenge service to ensure that multiple environmental measures can be sustained continuously.
+
+- ZIKIZA(지키자) phrase in Korean has two meanings:
+  - *Let's ***protect*** the earth by practicing challenges related to the environment as individuals.*
+  - *Let's ***complete*** the challenge that we have participated in.*
+
+- So, what happens when one or two individuals come together to form a majority?
+
+- Although you cannot see the progress of others, you can confirm the number of participants who continue to engage, which provides clear 
+motivation.
+
 - To ensure proper participation, the data of the participants is verified by actual inspectors. Users who continuously engage in improper participation can be subject to sanctions.
 
 ## Mobile(Google User)
@@ -24,6 +28,8 @@
  > *figure 2: Navigated to the challenges screen*,
  > *figure 3: Navigated to the explore screen*,
  > *figure 4: Navigated to the explore screen*
+ 
+- On the Home screen, you can submit photos for challenges you are participating in and view the details of challenges currently in progress.
 
 <p align="left">
    <img width="195" alt="Clay-Enroll" src="https://user-images.githubusercontent.com/26790710/228132038-4a6a82c6-41e9-44b3-8c76-faaca4daf0dd.png">
@@ -37,11 +43,9 @@
 > *figure 7: Take shot*,
 > *figure 8: Submission*
 
-#### 1. On the Home screen, you can submit photos for challenges you are participating in and view the details of challenges currently in progress.
-#### 2. Enhanced visual appeal through the application of dynamic colors
-#### 3. Find available environmental challenges and register by paying the fees.
-#### 4. Once the challenge starts, users take and submit certification photos at designated intervals during a set period of time.
-#### 5. When the challenge begins, users need to take photos to confirm that they have completed the challenge at certain times throughout a specific period. These photos must then be submitted for verification.
+- Find available environmental challenges and register by paying the fees.
+- Once the challenge starts, users take and submit certification photos at designated intervals during a set period of time.
+- When the challenge begins, users need to take photos to confirm that they have completed the challenge at certain times throughout a specific period. These photos must then be submitted for verification.
 
 
 ## Web(Adminstrator)
