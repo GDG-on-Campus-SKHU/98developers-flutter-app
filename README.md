@@ -16,7 +16,7 @@ motivation.
   - ***Protect** the earth by practicing challenges related to the environment as individuals.*
   - ***Complete** the challenge that we have participated in.*
 
-## Mobile(Google User)
+## Mobile
 <p align="left">
  <img width="195" alt="Clay-Home" src="https://user-images.githubusercontent.com/26790710/228124787-38ae5381-cfa2-4125-a4b5-ca51cc3eaf24.png">
 <img width="195" alt="Clay-Challenges" src="https://user-images.githubusercontent.com/26790710/228132199-f6a672c4-4520-4aa4-9d18-c0031b84f05c.png">
@@ -27,9 +27,12 @@ motivation.
  > *figure 1: The initial screen that appears when logging in with a Google account*,
  > *figure 2: Navigated to the challenges screen*,
  > *figure 3: Navigated to the explore screen*,
- > *figure 4: Navigated to the explore screen*
+ > *figure 4: Navigated to the profile screen*
  
-- On the Home screen, you can submit photos for challenges you are participating in and view the details of challenges currently in progress.
+1. On the Home screen, you can submit photos for challenges you are participating in and view the details of challenges currently in progress.
+2. Challenges screen, you can find available challenge and enroll it.
+3. And you can find zero-waste shop into explore screen.
+4. Profile screen has show your history and sign out.
 
 <p align="left">
    <img width="195" alt="Clay-Enroll" src="https://user-images.githubusercontent.com/26790710/228132038-4a6a82c6-41e9-44b3-8c76-faaca4daf0dd.png">
@@ -43,12 +46,34 @@ motivation.
 > *figure 7: Take shot*,
 > *figure 8: Submission*
 
-- Find available environmental challenges and register by paying the fees.
-- Once the challenge starts, users take and submit certification photos at designated intervals during a set period of time.
-- When the challenge begins, users need to take photos to confirm that they have completed the challenge at certain times throughout a specific period. These photos must then be submitted for verification.
+5. Find available environmental challenges and register by paying the fees.
+6. Once the challenge starts, users take and submit certification photos at designated intervals during a set period of time.
+7. When the challenge begins, users need to take photos to confirm that they have completed the challenge at certain times throughout a specific period. 8. These photos must then be submitted for verification.
 
+### How to run
 
-## Web(Adminstrator)
+#### Download projects
+
+```[bash]
+$pwd | cd {FOLDER_PATH}
+$git clone {REPOSITORY_PATH}
+$flutter doctor -v
+$flutter pub get
+```
+
+#### QEMU(Android)
+> If you want to build or debug with iOS Simulator, jumping to Simulator.
+
+```[bash]
+$flutter run
+```
+
+#### Simulator(iOS)
+```[bash]
+$flutter run --ios-simulator
+```
+
+## Web
 
 ### 1. Promotion website
 > *This website has our project infomation*
