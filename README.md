@@ -2,12 +2,14 @@
 
 <img width="1000" alt="Goals" src="https://user-images.githubusercontent.com/26790710/228222572-7ca7d558-f39a-45c0-a3a2-6eade01174b6.png">
 
+## Motivation
+
 We are living in an increasingly polluted environment. The fact that the flowering season is a month earlier in spring indicates a lot to us. If the Earth does not become healthier, there will be no place for people to stay. That's why we have decided to provide solutions to protect the environment and address climate change.
 We believed that individual efforts alone would have limited impact on environmental action. Moreover, we thought that without reasonable conditions, personal commitments to environmental protection would gradually weaken over time. That's why we decided to provide a challenge service to ensure that multiple environmental measures can be sustained continuously.
 
 - ZIKIZA(지키자) phrase in Korean has two meanings:
-  - *Let's ***protect*** the earth by practicing challenges related to the environment as individuals.*
-  - *Let's ***complete*** the challenge that we have participated in.*
+  - ***Protect** the earth by practicing challenges related to the environment as individuals.*
+  - ***Complete** the challenge that we have participated in.*
 
 - So, what happens when one or two individuals come together to form a majority?
 
