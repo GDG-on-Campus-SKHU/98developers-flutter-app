@@ -7,16 +7,14 @@
 We are living in an increasingly polluted environment. The fact that the flowering season is a month earlier in spring indicates a lot to us. If the Earth does not become healthier, there will be no place for people to stay. That's why we have decided to provide solutions to protect the environment and address climate change.
 We believed that individual efforts alone would have limited impact on environmental action. Moreover, we thought that without reasonable conditions, personal commitments to environmental protection would gradually weaken over time. That's why we decided to provide a challenge service to ensure that multiple environmental measures can be sustained continuously.
 
-- ZIKIZA(지키자) phrase in Korean has two meanings:
-  - ***Protect** the earth by practicing challenges related to the environment as individuals.*
-  - ***Complete** the challenge that we have participated in.*
-
-- So, what happens when one or two individuals come together to form a majority?
-
 - Although you cannot see the progress of others, you can confirm the number of participants who continue to engage, which provides clear 
 motivation.
 
 - To ensure proper participation, the data of the participants is verified by actual inspectors. Users who continuously engage in improper participation can be subject to sanctions.
+
+- ZIKIZA(지키자) phrase in Korean has two meanings:
+  - ***Protect** the earth by practicing challenges related to the environment as individuals.*
+  - ***Complete** the challenge that we have participated in.*
 
 ## Mobile(Google User)
 <p align="left">
@@ -51,7 +49,29 @@ motivation.
 
 
 ## Web(Adminstrator)
-> [Click here for more details](https://github.com/GDSC-SKHU/98developers-web)
+
+### 1. Promotion website
+> *This website has our project infomation*
+<p align="left">
+  <img width="500" src="https://user-images.githubusercontent.com/26790710/228415544-ef26197b-3d21-4b0b-871e-1e5461e1e09d.png" />
+  <img width="500" src="https://user-images.githubusercontent.com/26790710/228424140-82c546d9-b454-4bf4-a380-1e361ead046e.png" />
+</p>
+
+> *figure left: This image introduce the challenge service*
+> *figure right: This image promotion website footer*
+
+### 2. Adminstrator website
+> *This website has sign in only manager*
+
+<p align="left">
+  <img width="500" src="https://user-images.githubusercontent.com/26790710/228424159-d0894449-86a8-4ca2-8630-7d944a41abe2.png" />
+  <img width="500" src="https://user-images.githubusercontent.com/26790710/228424586-3ee26965-0e48-43c8-8324-55e1134747fb.png" />
+</p>
+
+> *figure left: Sign in manager with Google account*
+> *figure right: Users submission controll*
+
+[> Click here for more details](https://github.com/GDSC-SKHU/98developers-web)
 
 ## Server
 
