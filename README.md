@@ -49,17 +49,15 @@
 
 ### How to run
 
-* We plan to conduct internal testing on Android devices. The status for iOS is undetermined due to the end of developer registration. *
+- *We plan to conduct internal testing on Android devices. The status for iOS is undetermined due to the end of developer registration.*
 
 #### Step 1. Download the project
-
 ```bash
 $ git clone https://github.com/GDSC-SKHU/98developers-flutter-app.git
 $ pwd | code .
 ```
 
 #### Step 2-1. Run on QEMU
-
 ```bash
 # Required install android minSDK version 31 or later
 # Then, Open Android Studio
@@ -70,10 +68,10 @@ $ flutter run
 ```
 
 #### Step 2-2. Run on Simulator
+```bash
 # Required install iOS version 12.0 or later
 # Then, Open iOS/Runner.xcworkspace
 
-```bash
 $ flutter pub get
 $ flutter doctor -v
 $ flutter run
