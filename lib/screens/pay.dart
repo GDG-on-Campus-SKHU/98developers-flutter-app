@@ -10,7 +10,8 @@ import '../models/post_enroll.dart';
 
 class PayScreen {
   String androidApplicationId = 'Android-bootPay-Key'; //bootpaykey
-  String iosApplicationId = 'Ios-bootPay-Key'; //64193db5755e27001969236b
+  String iosApplicationId =
+      '64193db5755e27001969236b'; //64193db5755e27001969236b
 
   void bootpayTest(BuildContext context, id) {
     Payload payload = getPayload();
@@ -69,7 +70,7 @@ class PayScreen {
     payload.pg = '나이스페이';
     // payload.method = '카드';
     // payload.methods = ['card', 'phone', 'vbank', 'bank', 'kakao'];
-    payload.orderName = "테스트 상품"; //결제할 상품명
+    payload.orderName = "Challenge_Test"; //결제할 상품명
     payload.price = 1000.0; //정기결제시 0 혹은 주석
 
     payload.orderId = DateTime.now()
@@ -85,11 +86,11 @@ class PayScreen {
     payload.items = itemList; // 상품정보 배열
 
     User user = User(); // 구매자 정보
-    user.username = "사용자 이름";
-    user.email = "user1234@gmail.com";
+    user.username = "devpark435@gmail.com";
+    user.email = "devpark435@gmail.com";
     user.area = "서울";
-    user.phone = "010-4033-4678";
-    user.addr = '서울시 동작구 상도로 222';
+    user.phone = "-";
+    user.addr = '-';
 
     Extra extra = Extra(); // 결제 옵션
     extra.appScheme = 'bootpayFlutterExample';

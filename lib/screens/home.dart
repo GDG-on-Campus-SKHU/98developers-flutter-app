@@ -471,7 +471,7 @@ Widget sliderContainer(
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => enrollScreen(
+            builder: (context) => EnrollScreen(
               id: id,
             ),
           ));

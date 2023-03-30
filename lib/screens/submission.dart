@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:zikiza/models/post_submission.dart';
 import 'package:zikiza/models/challenge_service.dart';
+import 'package:zikiza/screens/home.dart';
 
 import '../utilities/typografie.dart';
 
@@ -35,14 +36,11 @@ class _submissionScreenState extends State<submissionScreen> {
             ),
             Container(
                 child: GestureDetector(
-              onTap: () => _getCameraImage(),
-              child: Text(
-                '사진찍기',
-                style: TextStyle(color: textColor),
-              ),
-            )),
+                    onTap: () => _getCameraImage(),
+                    child:
+                        Typografie().BodyMedium('Take a Photo', Colors.black))),
             const SizedBox(
-              height: 20,
+              height: 50,
             ),
           ],
         );
@@ -193,14 +191,51 @@ class _submissionScreenState extends State<submissionScreen> {
                                       dynamicColor.onSecondaryContainer)),
                             ),
                             onTap: () {
-                              postSubmission(widget.id, _pickedFile!.path);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Typografie().LabelLarge(
+                                          'Want to submit your submission photo?',
+                                          dynamicColor.onPrimaryContainer),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              postSubmission(
+                                                  widget.id, _pickedFile!.path);
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: ((context) =>
+                                                          HomeScreen())));
+                                            },
+                                            child: Typografie().BodyMedium(
+                                                'Upload',
+                                                dynamicColor
+                                                    .onPrimaryContainer)),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Typografie().BodyMedium(
+                                                'Cancel',
+                                                dynamicColor
+                                                    .onPrimaryContainer))
+                                      ],
+                                    );
+                                  });
                             },
                           )
                   ],
                 );
               } else {
-                return Center(
-                  child: CircularProgressIndicator(),
+                return Container(
+                  width: double.infinity,
+                  height: _height * 0.8,
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    color: dynamicColor.primaryContainer,
+                  ),
                 );
               }
             },
