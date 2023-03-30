@@ -86,19 +86,22 @@ $ flutter run
   <img width="500" src="https://user-images.githubusercontent.com/26790710/228424140-82c546d9-b454-4bf4-a380-1e361ead046e.png" />
 </p>
 
-> *figure left: This image introduce the challenge service* /
+> *figure left: This image introduce the challenge service*, 
 > *figure right: This image promotion website footer*
 
 ### 2. Adminstrator website
 > *This website has sign in only manager*
 
 <p align="left">
-  <img width="500" src="https://user-images.githubusercontent.com/26790710/228424159-d0894449-86a8-4ca2-8630-7d944a41abe2.png" />
-  <img width="500" src="https://user-images.githubusercontent.com/26790710/228424586-3ee26965-0e48-43c8-8324-55e1134747fb.png" />
+  <img width="450" src="https://user-images.githubusercontent.com/26790710/228424159-d0894449-86a8-4ca2-8630-7d944a41abe2.png" />
+  <img width="450" src="https://user-images.githubusercontent.com/26790710/228424586-3ee26965-0e48-43c8-8324-55e1134747fb.png" />
 </p>
 
-> *figure left: Sign in manager with Google account* / 
+> *figure left: Sign in manager with Google account*, 
 > *figure right: Users submission controll*
+
+- The manager accesses the challenge website and logs in with a Google account.
+- Access the challenge website and view the list of ongoing challenges, as well as the submission status of the participants, and proceed with the review.
 
 [> Click here for more details](https://github.com/GDSC-SKHU/98developers-web)
 
@@ -157,7 +160,7 @@ $ flutter run
 
 ---
 ## Members
-|![yujinkim1](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/26790710?v=4&h=150&w=150&fit=cover&mask=circle)|![devPark435](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/112539563?v=4&h=150&w=150&fit=cover&mask=circle)|![LEEHYUNBOK](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/34876989?v=4&h=150&w=150&fit=cover&mask=circle)|![yeeZinu](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/33426203?v=4&h=150&w=150&fit=cover&mask=circle)|
+|![yujinkim1](https://images.weserv.nl/?url=https://github.com/yujinkim1.png&h=150&w=150&fit=cover&mask=circle)|![devPark435](https://images.weserv.nl/?url=https://github.com/devpark435.png&h=150&w=150&fit=cover&mask=circle)|![LEEHYUNBOK](https://images.weserv.nl/?url=https://github.com/LEEHYUNBOK.png&h=150&w=150&fit=cover&mask=circle)|![yeeZinu](https://images.weserv.nl/?url=https://github.com/yeeZinu.png&h=150&w=150&fit=cover&mask=circle)|
 |:---:|:---:|:---:|:---:|
 |[Yujin Kim](https://github.com/yujinkim1)|[Hyunryeol Park](https://github.com/devPark435)|[Hyunbok Lee](https://github.com/LEEHYUNBOK)|[Jinwoo Lee](https://github.com/yeeZinu)|
 |[Gmail](mailto:yujinkim1.dev@gmail.com)|[Gmail](mailto:devpark435@gmail.com)|[Gmail](mailto:l.hn.bk0905@gmail.com)|[Gmail](mailto:doglife222@gmail.com)|
