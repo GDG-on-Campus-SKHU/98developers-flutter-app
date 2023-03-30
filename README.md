@@ -4,13 +4,9 @@
 
 ## Motivation
 
-We are living in an increasingly polluted environment. The fact that the flowering season is a month earlier in spring indicates a lot to us. If the Earth does not become healthier, there will be no place for people to stay. That's why we have decided to provide solutions to protect the environment and address climate change.
-We believed that individual efforts alone would have limited impact on environmental action. Moreover, we thought that without reasonable conditions, personal commitments to environmental protection would gradually weaken over time. That's why we decided to provide a challenge service to ensure that multiple environmental measures can be sustained continuously.
-
-- Although you cannot see the progress of others, you can confirm the number of participants who continue to engage, which provides clear 
-motivation.
-
-- To ensure proper participation, the data of the participants is verified by actual inspectors. Users who continuously engage in improper participation can be subject to sanctions.
+- We are living in an increasingly polluted environment. The fact that the flowering season is a month earlier in spring indicates a lot to us. 
+- If the Earth does not become healthier, there will be no place for people to stay. That's why we have decided to provide solutions to protect the environment and address climate change.
+- We believed that individual efforts alone would have limited impact on environmental action. Moreover, we thought that without reasonable conditions, personal commitments to environmental protection would gradually weaken over time.
 
 - ZIKIZA(지키자) phrase in Korean has two meanings:
   - ***Protect** the earth by practicing challenges related to the environment as individuals.*
@@ -31,7 +27,7 @@ motivation.
  
 1. On the Home screen, you can submit photos for challenges you are participating in and view the details of challenges currently in progress.
 2. Challenges screen, you can find available challenge and enroll it.
-3. And you can find zero-waste shop into explore screen.
+3. And you can find the location and information of the climate clubs.
 4. Profile screen has show your history and sign out.
 
 <p align="left">
@@ -46,31 +42,41 @@ motivation.
 > *figure 7: Take shot*,
 > *figure 8: Submission*
 
-5. Find available environmental challenges and register by paying the fees.
+5. The user pays a certain cost to participate in the challenge.
 6. Once the challenge starts, users take and submit certification photos at designated intervals during a set period of time.
-7. When the challenge begins, users need to take photos to confirm that they have completed the challenge at certain times throughout a specific period. 8. These photos must then be submitted for verification.
+7. When the challenge begins, users need to take photos to confirm that they have completed the challenge at certain times throughout a specific period.
+8. You can upload submission photo.
 
 ### How to run
 
-#### Download projects
+* We plan to conduct internal testing on Android devices. The status for iOS is undetermined due to the end of developer registration. *
 
-```[bash]
-$pwd | cd {FOLDER_PATH}
-$git clone {REPOSITORY_PATH}
-$flutter doctor -v
-$flutter pub get
+#### Step 1. Download the project
+
+```bash
+$ git clone https://github.com/GDSC-SKHU/98developers-flutter-app.git
+$ pwd | code .
 ```
 
-#### QEMU(Android)
-> If you want to build or debug with iOS Simulator, jumping to Simulator.
+#### Step 2-1. Run on QEMU
 
-```[bash]
-$flutter run
+```bash
+# Required install android minSDK version 31 or later
+# Then, Open Android Studio
+
+$ flutter pub get
+$ flutter doctor -v
+$ flutter run 
 ```
 
-#### Simulator(iOS)
-```[bash]
-$flutter run --ios-simulator
+#### Step 2-2. Run on Simulator
+# Required install iOS version 12.0 or later
+# Then, Open iOS/Runner.xcworkspace
+
+```bash
+$ flutter pub get
+$ flutter doctor -v
+$ flutter run
 ```
 
 ## Web
@@ -82,7 +88,7 @@ $flutter run --ios-simulator
   <img width="500" src="https://user-images.githubusercontent.com/26790710/228424140-82c546d9-b454-4bf4-a380-1e361ead046e.png" />
 </p>
 
-> *figure left: This image introduce the challenge service*
+> *figure left: This image introduce the challenge service* /
 > *figure right: This image promotion website footer*
 
 ### 2. Adminstrator website
@@ -93,7 +99,7 @@ $flutter run --ios-simulator
   <img width="500" src="https://user-images.githubusercontent.com/26790710/228424586-3ee26965-0e48-43c8-8324-55e1134747fb.png" />
 </p>
 
-> *figure left: Sign in manager with Google account*
+> *figure left: Sign in manager with Google account* / 
 > *figure right: Users submission controll*
 
 [> Click here for more details](https://github.com/GDSC-SKHU/98developers-web)
