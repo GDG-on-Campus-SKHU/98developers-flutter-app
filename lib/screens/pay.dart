@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import '../models/post_enroll.dart';
 
 class PayScreen {
-  String androidApplicationId = 'Android-bootPay-Key'; //bootpaykey
-  String iosApplicationId =
-      '64193db5755e27001969236b'; //64193db5755e27001969236b
+  String androidApplicationId =
+      'Android-bootPay-Key'; //64193db5755e27001969236a
+  String iosApplicationId = 'Ios-BootPay-Key'; //64193db5755e27001969236b
 
   void bootpayTest(BuildContext context, id) {
     Payload payload = getPayload();
