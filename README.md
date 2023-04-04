@@ -14,10 +14,10 @@
 
 ## Mobile
 <p align="left">
- <img width="175" alt="Clay-Home" src="https://user-images.githubusercontent.com/26790710/228124787-38ae5381-cfa2-4125-a4b5-ca51cc3eaf24.png">
-<img width="175" alt="Clay-Challenges" src="https://user-images.githubusercontent.com/26790710/228132199-f6a672c4-4520-4aa4-9d18-c0031b84f05c.png">
- <img width="175" alt="Clay-Explore" src="https://user-images.githubusercontent.com/26790710/228127158-a8f1ef4e-4680-4c21-a8b0-ebe805cf473a.png">
- <img width="175" alt="Clay-Profile" src="https://user-images.githubusercontent.com/26790710/228129369-a2629f3c-cb37-48d7-a8ff-debd83f81500.png">
+ <img width="160" alt="Clay-Home" src="https://user-images.githubusercontent.com/26790710/228124787-38ae5381-cfa2-4125-a4b5-ca51cc3eaf24.png">
+<img width="160" alt="Clay-Challenges" src="https://user-images.githubusercontent.com/26790710/228132199-f6a672c4-4520-4aa4-9d18-c0031b84f05c.png">
+ <img width="160" alt="Clay-Explore" src="https://user-images.githubusercontent.com/26790710/228127158-a8f1ef4e-4680-4c21-a8b0-ebe805cf473a.png">
+ <img width="160" alt="Clay-Profile" src="https://user-images.githubusercontent.com/26790710/228129369-a2629f3c-cb37-48d7-a8ff-debd83f81500.png">
 </p>
 
  > *figure 1: The initial screen that appears when logging in with a Google account*,
@@ -31,10 +31,10 @@
 4. Profile screen has show your history and sign out.
 
 <p align="left">
-   <img width="175" alt="Clay-Enroll" src="https://user-images.githubusercontent.com/26790710/228132038-4a6a82c6-41e9-44b3-8c76-faaca4daf0dd.png">
-<img width="175" alt="Clay-Purchase" src="https://user-images.githubusercontent.com/26790710/228132263-dc1f40fa-d787-4eb6-86ac-13f93a6f406a.png">
-  <img width="175" alt="Clay-TakeShot" src="https://user-images.githubusercontent.com/26790710/228128022-d2427d5a-750e-406e-aef1-4b8bce6da0c8.png">
-<img width="175" alt="Clay-Submission" src="https://user-images.githubusercontent.com/26790710/228128059-974d40ad-80bc-426f-8e43-e3c4e9701ca1.png">
+   <img width="160" alt="Clay-Enroll" src="https://user-images.githubusercontent.com/26790710/228132038-4a6a82c6-41e9-44b3-8c76-faaca4daf0dd.png">
+<img width="160" alt="Clay-Purchase" src="https://user-images.githubusercontent.com/26790710/228132263-dc1f40fa-d787-4eb6-86ac-13f93a6f406a.png">
+  <img width="160" alt="Clay-TakeShot" src="https://user-images.githubusercontent.com/26790710/228128022-d2427d5a-750e-406e-aef1-4b8bce6da0c8.png">
+<img width="160" alt="Clay-Submission" src="https://user-images.githubusercontent.com/26790710/228128059-974d40ad-80bc-426f-8e43-e3c4e9701ca1.png">
 </p>
 
 > *figure 5: enroll button is join the user this challenge*,
@@ -61,6 +61,8 @@ $ flutter doctor -v
 ```
 
 **Step 2-1. Run on QEMU**
+  
+  ```[tasklist]
   1. Required Android SDK version must be 31 or higher.
 
   2. Use a shortcut key to open the palette > Windows: `Ctrl+Shift+P` / MacOS: `CMD+Shift+P`
@@ -68,9 +70,10 @@ $ flutter doctor -v
   3. Flutter: Select Device
 
   4. Launch flutter emulator
+  ```
 
 **Step 2-2. Run on Simulator**
-
+  ```[tasklist]
   1. The iOS version should be 12.0 or higher.
 
   2. Use a shortcut key to open the palette > MacOS: `CMD+Shift+P`
@@ -78,21 +81,22 @@ $ flutter doctor -v
   3. Flutter: Select Device
 
   4. Launch iOS Simulator
-
+  ```
 ## Web
 
 ### 1. Promotion website
-> *This website has our project infomation*
+- This website has our project infomation
+
 <p align="left">
   <img width="450" src="https://user-images.githubusercontent.com/26790710/228415544-ef26197b-3d21-4b0b-871e-1e5461e1e09d.png" />
   <img width="450" src="https://user-images.githubusercontent.com/26790710/228424140-82c546d9-b454-4bf4-a380-1e361ead046e.png" />
 </p>
 
-> *figure left: This image introduce the challenge service*, 
+> *figure left: This image include introduction our service*, 
 > *figure right: This image promotion website footer*
 
-### 2. Adminstrator website
-> *This website has sign in only manager*
+### 2. Manager website
+- This website has sign in only manager
 
 <p align="left">
   <img width="450" src="https://user-images.githubusercontent.com/26790710/228424159-d0894449-86a8-4ca2-8630-7d944a41abe2.png" />
@@ -164,7 +168,7 @@ $ flutter doctor -v
 
 ## Next Steps
 - The following items are part of our planned next steps:
-
+  ```[tasklist]
   1. Support for payment system.
   
   2. Support for notification feature.
@@ -174,9 +178,9 @@ $ flutter doctor -v
   4. UX improvement and code refactoring.
 
   5. Conduct internal testing on Google Play.
-
+  ```
 ## Members
-|![yujinkim1](https://images.weserv.nl/?url=https://github.com/yujinkim1.png&h=150&w=150&fit=cover&mask=circle)|![devPark435](https://images.weserv.nl/?url=https://github.com/devpark435.png&h=150&w=150&fit=cover&mask=circle)|![LEEHYUNBOK](https://images.weserv.nl/?url=https://github.com/LEEHYUNBOK.png&h=150&w=150&fit=cover&mask=circle)|![yeeZinu](https://images.weserv.nl/?url=https://github.com/yeeZinu.png&h=150&w=150&fit=cover&mask=circle)|
+|![yujinkim1](https://images.weserv.nl/?url=https://github.com/yujinkim1.png&h=150&w=150&fit=cover&mask=rectangle)|![devPark435](https://images.weserv.nl/?url=https://github.com/devpark435.png&h=150&w=150&fit=cover&mask=rectangle)|![LEEHYUNBOK](https://images.weserv.nl/?url=https://github.com/LEEHYUNBOK.png&h=150&w=150&fit=cover&mask=rectangle)|![yeeZinu](https://images.weserv.nl/?url=https://github.com/yeeZinu.png&h=150&w=150&fit=cover&mask=rectangle)|
 |:---:|:---:|:---:|:---:|
 |[Yujin Kim](https://github.com/yujinkim1)|[Hyunryeol Park](https://github.com/devPark435)|[Hyunbok Lee](https://github.com/LEEHYUNBOK)|[Jinwoo Lee](https://github.com/yeeZinu)|
 |[Gmail](mailto:yujinkim1.dev@gmail.com)|[Gmail](mailto:devpark435@gmail.com)|[Gmail](mailto:l.hn.bk0905@gmail.com)|[Gmail](mailto:doglife222@gmail.com)|
