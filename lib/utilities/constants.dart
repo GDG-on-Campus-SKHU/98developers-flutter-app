@@ -7,6 +7,8 @@ class Constants {
   static const users = "/users";
   static const explore = "/explore";
   static const challenges = "/challenges";
+  static const aos_bootpay_key = "64193db5755e27001969236a";
+  static const ios_bootpay_key = "64193db5755e27001969236b";
 }
 
 /** This class is include setting padding of values */
