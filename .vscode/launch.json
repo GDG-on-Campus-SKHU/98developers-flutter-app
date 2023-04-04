@@ -5,9 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "98developers-flutter-app",
+            "name": "98developers-flutter-app (emulator)",
             "request": "launch",
-            "type": "dart"
+            "program": "lib/main.dart",
+            "type": "dart",
+            "deviceId": "flutter_emulator",
+            "args": ["--debug"],
+            "flutterMode": "debug",
+            "console": "debugConsole"
+        },
+        {
+            "name": "98developers-flutter-app (simulator)",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "type": "dart",
+            "deviceId": "1F5BED5A-CD15-4434-8C59-E49778C771CE",
+            "args": ["--debug"],
+            "flutterMode": "debug",
+            "console": "debugConsole"
         },
         {
             "name": "98developers-flutter-app (profile mode)",
