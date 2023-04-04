@@ -7,7 +7,7 @@
         <!-- Defind Google maps API KEY meta data -->
         <!-- AIzaSyDaILnZx_pfWHUTGYMLeKBpP5lq2GP8mYY -->
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="YOUR API KEY HERE"/>
+               android:value="AIzaSyDaILnZx_pfWHUTGYMLeKBpP5lq2GP8mYY"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

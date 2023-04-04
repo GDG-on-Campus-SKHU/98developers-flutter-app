@@ -1,17 +1,16 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:bootpay/bootpay.dart';
 import 'package:bootpay/model/extra.dart';
 import 'package:bootpay/model/item.dart';
 import 'package:bootpay/model/payload.dart';
 import 'package:bootpay/model/user.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import '../models/post_enroll.dart';
+import 'package:zikiza/models/post_enroll.dart';
+import 'package:zikiza/utilities/constants.dart';
 
 class PayScreen {
-  String androidApplicationId =
-      'Android-bootPay-Key'; //64193db5755e27001969236a
-  String iosApplicationId = 'Ios-BootPay-Key'; //64193db5755e27001969236b
+  String androidApplicationId = Constants.aos_bootpay_key;
+  String iosApplicationId = Constants.ios_bootpay_key;
 
   void bootpayTest(BuildContext context, id) {
     Payload payload = getPayload();

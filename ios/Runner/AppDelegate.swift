@@ -12,7 +12,7 @@ import FirebaseCore
     FirebaseApp.configure()
     // Defind Google maps API KEY
     // AIzaSyDaILnZx_pfWHUTGYMLeKBpP5lq2GP8mYY
-    GMSServices.provideAPIKey("YOUR API KEY HERE")
+    GMSServices.provideAPIKey("AIzaSyDaILnZx_pfWHUTGYMLeKBpP5lq2GP8mYY")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
